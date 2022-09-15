@@ -1,5 +1,5 @@
 ﻿using System;
-using HelloWorldLib;
+using ModelAppLib;
 using Xunit;
 
 namespace HelloWordLib_UnitTests

@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HelloWorldLib\HelloWorldLib.csproj" />
+    <ProjectReference Include="..\ModelAppLib\ModelAppLib.csproj" />
   </ItemGroup>
 </Project>

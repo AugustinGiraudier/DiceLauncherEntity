@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HelloWorldLib
+namespace ModelAppLib
 {
     ///<summary>
     ///a sample class
