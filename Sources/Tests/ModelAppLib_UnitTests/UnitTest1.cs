@@ -9,7 +9,12 @@ namespace HelloWordLib_UnitTests
         [Fact]
         public void Test1()
         {
+<<<<<<< HEAD
             
+=======
+            //Class1 c = new Class1();
+            //Assert.NotNull(c);
+>>>>>>> remotes/origin/ClassesStockageDes
         }
     }
 }
