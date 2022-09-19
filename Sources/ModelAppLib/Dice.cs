@@ -24,6 +24,15 @@ namespace ModelAppLib
         }
 
         /// <summary>
+        /// Construit un dé avec ses types de faces
+        /// </summary>
+        /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
+        public Dice(List<DiceSideType> sidesTypes)
+        {
+            SidesTypes = new List<DiceSideType>(sidesTypes);
+        }
+
+        /// <summary>
         /// Ajoute un type de face au dé (additionne le nombre de face si déja existante)
         /// </summary>
         /// <param name="sideT">Type de face à ajouter</param>
