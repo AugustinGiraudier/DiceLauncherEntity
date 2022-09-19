@@ -39,7 +39,7 @@ namespace ModelAppLib
         public void addSide(DiceSideType sideT)
         {
             if (SidesTypes.Contains(sideT))
-                SidesTypes.Find(x => x == sideT).NbSide += sideT.NbSide;
+                SidesTypes.Find(x => x.Equals(sideT)).AddSides(sideT.NbSide);
             else
                 SidesTypes.Add(sideT);
         }

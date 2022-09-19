@@ -11,14 +11,7 @@ namespace ModelAppLib
         /// <summary>
         /// Nombre de face de ce type
         /// </summary>
-        public int NbSide
-        {
-            get { return NbSide; }
-            set
-            {
-                NbSide = value;
-            }
-        }
+        public int NbSide { get; private set; }
 
         private DiceSide Prototype;
 
@@ -31,6 +24,11 @@ namespace ModelAppLib
         {
             NbSide = nbSide;
             Prototype = prototype;
+        }
+
+        public void AddSides(int nbToAdd)
+        {
+            NbSide += nbToAdd;
         }
 
         

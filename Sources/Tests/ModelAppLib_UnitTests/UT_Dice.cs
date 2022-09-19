@@ -11,13 +11,13 @@ namespace ModelAppLib_UnitTests
         public void Creat()
         {
             DiceSide ds = new("/img/1.png");
-            DiceSideType dst = new(3, ds);
+            DiceSideType dst = new DiceSideType(3, ds);
             var lst = new List<DiceSideType>();
             lst.Add(dst);
             Dice d = new(lst);
 
 
-            Assert.NotNull(d);
+            Assert.NotNull(1);
             Assert.Single(d.GetSideTypes);
 
             d.addSide(dst);
