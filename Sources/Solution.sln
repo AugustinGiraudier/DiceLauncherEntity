@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelAppLib", "ModelAppLib\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C75DF644-C41F-4A08-8B69-C8554204AC72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelApp", "ModelApp\ModelApp.csproj", "{21365B7E-4A1A-4C37-B140-A9D6FC7A7E50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{21365B7E-4A1A-4C37-B140-A9D6FC7A7E50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelApp_UnitTests", "Tests\ModelAppLib_UnitTests\ModelApp_UnitTests.csproj", "{FC9270BA-8473-487F-9C78-BF0A2A7D7029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelAppLib", "Tests\ModelAppLib_UnitTests\ModelAppLib.csproj", "{FC9270BA-8473-487F-9C78-BF0A2A7D7029}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
