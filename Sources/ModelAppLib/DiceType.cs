@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceType
+    public class DiceType
     {
         /// <summary>
         /// Nombre de dé de ce type

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class Dice
+    public class Dice
     {
 
-        private List<DiceSideType> SidesTypes;
+        private List<DiceSideType> SidesTypes = new List<DiceSideType>();
 
         /// <summary>
         /// Retourne la liste de types de faces sous forme read only

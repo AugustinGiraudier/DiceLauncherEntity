@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceSideType
+    public class DiceSideType
     {
         /// <summary>
         /// Nombre de face de ce type

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceSide
+    public class DiceSide
     {
         private String Image;
 

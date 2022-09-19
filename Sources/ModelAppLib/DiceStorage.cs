@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceStorage
+    public class DiceStorage
     {
         private List<Dice> Dices;
         private List<DiceSide> Sides;
