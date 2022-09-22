@@ -11,6 +11,10 @@ namespace HelloWordLib_UnitTests
         {
             //Class1 c = new Class1();
             //Assert.NotNull(c);
+
+            DiceType dice = new DiceType(10, new Dice());
+            Assert.NotNull(dice);
+            Assert.equals(10, dice.getNbDices());
         }
     }
 }
