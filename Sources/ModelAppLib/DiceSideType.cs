@@ -13,7 +13,7 @@ namespace ModelAppLib
         /// </summary>
         public int NbSide { get; private set; }
 
-        private DiceSide Prototype;
+        private DiceSide prototype;
 
         /// <summary>
         /// Construit un type de face avec un prototype et une quantité
@@ -23,7 +23,7 @@ namespace ModelAppLib
         public DiceSideType(int nbSide, DiceSide prototype)
         {
             NbSide = nbSide;
-            Prototype = prototype;
+            this.prototype = prototype;
         }
 
         public void AddSides(int nbToAdd)
@@ -35,7 +35,7 @@ namespace ModelAppLib
         public override bool Equals(object obj)
         {
             if (obj is DiceSideType)
-                return this.Prototype == ((DiceSideType)obj).Prototype;
+                return this.prototype == ((DiceSideType)obj).prototype;
             return false;
         }
     }

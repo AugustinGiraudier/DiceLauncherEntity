@@ -8,31 +8,51 @@ namespace ModelAppLib_UnitTests
     public class UT_Dice
     {
         [Fact]
-        public void Creat()
+        public void CreateObjectNotNull()
         {
-            DiceSide ds = new("/img/1.png");
-            DiceSideType dst = new DiceSideType(3, ds);
+            var lst = new List<DiceSideType>();
+            Dice d = new(lst);
+            Assert.NotNull(d);
+        }
+
+        [Fact]
+        public void GettingSidesNotNull()
+        {
+            var lst = new List<DiceSideType>();
+            Dice d = new(lst);
+            Assert.NotNull(d.SideTypes);
+        }
+
+        [Fact]
+        public void AddingSidesWorking()
+        {
+            DiceSide ds = new("imgPath");
+            DiceSideType dst = new DiceSideType(1, ds);
             var lst = new List<DiceSideType>();
             lst.Add(dst);
             Dice d = new(lst);
+            Assert.Single(d.SideTypes);
+        }
 
-
-            Assert.NotNull(1);
-            Assert.Single(d.GetSideTypes);
-
+        [Fact]
+        public void AddingSideThatAlreadyExistWorks()
+        {
+            DiceSideType dst = new DiceSideType(1, new DiceSide("imgPath"));
+            var lst = new List<DiceSideType>();
+            lst.Add(dst);
+            Dice d = new(lst);
             d.addSide(dst);
-            Assert.Single(d.GetSideTypes);
+            Assert.Single(d.SideTypes);
+            Assert.Equal(2, d.SideTypes[0].NbSide);
+        }
 
-            Assert.Equal(6, d.GetSideTypes[0].NbSide);
-
-            DiceSideType dst2 = new(2, ds);
-            d.addSide(dst2);
-            Assert.Single(d.GetSideTypes);
-
-            DiceSide ds2 = new("/img/2.png");
-            DiceSideType dst3 = new(2, ds2);
-            d.addSide(dst3);
-            Assert.Equal(2, d.GetSideTypes.Count);
+        [Fact]
+        public void AddingMultipleSidesWorks()
+        {
+            var lst = new List<DiceSideType>();
+            Dice d = new(lst);
+            d.addSide(new DiceSideType(2, new DiceSide("img")));
+            d.addSide(new DiceSideType(3, new DiceSide("img2")));
         }
     }
 }

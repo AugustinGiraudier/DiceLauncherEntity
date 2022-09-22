@@ -11,17 +11,7 @@ namespace ModelAppLib
         /// <summary>
         /// Nombre de dé de ce type
         /// </summary>
-        public int NbDices
-        {
-            get
-            {
-                return NbDices;
-            }
-            set
-            {
-                NbDices = value;
-            }
-        }
+        public int NbDices { get; private set; }
 
         private Dice Prototype;
 

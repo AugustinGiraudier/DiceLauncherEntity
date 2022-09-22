@@ -8,7 +8,7 @@ namespace ModelAppLib
 {
     public class DiceSide
     {
-        private String Image;
+        public String Image { get;}
 
         /// <summary>
         /// Construit une face de dé
