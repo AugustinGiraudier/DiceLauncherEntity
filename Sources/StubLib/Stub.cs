@@ -3,7 +3,7 @@ using ModelAppLib;
 
 namespace StubLib
 {
-    internal class Stub : Loader
+    public class Stub : Loader
     {
         public List<Dice> GetAllDices()
         {

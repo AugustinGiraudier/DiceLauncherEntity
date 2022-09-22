@@ -21,5 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ModelAppLib\ModelAppLib.csproj" />
+    <ProjectReference Include="..\..\StubLib\StubLib.csproj" />
   </ItemGroup>
 </Project>
