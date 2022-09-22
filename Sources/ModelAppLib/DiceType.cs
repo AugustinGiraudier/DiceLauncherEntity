@@ -6,22 +6,12 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceType
+    public class DiceType
     {
         /// <summary>
         /// Nombre de dé de ce type
         /// </summary>
-        public int NbDices
-        {
-            get
-            {
-                return NbDices;
-            }
-            set
-            {
-                NbDices = value;
-            }
-        }
+        public int NbDices { get; private set; }
 
         private Dice Prototype;
 

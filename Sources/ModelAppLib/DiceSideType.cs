@@ -6,21 +6,14 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceSideType
+    public class DiceSideType
     {
         /// <summary>
         /// Nombre de face de ce type
         /// </summary>
-        public int NbSide
-        {
-            get { return NbSide; }
-            set
-            {
-                NbSide = value;
-            }
-        }
+        public int NbSide { get; private set; }
 
-        private DiceSide Prototype;
+        private DiceSide prototype;
 
         /// <summary>
         /// Construit un type de face avec un prototype et une quantité
@@ -30,14 +23,19 @@ namespace ModelAppLib
         public DiceSideType(int nbSide, DiceSide prototype)
         {
             NbSide = nbSide;
-            Prototype = prototype;
+            this.prototype = prototype;
+        }
+
+        public void AddSides(int nbToAdd)
+        {
+            NbSide += nbToAdd;
         }
 
         
         public override bool Equals(object obj)
         {
             if (obj is DiceSideType)
-                return this.Prototype == ((DiceSideType)obj).Prototype;
+                return this.prototype == ((DiceSideType)obj).prototype;
             return false;
         }
     }

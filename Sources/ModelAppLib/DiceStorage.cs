@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceStorage
+    public class DiceStorage
     {
-        private List<Dice> Dices;
-        private List<DiceSide> Sides;
+        private List<Dice> dices;
+        private List<DiceSide> sides;
 
         /// <summary>
         /// retourne la liste des dés sous forme read only
         /// </summary>
-        public ReadOnlyCollection<Dice> GetDices 
+        public ReadOnlyCollection<Dice> Dices 
         { 
-            get { return Dices.AsReadOnly(); } 
+            get { return dices.AsReadOnly(); } 
         }
         /// <summary>
         /// retourne la liste des faces sous forme read only
         /// </summary>
-        public ReadOnlyCollection<DiceSide> GetSides
+        public ReadOnlyCollection<DiceSide> Sides
         {
-            get { return Sides.AsReadOnly(); }
+            get { return sides.AsReadOnly(); }
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace ModelAppLib
         /// <param name="sides">liste des faces (la liste sera clonée)</param>
         public DiceStorage(List<Dice> dices, List<DiceSide> sides)
         {
-            this.Sides = new List<DiceSide>(sides);
-            this.Dices = new List<Dice>(dices);
+            this.sides = new List<DiceSide>(sides);
+            this.dices = new List<Dice>(dices);
         }
 
 

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal class DiceSide
+    public class DiceSide
     {
-        private String Image;
+        public String Image { get;}
 
         /// <summary>
         /// Construit une face de dé

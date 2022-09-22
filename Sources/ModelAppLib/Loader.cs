@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal interface Loader
+    public interface Loader
     {
 
     }
