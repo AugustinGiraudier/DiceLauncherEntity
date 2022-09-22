@@ -58,7 +58,7 @@ steps:
       - /entrypoint.sh
     when:
       branch:
-        - master
+        - main
     depends_on: [ build ]
 
 volumes:
