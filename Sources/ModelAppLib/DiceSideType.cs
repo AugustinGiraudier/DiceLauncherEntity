@@ -34,8 +34,9 @@ namespace ModelAppLib
         
         public override bool Equals(object obj)
         {
+            DiceSideType dst = obj as DiceSideType;
             if (obj is DiceSideType)
-                return this.prototype == ((DiceSideType)obj).prototype;
+                return this.prototype == dst.prototype;
             return false;
         }
     }
