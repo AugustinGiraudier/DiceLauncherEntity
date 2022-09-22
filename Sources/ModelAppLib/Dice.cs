@@ -24,12 +24,22 @@ namespace ModelAppLib
         }
 
         /// <summary>
-        /// Construit un dé avec ses types de faces
+        /// Construit un dé avec la liste de ses types de faces
         /// </summary>
         /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
         public Dice(List<DiceSideType> sidesTypes)
         {
             this.sidesTypes = new List<DiceSideType>(sidesTypes);
+        }
+        /// <summary>
+        /// Construit un dé avec ses types de faces en parametre
+        /// </summary>
+        /// <param name="dstypes">types de face du dé</param>
+        public Dice(params DiceSideType[] dstypes)
+        {
+            this.sidesTypes = new List<DiceSideType>();
+            foreach(DiceSideType dst in dstypes)
+                this.addSide(dst);
         }
 
         /// <summary>

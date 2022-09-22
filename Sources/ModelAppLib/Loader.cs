@@ -9,5 +9,9 @@ namespace ModelAppLib
     public interface Loader
     {
 
+        public List<Dice> GetAllDices();
+        public List<DiceSide> GetAllSides();
+
+
     }
 }
