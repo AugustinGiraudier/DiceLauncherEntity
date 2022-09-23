@@ -56,7 +56,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(GetDatasForDices))]
+        [MemberData(nameof(GetDatasForEquality))]
         public void EqualityComparerWorks(Object d1, Object d2, bool shouldItBeEqual)
         {
             if(d1 !=null)
@@ -65,8 +65,18 @@ namespace ModelAppLib_UnitTests
                 Assert.Equal(shouldItBeEqual, d2.Equals(d1));
         }
 
+        [Theory]
+        [MemberData(nameof(GetDatasForEquality))]
+        public void HashCodesWork(Object d1, Object d2, bool shouldItHaveSameHash)
+        {
+            if(d1 != null && d2 != null)
+            {
+                Assert.Equal(shouldItHaveSameHash, d1.GetHashCode() == d2.GetHashCode());
+            }
+        }
 
-        public static IEnumerable<object[]> GetDatasForDices()
+
+        public static IEnumerable<object[]> GetDatasForEquality()
         {
             yield return new object[]
             {

@@ -37,6 +37,16 @@ namespace ModelAppLib_UnitTests
             Assert.Equal(shouldItBeEqual, ds2.Equals(ds));
         }
 
+        [Theory]
+        [InlineData("","",true)]
+        [InlineData("img1","img1",true)]
+        [InlineData("img","img2",false)]
+        [InlineData(""," ",false)]
+        public void HashCodesWork(String img1, String img2, bool shouldHaveSameCode)
+        {
+            Assert.Equal(shouldHaveSameCode, new DiceSide(img1).GetHashCode() == new DiceSide(img2).GetHashCode());
+        }
+
         [Fact]
         public void EqualityComparationWithOtherClassIsFalse()
         {
