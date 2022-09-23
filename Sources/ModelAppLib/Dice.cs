@@ -74,7 +74,7 @@ namespace ModelAppLib
 
         public override int GetHashCode()
         {
-            return sidesTypes.GetHashCode();
+            return this.SideTypes.GetHashCode();
         }
     }
 }

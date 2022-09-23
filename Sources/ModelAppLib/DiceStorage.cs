@@ -38,10 +38,5 @@ namespace ModelAppLib
             this.dices = new List<Dice>(dices);
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
     }
 }

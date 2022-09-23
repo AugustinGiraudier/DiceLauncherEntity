@@ -15,7 +15,7 @@ namespace ModelAppLib
         /// </summary>
         public int NbDices { get; private set; }
 
-        private Dice Prototype;
+        public  Dice Prototype { get; private set; }
 
         /// <summary>
         /// Construit un type de dé avec un dé et une quantité
