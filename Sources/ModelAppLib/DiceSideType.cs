@@ -44,13 +44,13 @@ namespace ModelAppLib
         {
             DiceSideType dst = obj as DiceSideType;
             if (dst != null)
-                return this.prototype.Equals(dst.prototype);
+                return (this.NbSide == dst.NbSide && this.prototype.Equals(dst.prototype));
             return false;
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return prototype.GetHashCode() ^ NbSide;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ModelAppLib
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Image.GetHashCode();
         }
 
     }
