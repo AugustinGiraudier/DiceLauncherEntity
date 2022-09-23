@@ -64,6 +64,8 @@ namespace ModelAppLib
         /// <returns>true si égaux false sinon</returns>
         public override bool Equals(Object obj)
         {
+            if (obj == null)
+                return false;
             Dice d = obj as Dice;
             if (d != null)
                 return this.SideTypes.SequenceEqual(d.SideTypes);

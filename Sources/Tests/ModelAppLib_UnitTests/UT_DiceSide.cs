@@ -37,5 +37,11 @@ namespace ModelAppLib_UnitTests
             Assert.Equal(shouldItBeEqual, ds2.Equals(ds));
         }
 
+        [Fact]
+        public void EqualityComparationWithOtherClassIsFalse()
+        {
+            Assert.False(new DiceSide("").Equals(new DiceSideType(2, null)));
+        }
+
     }
 }
