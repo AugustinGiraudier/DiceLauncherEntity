@@ -47,5 +47,10 @@ namespace ModelAppLib
                 return this.prototype.Equals(dst.prototype);
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
