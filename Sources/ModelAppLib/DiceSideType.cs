@@ -26,17 +26,25 @@ namespace ModelAppLib
             this.prototype = prototype;
         }
 
+        /// <summary>
+        /// Ajoute des faces à ce type de face
+        /// </summary>
+        /// <param name="nbToAdd">Nombre de face à ajouter</param>
         public void AddSides(int nbToAdd)
         {
             NbSide += nbToAdd;
         }
 
-        
+        /// <summary>
+        /// Egaux si même prototype
+        /// </summary>
+        /// <param name="obj">objet à comparer</param>
+        /// <returns>true si égaux false sinon</returns>
         public override bool Equals(object obj)
         {
             DiceSideType dst = obj as DiceSideType;
-            if (obj is DiceSideType)
-                return this.prototype == dst.prototype;
+            if (dst != null)
+                return this.prototype.Equals(dst.prototype);
             return false;
         }
     }

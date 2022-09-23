@@ -18,5 +18,19 @@ namespace ModelAppLib
         {
             this.Image = image;
         }
+
+        /// <summary>
+        /// Egaux si même image
+        /// </summary>
+        /// <param name="obj">objet à comparer</param>
+        /// <returns>true si égaux false sinon</returns>
+        public override bool Equals(object obj)
+        {
+            DiceSide ds = obj as DiceSide;
+            if (ds != null)
+                return this.Image.Equals(ds.Image);
+            return false;
+        }
+
     }
 }

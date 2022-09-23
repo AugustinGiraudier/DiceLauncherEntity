@@ -54,5 +54,44 @@ namespace ModelAppLib_UnitTests
             d.addSide(new DiceSideType(2, new DiceSide("img")));
             d.addSide(new DiceSideType(3, new DiceSide("img2")));
         }
+
+        [Theory]
+        [MemberData(nameof(GetDatasForDices))]
+        public void EqualityComparerWorks(List<DiceSideType> dst1, List<DiceSideType> dst2, bool shouldItBeEqual)
+        {
+            Dice d1 = new(dst1);
+            Dice d2 = new(dst2);
+            Assert.Equal(shouldItBeEqual, d1.Equals(d2));
+            Assert.Equal(shouldItBeEqual, d2.Equals(d1));
+        }
+
+
+        public static IEnumerable<object[]> GetDatasForDices()
+        {
+            yield return new object[]
+            {
+                new List<DiceSideType>{
+                    new DiceSideType(1,new DiceSide("img1")),
+                    new DiceSideType(1,new DiceSide("img1"))
+                },
+                new List<DiceSideType>{
+                    new DiceSideType(2,new DiceSide("img1"))
+                },
+                true
+            };
+
+            yield return new object[]
+            {
+                new List<DiceSideType>{
+                    new DiceSideType(1,new DiceSide("img1")),
+                    new DiceSideType(1,new DiceSide("img2"))
+                },
+                new List<DiceSideType>{
+                    new DiceSideType(2,new DiceSide("img1"))
+                },
+                false
+            };
+        }
+
     }
 }

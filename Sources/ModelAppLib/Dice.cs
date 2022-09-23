@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,9 @@ namespace ModelAppLib
         /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
         public Dice(List<DiceSideType> sidesTypes)
         {
-            this.sidesTypes = new List<DiceSideType>(sidesTypes);
+            this.sidesTypes = new List<DiceSideType>();
+            foreach (DiceSideType dst in sidesTypes)
+                this.addSide(dst);
         }
         /// <summary>
         /// Construit un dé avec ses types de faces en parametre
@@ -52,6 +55,19 @@ namespace ModelAppLib
                 sidesTypes.Find(x => x.Equals(sideT)).AddSides(sideT.NbSide);
             else
                 sidesTypes.Add(sideT);
+        }
+
+        /// <summary>
+        /// Egaux si mêmes types de faces
+        /// </summary>
+        /// <param name="obj">objet à comparer</param>
+        /// <returns>true si égaux false sinon</returns>
+        public override bool Equals(Object obj)
+        {
+            Dice d = obj as Dice;
+            if (d != null)
+                return this.SideTypes.SequenceEqual(d.SideTypes);
+            return false;
         }
 
     }

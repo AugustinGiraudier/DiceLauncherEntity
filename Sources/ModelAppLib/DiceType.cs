@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +27,19 @@ namespace ModelAppLib
             NbDices = nbDices;
             Prototype = prototype;
         }
+
+        /// <summary>
+        /// Egaux si même nombre de dé et même prototype
+        /// </summary>
+        /// <param name="obj">objet à comparer</param>
+        /// <returns>true si égaux false sinon</returns>
+        public override bool Equals(object obj)
+        {
+            DiceType ds = obj as DiceType;
+            if (ds != null)
+                return (this.NbDices == ds.NbDices && this.Prototype.Equals(ds.Prototype));
+            return false;
+        }
+
     }
 }
