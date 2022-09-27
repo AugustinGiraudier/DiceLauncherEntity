@@ -34,8 +34,14 @@ namespace ModelAppLib
         /// <param name="sides">liste des faces (la liste sera clonée)</param>
         public DiceStorage(List<Dice> dices, List<DiceSide> sides)
         {
-            this.sides = new List<DiceSide>(sides);
-            this.dices = new List<Dice>(dices);
+            if(sides == null)
+                this.sides = new List<DiceSide>();
+            else
+                this.sides = new List<DiceSide>(sides);
+            if (dices == null)
+                this.dices = new List<Dice>();
+            else
+                this.dices = new List<Dice>(dices);
         }
 
     }
