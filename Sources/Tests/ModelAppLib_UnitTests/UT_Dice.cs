@@ -75,6 +75,106 @@ namespace ModelAppLib_UnitTests
             }
         }
 
+        [Theory]
+        [MemberData(nameof(GetDatasForNumberOfSides))]
+        public void CheckTotalNumberOfSides(Dice d, int theoricalNumberOfSides)
+        {
+            Assert.Equal(theoricalNumberOfSides, d.GetTotalSides());
+        }
+
+        [Theory]
+        [MemberData(nameof(GetDatasForIndexesOfSides))]
+        public void CheckIndexOfSide(Dice d, int index, DiceSide ds)
+        {
+            Assert.True(d.GetSideWithItsIndex(index) == ds);
+        }
+
+        public static IEnumerable<object[]> GetDatasForIndexesOfSides()
+        {
+            DiceSide ds = new DiceSide("img");
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(3, ds),
+                    new DiceSideType(3, new DiceSide("img"))
+                ),
+                0,
+                ds
+            };
+
+            DiceSide ds2 = new DiceSide("img2");
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(3, ds2),
+                    new DiceSideType(3, new DiceSide("img"))
+                ),
+                2,
+                ds2
+            };
+
+            DiceSide ds3 = new DiceSide("img1");
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(3, new DiceSide("img2")),
+                    new DiceSideType(3, ds3)
+                ),
+                3,
+                ds3
+            };
+
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(3, new DiceSide("img2")),
+                    new DiceSideType(3, new DiceSide("img2"))
+                ),
+                6,
+                null
+            };
+
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(3, new DiceSide("img2")),
+                    new DiceSideType(3, new DiceSide("img2"))
+                ),
+                7,
+                null
+            };
+        }
+
+        public static IEnumerable<object[]> GetDatasForNumberOfSides()
+        {
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(3, new DiceSide("img")),
+                    new DiceSideType(3, new DiceSide("img2"))
+                ),
+                6
+            };
+            
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(2, new DiceSide("img2")),
+                    new DiceSideType(3, new DiceSide("img2"))
+                ),
+                5
+            };
+
+            yield return new object[]
+            {
+                new Dice(
+                    new DiceSideType(2, new DiceSide("img2")),
+                    new DiceSideType(2, new DiceSide("img")),
+                    new DiceSideType(3, new DiceSide("img2"))
+                ),
+                7
+            };
+        }
 
         public static IEnumerable<object[]> GetDatasForEquality()
         {

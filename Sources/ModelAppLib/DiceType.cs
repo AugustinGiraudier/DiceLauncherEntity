@@ -28,6 +28,11 @@ namespace ModelAppLib
             Prototype = prototype;
         }
 
+        public void AddDice(int nbDicesToAdd)
+        {
+            this.NbDices += nbDicesToAdd;
+        }
+
         /// <summary>
         /// Egaux si même nombre de dé et même prototype
         /// </summary>
