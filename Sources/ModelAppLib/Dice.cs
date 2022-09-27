@@ -46,6 +46,45 @@ namespace ModelAppLib
         }
 
         /// <summary>
+        /// Le nombre total de faces du dé
+        /// </summary>
+        /// <returns>le nombre total de faces du dé</returns>
+        public int GetTotalSides()
+        {
+            int ret = 0;
+            foreach(DiceSideType dst in sidesTypes)
+            {
+                ret += dst.NbSide;
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Retourne la face du dé correspondant à l'index
+        /// </summary>
+        /// <param name="index">index de la face dans ce dé</param>
+        /// <returns>la face pointée par l'index</returns>
+        public DiceSide GetSideWithItsIndex(int index)
+        {
+            if (sidesTypes == null || sidesTypes.Count == 0 || index >= GetTotalSides())
+                return null;
+
+            int idCpt = 0;
+            DiceSideType dst;
+            int DiceCpt = 0;
+
+            do
+            {
+                dst = sidesTypes[idCpt];
+                DiceCpt += dst.NbSide;
+                idCpt++;
+            }
+            while (DiceCpt <= index);
+
+            return dst.Prototype;
+        }
+
+        /// <summary>
         /// Ajoute un type de face au dé (additionne le nombre de face si déja existante)
         /// </summary>
         /// <param name="sideT">Type de face à ajouter</param>
