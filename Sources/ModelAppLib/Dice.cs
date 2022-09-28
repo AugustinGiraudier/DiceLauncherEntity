@@ -16,13 +16,17 @@ namespace ModelAppLib
         /// <summary>
         /// Retourne la liste de types de faces sous forme read only
         /// </summary>
-        public ReadOnlyCollection<DiceSideType> SideTypes
-        {
-            get
-            {
-                return sidesTypes.AsReadOnly();
-            }
-        }
+        /// public ReadOnlyCollection<DiceSideType> SideTypes
+        /// {
+        ///     get
+        ///     {
+        ///         return sidesTypes.AsReadOnly();
+        ///     }
+        /// }
+        /// 
+
+        public System.Collections.ObjectModel.ReadOnlyCollection<DiceSideType> SideTypes => sidesTypes.AsReadOnly();
+        
 
         /// <summary>
         /// Construit un dé avec la liste de ses types de faces

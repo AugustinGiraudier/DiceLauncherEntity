@@ -50,5 +50,8 @@ namespace StubLib
             return ret;
 
         }
+        // Pour charger les données, eviter de charger les 3000 parties, mais afficher les 10 derniers par exemple, ou les 20 dernières, et faire comme sur le web
+        // changer de page pour charger les 10 ou les 20 suivantes etc, si on le temps on peut même demander à l'utilisateur le nombre de partie qu'il veut qu'on affiche sur 
+        // une seule page 
     }
 }
