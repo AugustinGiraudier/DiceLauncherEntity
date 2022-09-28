@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using ModelAppLib;
 using Xunit;
 
-namespace ModelAppLib_UnitTests
+namespace ModelAppLib_UnitTests;
 
     public class UT_Game
-{
-    [Fact]
-    public void CreateObjectNotNull()
     {
-        List<DiceType> lt = new List<DiceType>(
-            new DiceSideType(2, sides[2]),
-            new DiceSideType(3, sides[0])));
-        );
+        [Fact]
+        public void CreateObjectNotNull()
+        {
+            Game gm = new Game(new List<DiceType>());
+            Assert.NotNull(gm);
+        }
 
-        Game gm = new Game(lt);
-        Assert.NotNull(gm);
+        
     }
-}
