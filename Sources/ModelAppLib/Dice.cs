@@ -25,7 +25,7 @@ namespace ModelAppLib
         /// }
         /// 
 
-        public System.Collections.ObjectModel.ReadOnlyCollection<DiceSideType> SideTypes => sidesTypes.AsReadOnly();
+        public ReadOnlyCollection<DiceSideType> SideTypes => sidesTypes.AsReadOnly();
         
 
         /// <summary>

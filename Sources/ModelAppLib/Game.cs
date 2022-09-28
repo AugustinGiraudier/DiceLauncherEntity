@@ -11,12 +11,7 @@ namespace ModelAppLib
     {
 
         private readonly List<DiceType> dices;
-        public ReadOnlyCollection<DiceType> Dices
-        {
-            get { return dices.AsReadOnly(); }
-        }
-        /// Apparemment, c'est mieux de mettre des trucs comme ca: public System.Collections.ObjectModel.ReadOnlyCollection<Nounours> NounoursROC2 => mNounours.AsReadOnly();
-        /// Ca vient de la doc de Chevaldonne, parce qu'il a dit qu'on avait pas vue la doc avant de faire ca 
+        public ReadOnlyCollection<DiceType> Dices => dices.AsReadOnly(); 
 
 
         public Game(List<DiceType> dices)

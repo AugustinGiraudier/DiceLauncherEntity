@@ -15,17 +15,11 @@ namespace ModelAppLib
         /// <summary>
         /// retourne la liste des dés sous forme read only
         /// </summary>
-        public ReadOnlyCollection<Dice> Dices 
-        { 
-            get { return dices.AsReadOnly(); } 
-        }
+        public ReadOnlyCollection<Dice> Dices => dices.AsReadOnly();
         /// <summary>
         /// retourne la liste des faces sous forme read only
         /// </summary>
-        public ReadOnlyCollection<DiceSide> Sides
-        {
-            get { return sides.AsReadOnly(); }
-        }
+        public ReadOnlyCollection<DiceSide> Sides => sides.AsReadOnly();
 
         /// <summary>
         /// Construit un stockage de dés et de faces
