@@ -29,8 +29,9 @@ namespace ModelAppLib_UnitTests;
             List<DiceType> list = new List<DiceType>();
             Game gm = new Game(list);
             gm.AddDiceType(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
+            list.Add(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
             Assert.NotNull(gm.Dices);
-            //Assert.Equal(list, gm.Dices);
+            Assert.Contains(list[0], gm.Dices);
         }
 
         
