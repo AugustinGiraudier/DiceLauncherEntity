@@ -12,8 +12,8 @@ namespace ModelAppLib
 {
     internal class DiceStorage
     {
-        private List<Dice> dices;
-        private List<DiceSide> sides;
+        private readonly List<Dice> dices;
+        private readonly List<DiceSide> sides;
 
         /// <summary>
         /// retourne la liste des dés sous forme read only

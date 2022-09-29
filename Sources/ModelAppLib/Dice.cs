@@ -12,7 +12,7 @@ namespace ModelAppLib
     internal class Dice
     {
 
-        private List<DiceSideType> sidesTypes = new List<DiceSideType>();
+        private readonly List<DiceSideType> sidesTypes;
 
         /// <summary>
         /// Retourne la liste de types de faces sous forme read only

@@ -53,6 +53,8 @@ namespace ModelAppLib_UnitTests
             Dice d = new(lst);
             d.addSide(new DiceSideType(2, new DiceSide("img")));
             d.addSide(new DiceSideType(3, new DiceSide("img2")));
+            Assert.Equal(2, d.SideTypes.Count);
+            Assert.Equal(5, d.GetTotalSides());
         }
 
         [Theory]
