@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
@@ -40,14 +37,14 @@ namespace ModelAppLib
         public List<DiceSide> LaunchDices()
         {
             var ret = new List<DiceSide>();
-            var rd = new Random();
+            IRandomizer rd = new SecureRandomizer();
 
             foreach (var dice in dices) // chaque type de dé
             {
                 Dice d = dice.Prototype;
                 for (int i=0; i<dice.NbDices; i++) // chaque dé
                 {
-                    ret.Add(d.GetSideWithItsIndex(rd.Next(d.GetTotalSides())));
+                    ret.Add(d.GetSideWithItsIndex(rd.GetRandomInt(0,d.GetTotalSides())));
                 }
             }
 
