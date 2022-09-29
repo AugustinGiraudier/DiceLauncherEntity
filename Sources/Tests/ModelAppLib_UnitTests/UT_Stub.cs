@@ -19,14 +19,14 @@ namespace ModelAppLib_UnitTests
         public void DiceCollectionNotEmpty()
         {
             var stub = new Stub();
-            Assert.NotEmpty(stub.GetAllDices());
+            Assert.NotEmpty(stub.GetAllDices().Result);
         }
 
         [Fact]
         public void SideCollectionNotEmpty()
         {
             var stub = new Stub();
-            Assert.NotEmpty(stub.GetAllSides());
+            Assert.NotEmpty(stub.GetAllSides().Result);
         }
 
 

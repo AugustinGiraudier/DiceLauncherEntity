@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ModelAppLib;
 
 namespace StubLib
 {
-    public class Stub : Loader
+    public class Stub : ILoader
     {
-        public List<Dice> GetAllDices()
+        public Task<List<Dice>> GetAllDices()
         {
             List<Dice> ret = new();
 
-            var sides = GetAllSides();
+            var sides = GetAllSides().Result;
 
             ret.Add(new Dice(
                 new DiceSideType(1, sides[0]),
@@ -32,10 +33,10 @@ namespace StubLib
                 new DiceSideType(5, sides[5]),
                 new DiceSideType(1, sides[6])));
 
-            return ret;
+            return Task.FromResult(ret);
         }
 
-        public List<DiceSide> GetAllSides()
+        public Task<List<DiceSide>> GetAllSides()
         {
             List<DiceSide> ret = new();
 
@@ -47,11 +48,40 @@ namespace StubLib
             ret.Add(new DiceSide("6.png"));
             ret.Add(new DiceSide("star.png"));
 
-            return ret;
+            return Task.FromResult(ret);
 
         }
-        // Pour charger les données, eviter de charger les 3000 parties, mais afficher les 10 derniers par exemple, ou les 20 dernières, et faire comme sur le web
-        // changer de page pour charger les 10 ou les 20 suivantes etc, si on le temps on peut même demander à l'utilisateur le nombre de partie qu'il veut qu'on affiche sur 
-        // une seule page 
+
+        public Task<List<Dice>> GetSomeDices(int nb, int page)
+        {
+            var sides = GetAllSides().Result;
+            int cpt = 0;
+            List<Dice> ret = new();
+            for (int i = 0; i < nb; i++)
+            {
+                List<DiceSideType> lDst = new();
+                for(int j=0; j<3; j++)
+                {
+                    lDst.Add(new DiceSideType(1, sides[cpt%7]));
+                    cpt++;
+                }
+                ret.Add(new Dice(lDst));
+            }
+
+            return Task.FromResult(ret);
+        }
+
+        public Task<List<DiceSide>> GetSomeSides(int nb, int page)
+        {
+            int cpt = 0;
+            List<DiceSide> ret = new();
+            for (int i = nb * page; i < (nb * page) +nb; i++)
+            {
+                ret.Add(new DiceSide("img" + cpt + ".png"));
+                cpt++;
+            }
+
+            return Task.FromResult(ret);
+        }
     }
 }
