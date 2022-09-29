@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+
+
+[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+
 
 namespace ModelAppLib
 {
-    public class SecureRandomizer : IRandomizer
+    internal class SecureRandomizer : IRandomizer
     {
         public int GetRandomInt(int min, int max)
         {

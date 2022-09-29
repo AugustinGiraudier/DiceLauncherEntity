@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using ModelAppLib;
 
+[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+
 namespace StubLib
 {
-    public class Stub : ILoader
+    internal class Stub : ILoader
     {
         public Task<List<Dice>> GetAllDices()
         {

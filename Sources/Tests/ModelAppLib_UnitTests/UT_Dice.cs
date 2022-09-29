@@ -77,14 +77,14 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForNumberOfSides))]
-        public void CheckTotalNumberOfSides(Dice d, int theoricalNumberOfSides)
+        internal void CheckTotalNumberOfSides(Dice d, int theoricalNumberOfSides)
         {
             Assert.Equal(theoricalNumberOfSides, d.GetTotalSides());
         }
 
         [Theory]
         [MemberData(nameof(GetDatasForIndexesOfSides))]
-        public void CheckIndexOfSide(Dice d, int index, DiceSide ds)
+        internal void CheckIndexOfSide(Dice d, int index, DiceSide ds)
         {
             Assert.True(d.GetSideWithItsIndex(index) == ds);
         }

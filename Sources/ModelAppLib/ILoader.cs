@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+
 namespace ModelAppLib
 {
-    public interface ILoader
+    internal interface ILoader
     {
 
         public Task<List<Dice>> GetAllDices();
