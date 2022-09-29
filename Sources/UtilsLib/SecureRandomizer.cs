@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace ModelAppLib
 {
-    internal class SecureRandomizer : IRandomizer
+    public class SecureRandomizer : IRandomizer
     {
         public int GetRandomInt(int min, int max)
         {
