@@ -73,12 +73,10 @@ namespace StubLib
 
         public Task<List<DiceSide>> GetSomeSides(int nb, int page)
         {
-            int cpt = 0;
             List<DiceSide> ret = new();
             for (int i = nb * page; i < (nb * page) +nb; i++)
             {
-                ret.Add(new DiceSide("img" + cpt + ".png"));
-                cpt++;
+                ret.Add(new DiceSide("img" + i));
             }
 
             return Task.FromResult(ret);
