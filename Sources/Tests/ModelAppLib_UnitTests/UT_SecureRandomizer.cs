@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ModelAppLib;
-using StubLib;
+﻿using ModelAppLib;
 using Xunit;
 
 namespace ModelAppLib_UnitTests

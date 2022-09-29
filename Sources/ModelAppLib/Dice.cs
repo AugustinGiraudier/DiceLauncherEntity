@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+[assembly: InternalsVisibleTo("StubLib")]
 
 namespace ModelAppLib
 {
-    public class Dice
+    internal class Dice
     {
 
         private List<DiceSideType> sidesTypes = new List<DiceSideType>();

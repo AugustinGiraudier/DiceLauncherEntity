@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+
 namespace ModelAppLib
 {
-    public class DiceStorage
+    internal class DiceStorage
     {
         private List<Dice> dices;
         private List<DiceSide> sides;

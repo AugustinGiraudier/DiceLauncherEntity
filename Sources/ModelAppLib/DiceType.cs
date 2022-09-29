@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+[assembly: InternalsVisibleTo("StubLib")]
+
 namespace ModelAppLib
 {
-    public class DiceType
+    internal class DiceType
     {
         /// <summary>
         /// Nombre de dé de ce type

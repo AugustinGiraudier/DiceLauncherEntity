@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+[assembly: InternalsVisibleTo("StubLib")]
+
 namespace ModelAppLib
 {
-    public class DiceSide
+    internal class DiceSide
     {
         public String Image { get;}
 
