@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    internal interface IRandomizer
+    public interface IRandomizer
     {
         public int GetRandomInt(int min, int max);
     }
