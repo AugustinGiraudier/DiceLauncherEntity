@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ModelAppLib;
 using Xunit;
 
@@ -17,8 +18,6 @@ namespace ModelAppLib_UnitTests;
         public void GetList()
         {
             List<DiceType> list = new List<DiceType>();
-            //Dice d = new(new DiceSideType(3, new DiceSide("img1")));
-            
             Game gm = new Game(list);
             Assert.Equal(new List<DiceType>(), gm.Dices);
         }
@@ -29,10 +28,63 @@ namespace ModelAppLib_UnitTests;
             List<DiceType> list = new List<DiceType>();
             Game gm = new Game(list);
             gm.AddDiceType(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
+            gm.AddDiceType(new DiceType(5, new Dice(new DiceSideType(1, new DiceSide("img3")))));
             list.Add(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
+            list.Add(new DiceType(5, new Dice(new DiceSideType(1, new DiceSide("img3")))));
             Assert.NotNull(gm.Dices);
-            Assert.Contains(list[0], gm.Dices);
+            Assert.All(list, a => gm.Dices.Contains(a));
         }
 
-        
+        public static IEnumerable<object[]> Data_AddDiceTypeToGame()
+        {
+            yield return new object[]
+            {
+                true,
+                new DiceType[]
+                {
+                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                    new DiceType(4, new Dice(new DiceSideType(2, new DiceSide("img7")))),
+                },
+                new Game(new DiceType[]
+                {
+                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                }),
+                new DiceType(4, new Dice(new DiceSideType(2, new DiceSide("img7"))))
+            };
+            yield return new object[]
+            {
+                false,
+                new DiceType[]
+                {
+                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                },
+                new Game(new DiceType[]
+                {
+                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                }),
+                new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(Data_AddDiceTypeToGame))]
+        public void Test_AddDiceTypeToGame(bool expectResult, IEnumerable<DiceType> expectedDiceType, Game game, DiceType diceType)
+        {
+            game.AddDiceType(diceType);
+            var diceTypeTest = expectedDiceType.ToList();
+            Assert.Equal(diceTypeTest.Count(), game.Dices.Count());
+            Assert.All(diceTypeTest, e => game.Dices.Contains(e));
+        }
     }

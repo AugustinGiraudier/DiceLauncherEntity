@@ -10,7 +10,7 @@ namespace ModelAppLib
     public class Game
     {
 
-        private readonly List<DiceType> dices;
+        private readonly List<DiceType> dices = new List<DiceType>();
         public ReadOnlyCollection<DiceType> Dices => dices.AsReadOnly(); 
 
 
