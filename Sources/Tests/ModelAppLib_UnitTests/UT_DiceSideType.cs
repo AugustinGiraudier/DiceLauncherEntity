@@ -10,21 +10,21 @@ namespace ModelAppLib_UnitTests
     {
 
         [Fact]
-        public void CreateObjectNotNull()
+        void CreateObjectNotNull()
         {
             DiceSideType dst = new(3, new DiceSide("img1.png"));
             Assert.NotNull(dst);
         }
 
         [Fact]
-        public void GetNbSide()
+        void GetNbSide()
         {
             DiceSideType dst = new(3, new DiceSide("img1.png"));
             Assert.Equal(3, dst.NbSide);
         }
 
         [Fact]
-        public void GetPrototypeWorks()
+        void GetPrototypeWorks()
         {
             DiceSide ds = new DiceSide("img1.png");
             DiceSideType dst = new(3, ds);
@@ -33,7 +33,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void AddingSideWorks()
+        void AddingSideWorks()
         {
             DiceSideType dst = new(3, new DiceSide("img1.png"));
             dst.AddSides(2);
@@ -42,7 +42,7 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
-        public void CheckEqual(Object obj1, Object obj2, bool shouldBeEqual)
+        void CheckEqual(Object obj1, Object obj2, bool shouldBeEqual)
         {
             if (obj1 != null)
                 Assert.Equal(shouldBeEqual, obj1.Equals(obj2));
@@ -52,7 +52,7 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
-        public void HashCodesWork(Object d1, Object d2, bool shouldItHaveSameHash)
+        void HashCodesWork(Object d1, Object d2, bool shouldItHaveSameHash)
         {
             if (d1 != null && d2 != null)
             {

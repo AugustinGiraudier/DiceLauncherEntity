@@ -8,7 +8,7 @@ namespace ModelAppLib_UnitTests
     public class UT_Dice
     {
         [Fact]
-        public void CreateObjectNotNull()
+        internal void CreateObjectNotNull()
         {
             var lst = new List<DiceSideType>();
             Dice d = new(lst);
@@ -16,7 +16,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void GettingSidesNotNull()
+        void GettingSidesNotNull()
         {
             var lst = new List<DiceSideType>();
             Dice d = new(lst);
@@ -24,7 +24,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void AddingSidesWorking()
+        void AddingSidesWorking()
         {
             DiceSide ds = new("imgPath");
             DiceSideType dst = new DiceSideType(1, ds);
@@ -35,7 +35,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void AddingSideThatAlreadyExistWorks()
+        void AddingSideThatAlreadyExistWorks()
         {
             DiceSideType dst = new DiceSideType(1, new DiceSide("imgPath"));
             var lst = new List<DiceSideType>();
@@ -47,7 +47,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void AddingMultipleSidesWorks()
+        void AddingMultipleSidesWorks()
         {
             var lst = new List<DiceSideType>();
             Dice d = new(lst);
@@ -59,7 +59,7 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
-        public void EqualityComparerWorks(Object d1, Object d2, bool shouldItBeEqual)
+        void EqualityComparerWorks(Object d1, Object d2, bool shouldItBeEqual)
         {
             if(d1 !=null)
                 Assert.Equal(shouldItBeEqual, d1.Equals(d2));
@@ -69,7 +69,7 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
-        public void HashCodesWork(Object d1, Object d2, bool shouldItHaveSameHash)
+        void HashCodesWork(Object d1, Object d2, bool shouldItHaveSameHash)
         {
             if(d1 != null && d2 != null)
             {
@@ -79,14 +79,14 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForNumberOfSides))]
-        internal void CheckTotalNumberOfSides(Dice d, int theoricalNumberOfSides)
+        void CheckTotalNumberOfSides(Dice d, int theoricalNumberOfSides)
         {
             Assert.Equal(theoricalNumberOfSides, d.GetTotalSides());
         }
 
         [Theory]
         [MemberData(nameof(GetDatasForIndexesOfSides))]
-        internal void CheckIndexOfSide(Dice d, int index, DiceSide ds)
+        void CheckIndexOfSide(Dice d, int index, DiceSide ds)
         {
             Assert.True(d.GetSideWithItsIndex(index) == ds);
         }

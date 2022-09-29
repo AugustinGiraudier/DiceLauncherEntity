@@ -9,7 +9,7 @@ namespace ModelAppLib_UnitTests
     {
 
         [Fact]
-        public void CreateObjectNotNull()
+        void CreateObjectNotNull()
         {
             var storage = new DiceStorage(
                 new List<Dice>
@@ -25,7 +25,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void CreateObjectWithNullCollections()
+        void CreateObjectWithNullCollections()
         {
             var storage = new DiceStorage(null,null);
             Assert.NotNull(storage);
@@ -34,7 +34,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void GetSides()
+        void GetSides()
         {
             var storage = new DiceStorage(
                             new List<Dice>
@@ -50,7 +50,7 @@ namespace ModelAppLib_UnitTests
         }
 
         [Fact]
-        public void GetDices()
+        void GetDices()
         {
             var storage = new DiceStorage(
                             new List<Dice>

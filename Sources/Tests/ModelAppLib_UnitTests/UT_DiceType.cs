@@ -9,21 +9,21 @@ namespace ModelAppLib_UnitTests
     {
 
         [Fact]
-        public void CreateObjectNotNull()
+        void CreateObjectNotNull()
         {
             DiceType dt = new(3, new Dice(new DiceSideType(3, new DiceSide("img1"))));
             Assert.NotNull(dt);
         }
 
         [Fact]
-        public void GetNbDices()
+        void GetNbDices()
         {
             DiceType dt = new(3, new Dice(new DiceSideType(3, new DiceSide("img1"))));
             Assert.Equal(3, dt.NbDices);
         }
 
         [Fact]
-        public void GetPrototypeWorks()
+        void GetPrototypeWorks()
         {
             Dice d = new(new DiceSideType(3, new DiceSide("img1")));
             DiceType dt = new(3, d);
@@ -33,7 +33,7 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
-        public void CheckEqual(Object obj1, Object obj2, bool shouldBeEqual)
+        void CheckEqual(Object obj1, Object obj2, bool shouldBeEqual)
         {
             if (obj1 != null)
                 Assert.Equal(shouldBeEqual, obj1.Equals(obj2));
@@ -43,7 +43,7 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
-        public void HashCodesWork(Object d1, Object d2, bool shouldItHaveSameHash)
+        void HashCodesWork(Object d1, Object d2, bool shouldItHaveSameHash)
         {
             if (d1 != null && d2 != null)
             {

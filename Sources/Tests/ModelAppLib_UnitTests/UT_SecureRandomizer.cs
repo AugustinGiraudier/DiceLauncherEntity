@@ -7,7 +7,7 @@ namespace ModelAppLib_UnitTests
     {
         
         [Fact]
-        public void CreateObjectNotNull()
+        void CreateObjectNotNull()
         {
             var rd = new SecureRandomizer();
             Assert.NotNull(rd);
@@ -17,7 +17,7 @@ namespace ModelAppLib_UnitTests
         [InlineData(0,10,50)]
         [InlineData(0,100,50)]
         [InlineData(0,2,100)]
-        public void TestRandom(int min, int max, int nbTest)
+        void TestRandom(int min, int max, int nbTest)
         {
             var rd = new SecureRandomizer();
             for(int iTest=0; iTest<nbTest; iTest++)

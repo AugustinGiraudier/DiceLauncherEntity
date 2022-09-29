@@ -8,14 +8,14 @@ namespace ModelAppLib_UnitTests;
     public class UT_Game
     {
         [Fact]
-        public void CreateObjectNotNull()
+        void CreateObjectNotNull()
         {
             Game gm = new Game(new List<DiceType>());
             Assert.NotNull(gm);
         }
 
         [Fact]
-        public void GetList()
+        void GetList()
         {
             List<DiceType> list = new List<DiceType>();
             Game gm = new Game(list);
@@ -23,7 +23,7 @@ namespace ModelAppLib_UnitTests;
         }
 
         [Fact]
-        public void TryAddDices()
+        void TryAddDices()
         {
             List<DiceType> list = new List<DiceType>();
             Game gm = new Game(list);
@@ -36,7 +36,7 @@ namespace ModelAppLib_UnitTests;
         }
 
         [Fact]
-        public void TestLauncheDices()
+        void TestLauncheDices()
         {
             Game game = new Game(
                 new DiceType(3, new Dice(new DiceSideType(1, new DiceSide("img1"))))
@@ -91,7 +91,7 @@ namespace ModelAppLib_UnitTests;
 
         [Theory]
         [MemberData(nameof(Data_AddDiceTypeToGame))]
-        public void Test_AddDiceTypeToGame(bool expectResult, IEnumerable<DiceType> expectedDiceType, Game game, DiceType diceType)
+        void Test_AddDiceTypeToGame(bool expectResult, IEnumerable<DiceType> expectedDiceType, Game game, DiceType diceType)
         {
             bool result = game.AddDiceType(diceType);
             Assert.Equal(expectResult, result);

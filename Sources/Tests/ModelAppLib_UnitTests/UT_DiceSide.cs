@@ -9,14 +9,14 @@ namespace ModelAppLib_UnitTests
     {
 
         [Fact]
-        public void CreateObjectNotNull()
+        void CreateObjectNotNull()
         {
             DiceSide ds = new("img");
             Assert.NotNull(ds);
         }
 
         [Fact]
-        public void CanGetImage()
+        void CanGetImage()
         {
             DiceSide ds = new("imagePath");
             Assert.Equal("imagePath", ds.Image);
@@ -28,7 +28,7 @@ namespace ModelAppLib_UnitTests
         [InlineData("test test","test test", true)]
         [InlineData("","", true)]
         [InlineData(""," ", false)]
-        public void EqualityComprarerWorks(String img1, String img2, bool shouldItBeEqual)
+        void EqualityComprarerWorks(String img1, String img2, bool shouldItBeEqual)
         {
             DiceSide ds = new(img1);
             DiceSide ds2 = new(img2);
@@ -42,13 +42,13 @@ namespace ModelAppLib_UnitTests
         [InlineData("img1","img1",true)]
         [InlineData("img","img2",false)]
         [InlineData(""," ",false)]
-        public void HashCodesWork(String img1, String img2, bool shouldHaveSameCode)
+        void HashCodesWork(String img1, String img2, bool shouldHaveSameCode)
         {
             Assert.Equal(shouldHaveSameCode, new DiceSide(img1).GetHashCode() == new DiceSide(img2).GetHashCode());
         }
 
         [Fact]
-        public void EqualityComparationWithOtherClassIsFalse()
+        void EqualityComparationWithOtherClassIsFalse()
         {
             Assert.False(new DiceSide("").Equals(new DiceSideType(2, null)));
         }

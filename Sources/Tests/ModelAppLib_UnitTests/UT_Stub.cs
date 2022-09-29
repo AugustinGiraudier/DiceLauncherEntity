@@ -9,21 +9,21 @@ namespace ModelAppLib_UnitTests
     public class UT_Stub
     {
         [Fact]
-        public void CreateObjectNotNull()
+        void CreateObjectNotNull()
         {
             var stub = new Stub();
             Assert.NotNull(stub);
         }
 
         [Fact]
-        public void DiceCollectionNotEmpty()
+        void DiceCollectionNotEmpty()
         {
             var stub = new Stub();
             Assert.NotEmpty(stub.GetAllDices().Result);
         }
 
         [Fact]
-        public void SideCollectionNotEmpty()
+        void SideCollectionNotEmpty()
         {
             var stub = new Stub();
             Assert.NotEmpty(stub.GetAllSides().Result);
@@ -33,7 +33,7 @@ namespace ModelAppLib_UnitTests
         [InlineData(3,5)]
         [InlineData(1,0)]
         [InlineData(9,3)]
-        public void CheckGettingSomeSides(int nbSides, int pageNum)
+        void CheckGettingSomeSides(int nbSides, int pageNum)
         {
             var stub = new Stub();
             var result = stub.GetSomeSides(nbSides, pageNum).Result;
@@ -50,7 +50,7 @@ namespace ModelAppLib_UnitTests
         [InlineData(4)]
         [InlineData(20)]
         [InlineData(100)]
-        public void CheckGettingSomeDices(int nbSides)
+        void CheckGettingSomeDices(int nbSides)
         {
             var stub = new Stub();
             var result = stub.GetSomeDices(nbSides, 1).Result;
