@@ -10,7 +10,7 @@ namespace ModelAppLib
     internal class Game
     {
 
-        private readonly List<DiceType> dices;
+        private readonly List<DiceType> dices = new List<DiceType>();
         public ReadOnlyCollection<DiceType> Dices => dices.AsReadOnly(); 
 
 
@@ -29,12 +29,15 @@ namespace ModelAppLib
             }
         }
 
-        public void AddDiceType(DiceType dt)
+        public bool AddDiceType(DiceType dt)
         {
             if (dices.Contains(dt))
-                dices.Find(x => x.Equals(dt)).AddDice(dt.NbDices);
-            else
-                dices.Add(dt);
+            {
+                dices.Find(x => x.Equals(dt))?.AddDice(dt.NbDices);
+                return false;
+            }
+            dices.Add(dt);
+            return true;
         }
 
         public List<DiceSide> LaunchDices()
