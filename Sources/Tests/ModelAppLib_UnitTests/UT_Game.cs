@@ -35,6 +35,17 @@ namespace ModelAppLib_UnitTests;
             Assert.All(list, a => gm.Dices.Contains(a));
         }
 
+        [Fact]
+        public void TestLauncheDices()
+        {
+            Game game = new Game(
+                new DiceType(3, new Dice(new DiceSideType(1, new DiceSide("img1"))))
+            );
+            List<DiceSide> list = game.LaunchDices();
+            Assert.NotNull(list);
+            Assert.Equal(3, list.Count);
+        }
+
         public static IEnumerable<object[]> Data_AddDiceTypeToGame()
         {
             yield return new object[]
@@ -82,7 +93,8 @@ namespace ModelAppLib_UnitTests;
         [MemberData(nameof(Data_AddDiceTypeToGame))]
         public void Test_AddDiceTypeToGame(bool expectResult, IEnumerable<DiceType> expectedDiceType, Game game, DiceType diceType)
         {
-            game.AddDiceType(diceType);
+            bool result = game.AddDiceType(diceType);
+            Assert.Equal(expectResult, result);
             var diceTypeTest = expectedDiceType.ToList();
             Assert.Equal(diceTypeTest.Count(), game.Dices.Count());
             Assert.All(diceTypeTest, e => game.Dices.Contains(e));
