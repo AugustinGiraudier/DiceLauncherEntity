@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -6,25 +8,16 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
 [assembly: InternalsVisibleTo("StubLib")]
+[assembly: InternalsVisibleTo("Application")]
 
 namespace ModelAppLib
 {
     internal class Dice
     {
 
+        private static ILogger<Dice> logger = LoggerFactory.Create(builder => builder.AddNLog()).CreateLogger<Dice>();
+        
         private readonly List<DiceSideType> sidesTypes;
-
-        /// <summary>
-        /// Retourne la liste de types de faces sous forme read only
-        /// </summary>
-        /// public ReadOnlyCollection<DiceSideType> SideTypes
-        /// {
-        ///     get
-        ///     {
-        ///         return sidesTypes.AsReadOnly();
-        ///     }
-        /// }
-        /// 
 
         public ReadOnlyCollection<DiceSideType> SideTypes => sidesTypes.AsReadOnly();
         
@@ -35,6 +28,7 @@ namespace ModelAppLib
         /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
         public Dice(List<DiceSideType> sidesTypes)
         {
+            logger.LogTrace("Dice created");
             this.sidesTypes = new List<DiceSideType>();
             foreach (DiceSideType dst in sidesTypes)
                 this.addSide(dst);
@@ -45,6 +39,7 @@ namespace ModelAppLib
         /// <param name="dstypes">types de face du dé</param>
         public Dice(params DiceSideType[] dstypes)
         {
+            logger.LogTrace("Dice created");
             this.sidesTypes = new List<DiceSideType>();
             foreach(DiceSideType dst in dstypes)
                 this.addSide(dst);
@@ -56,6 +51,7 @@ namespace ModelAppLib
         /// <returns>le nombre total de faces du dé</returns>
         public int GetTotalSides()
         {
+            logger.LogTrace("Dice total number of sides asked");
             int ret = 0;
             foreach(DiceSideType dst in sidesTypes)
             {
