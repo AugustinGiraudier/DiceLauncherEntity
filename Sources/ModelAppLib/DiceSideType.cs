@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
-[assembly: InternalsVisibleTo("StubLib")]
-
-namespace ModelAppLib
+﻿namespace ModelAppLib
 {
-    internal class DiceSideType
+    public class DiceSideType
     {
         /// <summary>
         /// Nombre de face de ce type

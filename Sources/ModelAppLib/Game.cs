@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
-
 namespace ModelAppLib
 {
-    internal class Game
+    public class Game
     {
 
         private readonly List<DiceType> dices = new List<DiceType>();
@@ -29,6 +27,11 @@ namespace ModelAppLib
             }
         }
 
+        /// <summary>
+        /// Ajoute un type de dé au jeu
+        /// </summary>
+        /// <param name="dt">type de dé à ajouter</param>
+        /// <returns></returns>
         public bool AddDiceType(DiceType dt)
         {
             if (dices.Contains(dt))
@@ -40,6 +43,10 @@ namespace ModelAppLib
             return true;
         }
 
+        /// <summary>
+        /// Génère un lancé des dés de la partie
+        /// </summary>
+        /// <returns>la liste des faces résultat</returns>
         public List<DiceSide> LaunchDices()
         {
             var ret = new List<DiceSide>();
