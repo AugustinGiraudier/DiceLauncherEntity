@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
-
 namespace ModelAppLib
 {
-    internal class Game
+    public class Game
     {
 
         private readonly List<DiceType> dices = new List<DiceType>();

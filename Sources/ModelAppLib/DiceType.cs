@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
-[assembly: InternalsVisibleTo("StubLib")]
-
+﻿
 namespace ModelAppLib
 {
-    internal class DiceType
+    public class DiceType
     {
         /// <summary>
         /// Nombre de dé de ce type

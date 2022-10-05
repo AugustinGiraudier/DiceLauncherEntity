@@ -41,5 +41,37 @@ namespace ModelAppLib
                 this.dices = new List<Dice>(dices);
         }
 
+        public void AddDice(Dice d)
+        {
+            if(d!=null)
+                dices.Add(d);
+        }
+
+        public void addSide(DiceSide ds)
+        {
+            if (ds != null)
+                sides.Add(ds);
+        }
+
+        internal void InitDices(List<Dice> ld)
+        {
+            if (ld == null) return;
+            dices.Clear();
+            foreach (Dice d in ld)
+            {
+                dices.Add(d);
+            }
+        }
+
+        internal void InitSides(List<DiceSide> lds)
+        {
+            if (lds == null) return;
+            sides.Clear();
+            foreach (DiceSide ds in lds)
+            {
+                sides.Add(ds);
+            }
+        }
+
     }
 }

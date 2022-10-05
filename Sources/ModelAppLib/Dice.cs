@@ -4,15 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
-[assembly: InternalsVisibleTo("StubLib")]
-[assembly: InternalsVisibleTo("Application")]
 
 namespace ModelAppLib
 {
-    internal class Dice
+    public class Dice
     {
 
         private static ILogger<Dice> logger = LoggerFactory.Create(builder => builder.AddNLog()).CreateLogger<Dice>();
