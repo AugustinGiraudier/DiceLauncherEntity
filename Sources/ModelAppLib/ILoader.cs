@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
+[assembly: InternalsVisibleTo("StubLib")]
 
 namespace ModelAppLib
 {
