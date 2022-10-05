@@ -28,6 +28,7 @@ namespace ModelAppLib
             foreach (DiceSideType dst in sidesTypes)
                 this.addSide(dst);
         }
+        
         /// <summary>
         /// Construit un dé avec ses types de faces en parametre
         /// </summary>

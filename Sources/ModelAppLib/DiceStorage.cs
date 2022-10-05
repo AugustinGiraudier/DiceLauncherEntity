@@ -41,18 +41,30 @@ namespace ModelAppLib
                 this.dices = new List<Dice>(dices);
         }
 
+        /// <summary>
+        /// Ajoute un dé au stockage
+        /// </summary>
+        /// <param name="d">dé à ajouter</param>
         public void AddDice(Dice d)
         {
             if(d!=null)
                 dices.Add(d);
         }
 
+        /// <summary>
+        /// Ajoute une face de dé au stockage
+        /// </summary>
+        /// <param name="ds">face à ajouter</param>
         public void addSide(DiceSide ds)
         {
             if (ds != null)
                 sides.Add(ds);
         }
 
+        /// <summary>
+        /// Réinitialise la liste de dés avec une nouvelle liste (la référence n'est pas conservée)
+        /// </summary>
+        /// <param name="ld">la nouvelle liste</param>
         internal void InitDices(List<Dice> ld)
         {
             if (ld == null) return;
@@ -63,6 +75,10 @@ namespace ModelAppLib
             }
         }
 
+        /// <summary>
+        /// Réinitialise la liste de faces avec une nouvelle liste (la référence n'est pas conservée)
+        /// </summary>
+        /// <param name="lds">la nouvelle liste</param>
         internal void InitSides(List<DiceSide> lds)
         {
             if (lds == null) return;

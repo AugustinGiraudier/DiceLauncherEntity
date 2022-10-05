@@ -21,6 +21,10 @@ namespace ModelAppLib
             Prototype = prototype;
         }
 
+        /// <summary>
+        /// Ajoute un certain nombre de dé de ce type
+        /// </summary>
+        /// <param name="nbDicesToAdd">nombre de dés à ajouter</param>
         public void AddDice(int nbDicesToAdd)
         {
             this.NbDices += nbDicesToAdd;
