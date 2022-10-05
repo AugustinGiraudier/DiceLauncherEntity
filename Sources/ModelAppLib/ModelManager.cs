@@ -5,10 +5,18 @@ namespace ModelAppLib
 {
     public class ModelManager
     {
-
+        private ILoader loader;
         private DiceStorage diceStorage = new DiceStorage(null, null);
         private List<Game> games = new List<Game>();
 
+        public ModelManager(ILoader loader)
+        {
+            this.loader = loader;
+            InitSides(loader.GetAllSides().Result);
+            InitDices(loader.GetAllDices().Result);
+            InitGames(loader.GetAllGames().Result);
+        }
+        
         /// <summary>
         /// Ajoute un dé au stockage
         /// </summary>
@@ -67,7 +75,7 @@ namespace ModelAppLib
         /// Permet d'initialiser la liste de dés
         /// </summary>
         /// <param name="ld">liste des dés</param>
-        public void InitDices(List<Dice> ld) 
+        private void InitDices(List<Dice> ld) 
         {
             diceStorage.InitDices(ld);
         }
@@ -76,7 +84,7 @@ namespace ModelAppLib
         /// Permet d'initialiser la liste des faces de dés
         /// </summary>
         /// <param name="lds">liste des faces</param>
-        public void InitSides(List<DiceSide> lds)
+        private void InitSides(List<DiceSide> lds)
         {
             diceStorage.InitSides(lds);
         }
@@ -85,7 +93,7 @@ namespace ModelAppLib
         /// Permet d'initialiser la liste des parties
         /// </summary>
         /// <param name="lg">liste des parties</param>
-        public void InitGames(List<Game> lg)
+        private void InitGames(List<Game> lg)
         {
             if (lg == null) return;
             lg.Clear();

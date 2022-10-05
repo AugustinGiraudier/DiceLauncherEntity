@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using ModelAppLib;
 
-[assembly: InternalsVisibleTo("ModelAppLib_UnitTests")]
-
 namespace StubLib
 {
-    internal class Stub : ILoader
+    public class Stub : ILoader
     {
         public Task<List<Dice>> GetAllDices()
         {
@@ -35,6 +32,34 @@ namespace StubLib
             ret.Add(new Dice(
                 new DiceSideType(5, sides[5]),
                 new DiceSideType(1, sides[6])));
+
+            return Task.FromResult(ret);
+        }
+
+        public Task<List<Game>> GetAllGames()
+        {
+            List<Game> ret = new();
+
+            var dices = GetAllDices().Result;
+
+            ret.Add(new Game(new List<DiceType> {
+                new DiceType(1, dices[0]),
+                new DiceType(2, dices[1]),
+                new DiceType(3, dices[2])
+            }));
+            
+            ret.Add(new Game(new List<DiceType> {
+                new DiceType(5, dices[0])
+            }));
+
+            ret.Add(new Game(new List<DiceType> {
+                new DiceType(1, dices[0]),
+                new DiceType(1, dices[1]),
+                new DiceType(1, dices[2]),
+                new DiceType(1, dices[3]),
+                new DiceType(1, dices[4]),
+                new DiceType(1, dices[5])
+            }));
 
             return Task.FromResult(ret);
         }
@@ -71,6 +96,17 @@ namespace StubLib
                 ret.Add(new Dice(lDst));
             }
 
+            return Task.FromResult(ret);
+        }
+
+        public Task<List<Game>> GetSomeGames(int nb, int page)
+        {
+            List<Game> games = GetAllGames().Result;
+            List<Game> ret = new();
+            for (int i = nb * page; i < (nb * page) + nb; i++)
+            {
+                ret.Add(games[i%games.Count]);
+            }
             return Task.FromResult(ret);
         }
 
