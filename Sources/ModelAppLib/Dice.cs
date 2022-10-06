@@ -23,10 +23,19 @@ namespace ModelAppLib
         /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
         public Dice(List<DiceSideType> sidesTypes)
         {
+            if(sidesTypes == null)
+                throw new ArgumentNullException(nameof(sidesTypes));
+            if (sidesTypes.Count == 0)
+                throw new ArgumentException("La liste des types de faces ne peut être vide", nameof(sidesTypes));
+            
             logger.LogTrace("Dice created");
             this.sidesTypes = new List<DiceSideType>();
-            foreach (DiceSideType dst in sidesTypes)
-                this.addSide(dst);
+            foreach (var sideType in sidesTypes)
+            {
+                if (sideType == null)
+                    throw new ArgumentNullException(nameof(sidesTypes));
+                this.AddSide(sideType);
+            }
         }
         
         /// <summary>
@@ -35,10 +44,20 @@ namespace ModelAppLib
         /// <param name="dstypes">types de face du dé</param>
         public Dice(params DiceSideType[] dstypes)
         {
+            if (dstypes == null)
+                throw new ArgumentNullException(nameof(dstypes));
+            if (dstypes.Length == 0)
+                throw new ArgumentException("La liste des types de faces ne peut être vide", nameof(dstypes));
+
             logger.LogTrace("Dice created");
             this.sidesTypes = new List<DiceSideType>();
-            foreach(DiceSideType dst in dstypes)
-                this.addSide(dst);
+            
+            foreach (var sideType in dstypes)
+            {
+                if (sideType == null)
+                    throw new ArgumentNullException(nameof(dstypes));
+                this.sidesTypes.Add(sideType);
+            }
         }
 
         /// <summary>
@@ -63,7 +82,11 @@ namespace ModelAppLib
         /// <returns>la face pointée par l'index</returns>
         public DiceSide GetSideWithItsIndex(int index)
         {
-            if (sidesTypes == null || sidesTypes.Count == 0 || index >= GetTotalSides())
+            if(index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), "L'index doit être positif");
+            }
+            if (sidesTypes.Count == 0 || index >= GetTotalSides())
                 return null;
 
             int idCpt = 0;
@@ -85,8 +108,10 @@ namespace ModelAppLib
         /// Ajoute un type de face au dé (additionne le nombre de face si déja existante)
         /// </summary>
         /// <param name="sideT">Type de face à ajouter</param>
-        public void addSide(DiceSideType sideT)
+        public void AddSide(DiceSideType sideT)
         {
+            if (sideT == null)
+                throw new ArgumentNullException(nameof(sideT));
             if (sidesTypes.Contains(sideT))
                 sidesTypes.Find(x => x.Equals(sideT)).AddSides(sideT.NbSide);
             else

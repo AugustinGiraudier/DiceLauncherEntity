@@ -13,6 +13,8 @@ namespace ModelAppLib
         /// <param name="image">url de l'image de la face</param>
         public DiceSide(string image)
         {
+            if(image == null)
+                throw new ArgumentNullException("image");
             this.Image = image;
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 
 namespace ModelAppLib
 {
@@ -15,14 +14,21 @@ namespace ModelAppLib
         public Game(List<DiceType> dices)
         {
             if(dices == null)
-                this.dices = new List<DiceType>();
-            else
-                this.dices = new List<DiceType>(dices);
+                throw new ArgumentNullException(nameof(dices), "la liste de dés ne peut etre null");
+            this.dices = new List<DiceType>();
+            foreach (var dice in dices)
+            {
+                if (dice == null)
+                    throw new ArgumentNullException(nameof(dice), "un des dés est null");
+                AddDiceType(dice);
+            }
         }
         public Game(params DiceType[] dices)
         {
             foreach(var dice in dices)
             {
+                if (dice == null)
+                    throw new ArgumentNullException(nameof(dice), "un des dés est null");
                 AddDiceType(dice);
             }
         }
@@ -34,6 +40,8 @@ namespace ModelAppLib
         /// <returns></returns>
         public bool AddDiceType(DiceType dt)
         {
+            if(dt == null)
+                throw new ArgumentNullException(nameof(dt), "le type de dé ne peut etre null");
             if (dices.Contains(dt))
             {
                 dices.Find(x => x.Equals(dt))?.AddDice(dt.NbDices);

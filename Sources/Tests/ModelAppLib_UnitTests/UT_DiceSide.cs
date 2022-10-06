@@ -50,7 +50,7 @@ namespace ModelAppLib_UnitTests
         [Fact]
         void EqualityComparationWithOtherClassIsFalse()
         {
-            Assert.False(new DiceSide("").Equals(new DiceSideType(2, null)));
+            Assert.False(new DiceSide("img").Equals(new DiceSideType(2, new DiceSide("img"))));
         }
 
     }

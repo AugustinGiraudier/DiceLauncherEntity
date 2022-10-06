@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ModelAppLib
 {
@@ -10,9 +10,8 @@ namespace ModelAppLib
         public ModelManager(IDataManager dManager)
         {
             if (dManager == null)
-            {
-                throw new System.ArgumentNullException(nameof(dManager));
-            }
+                throw new ArgumentNullException(nameof(dManager), "le gestionnaire de données ne peut etre null");
+            
             this.dataManager = dManager;
         }
         
@@ -22,6 +21,8 @@ namespace ModelAppLib
         /// <param name="d">dé à ajouter</param>
         public void AddDice(Dice d) 
         {
+            if (d == null)
+                throw new ArgumentNullException(nameof(d), "le dé ne peut etre null");
             dataManager.AddDice(d);
         }
         /// <summary>
@@ -30,6 +31,8 @@ namespace ModelAppLib
         /// <param name="g">partie à ajouter</param>
         public void AddGame(Game g)
         {
+            if(g == null)
+                throw new ArgumentNullException(nameof(g), "la partie ne peut etre null");
             dataManager.AddGame(g);
         }
 
