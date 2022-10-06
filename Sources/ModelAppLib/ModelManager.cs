@@ -5,16 +5,15 @@ namespace ModelAppLib
 {
     public class ModelManager
     {
-        private ILoader loader;
-        private DiceStorage diceStorage = new DiceStorage(null, null);
-        private List<Game> games = new List<Game>();
+        private IDataManager dataManager;
 
-        public ModelManager(ILoader loader)
+        public ModelManager(IDataManager dManager)
         {
-            this.loader = loader;
-            InitSides(loader.GetAllSides().Result);
-            InitDices(loader.GetAllDices().Result);
-            InitGames(loader.GetAllGames().Result);
+            if (dManager == null)
+            {
+                throw new System.ArgumentNullException(nameof(dManager));
+            }
+            this.dataManager = dManager;
         }
         
         /// <summary>
@@ -23,7 +22,7 @@ namespace ModelAppLib
         /// <param name="d">dé à ajouter</param>
         public void AddDice(Dice d) 
         {
-            diceStorage.AddDice(d);
+            dataManager.AddDice(d);
         }
         /// <summary>
         /// Ajoute une partie au stockage
@@ -31,77 +30,44 @@ namespace ModelAppLib
         /// <param name="g">partie à ajouter</param>
         public void AddGame(Game g)
         {
-            if(g != null)
-                games.Add(g);
+            dataManager.AddGame(g);
         }
 
         /// <summary>
         /// Retourne le nombre de dés du stockage
         /// </summary>
         /// <returns>le nombre de dés</returns>
-        public int GetDiceCount() { return diceStorage.Dices.Count; }
+        public int GetDiceCount() { return dataManager.GetNbDice().Result; }
 
         /// <summary>
         /// Retourne le nombre de faces de dé du stockage
         /// </summary>
         /// <returns>le nombre de faces</returns>
-        public int GetSideCount() { return diceStorage.Sides.Count; }
+        public int GetSideCount() { return dataManager.GetNbSide().Result; }
 
         /// <summary>
         /// Retourne le nombre de parties du stockage
         /// </summary>
         /// <returns>nombre de parties</returns>
-        public int GetGameCount() { return games.Count; }
+        public int GetGameCount() { return dataManager.GetNbGame().Result; }
 
         /// <summary>
         /// Retourne la liste de toutes les faces de dés
         /// </summary>
         /// <returns>liste des faces</returns>
-        public ReadOnlyCollection<DiceSide> GetAllSides() { return diceStorage.Sides; }
+        public List<DiceSide> GetAllSides() { return dataManager.GetAllSides().Result; }
         
         /// <summary>
         /// Retourne la liste de tous les dés
         /// </summary>
         /// <returns>liste des dés</returns>
-        public ReadOnlyCollection<Dice> GetAllDices() { return diceStorage.Dices; }
+        public List<Dice> GetAllDices() { return dataManager.GetAllDices().Result; }
 
         /// <summary>
         /// Retourne la liste de toutes les parties
         /// </summary>
         /// <returns>liste des parties</returns>
-        public ReadOnlyCollection<Game> GetAllGames() { return games.AsReadOnly(); }
-
-        /// <summary>
-        /// Permet d'initialiser la liste de dés
-        /// </summary>
-        /// <param name="ld">liste des dés</param>
-        private void InitDices(List<Dice> ld) 
-        {
-            diceStorage.InitDices(ld);
-        }
-
-        /// <summary>
-        /// Permet d'initialiser la liste des faces de dés
-        /// </summary>
-        /// <param name="lds">liste des faces</param>
-        private void InitSides(List<DiceSide> lds)
-        {
-            diceStorage.InitSides(lds);
-        }
-
-        /// <summary>
-        /// Permet d'initialiser la liste des parties
-        /// </summary>
-        /// <param name="lg">liste des parties</param>
-        private void InitGames(List<Game> lg)
-        {
-            if (lg == null) return;
-            lg.Clear();
-            foreach(Game g in lg)
-            {
-                games.Add(g);
-            }
-        }
+        public List<Game> GetAllGames() { return dataManager.GetAllGames().Result; }
 
     }
 }
