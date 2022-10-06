@@ -10,15 +10,35 @@ namespace ModelAppLib_UnitTests
         [Fact]
         internal void CreateObjectNotNull()
         {
-            var lst = new List<DiceSideType>();
+            var lst = new List<DiceSideType>
+            {
+                new DiceSideType(1, new DiceSide("img1"))
+            };
             Dice d = new(lst);
             Assert.NotNull(d);
         }
 
         [Fact]
+        void CreateObjectWithNullCollection()
+        {
+            List<DiceSideType> ldt = null;
+            Assert.Throws<ArgumentNullException>(() => new Dice(ldt));
+
+            List<DiceSideType> ldt2 = new List<DiceSideType>{ 
+                new DiceSideType(2, new DiceSide("img")),
+                null
+            };
+            Assert.Throws<ArgumentNullException>(() => new Dice(ldt2));
+            
+            Assert.Throws<ArgumentNullException>(() => new Dice(new DiceSideType(2, new DiceSide("img")),null));
+        }
+
+        [Fact]
         void GettingSidesNotNull()
         {
-            var lst = new List<DiceSideType>();
+            var lst = new List<DiceSideType>()            {
+                new DiceSideType(1, new DiceSide("img1"))
+            };
             Dice d = new(lst);
             Assert.NotNull(d.SideTypes);
         }
@@ -41,7 +61,7 @@ namespace ModelAppLib_UnitTests
             var lst = new List<DiceSideType>();
             lst.Add(dst);
             Dice d = new(lst);
-            d.addSide(dst);
+            d.AddSide(dst);
             Assert.Single(d.SideTypes);
             Assert.Equal(2, d.SideTypes[0].NbSide);
         }
@@ -49,19 +69,21 @@ namespace ModelAppLib_UnitTests
         [Fact]
         void AddingMultipleSidesWorks()
         {
-            var lst = new List<DiceSideType>();
+            var lst = new List<DiceSideType>()            {
+                new DiceSideType(1, new DiceSide("img1"))
+            };
             Dice d = new(lst);
-            d.addSide(new DiceSideType(2, new DiceSide("img")));
-            d.addSide(new DiceSideType(3, new DiceSide("img2")));
-            Assert.Equal(2, d.SideTypes.Count);
-            Assert.Equal(5, d.GetTotalSides());
+            d.AddSide(new DiceSideType(2, new DiceSide("img")));
+            d.AddSide(new DiceSideType(3, new DiceSide("img2")));
+            Assert.Equal(3, d.SideTypes.Count);
+            Assert.Equal(6, d.GetTotalSides());
         }
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
         void EqualityComparerWorks(Object d1, Object d2, bool shouldItBeEqual)
         {
-            if(d1 !=null)
+            if(d1 != null)
                 Assert.Equal(shouldItBeEqual, d1.Equals(d2));
             if(d2 != null)
                 Assert.Equal(shouldItBeEqual, d2.Equals(d1));

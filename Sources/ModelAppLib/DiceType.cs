@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace ModelAppLib
 {
     public class DiceType
@@ -17,6 +19,10 @@ namespace ModelAppLib
         /// <param name="prototype">Dé cible</param>
         public DiceType(int nbDices, Dice prototype)
         {
+            if (nbDices <= 0)
+                throw new ArgumentOutOfRangeException("nbDices", "Le nombre de dés doit être suppérieur à 0");
+            if(prototype == null)
+                throw new ArgumentNullException("prototype", "Le prototype ne peut être null");
             NbDices = nbDices;
             Prototype = prototype;
         }
@@ -27,6 +33,8 @@ namespace ModelAppLib
         /// <param name="nbDicesToAdd">nombre de dés à ajouter</param>
         public void AddDice(int nbDicesToAdd)
         {
+            if(nbDicesToAdd <=0)
+                throw new ArgumentOutOfRangeException("nbDicesToAdd", "Le nombre de dés à ajouter doit être suppérieur à 0");
             this.NbDices += nbDicesToAdd;
         }
 
