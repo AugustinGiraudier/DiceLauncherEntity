@@ -15,6 +15,13 @@ namespace ModelAppLib_UnitTests;
         }
 
         [Fact]
+        void CreateObjectNull()
+        {
+            Game gm = null;
+            Assert.Null(gm);
+        }
+
+        [Fact]
         void GetList()
         {
             List<DiceType> list = new List<DiceType>();
