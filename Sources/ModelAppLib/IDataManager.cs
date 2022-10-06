@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
-    public interface ILoader
+    public interface IDataManager
     {
         /// <summary>
         /// Permet de récupérer tous les dés
@@ -47,5 +47,44 @@ namespace ModelAppLib
         /// <returns></returns>
         public Task<List<Game>> GetSomeGames(int nb, int page);
 
+        /// <summary>
+        /// Ajoute une partie à la base de données
+        /// </summary>
+        /// <param name="game">la partie</param>
+        /// <returns></returns>
+        public Task<bool> AddGame(Game game);
+
+        /// <summary>
+        /// Ajoute un dé à la base de données
+        /// </summary>
+        /// <param name="dice">le dé</param>
+        /// <returns></returns>
+        public Task<bool> AddDice(Dice dice);
+
+        /// <summary>
+        /// Ajoute une face à la base de données
+        /// </summary>
+        /// <param name="side">la face</param>
+        /// <returns></returns>
+        public Task<bool> AddSide(DiceSide side);
+
+        /// <summary>
+        /// Retourne le nombre de dés de la base
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> GetNbDice();
+
+        /// <summary>
+        /// Retourne le nombre de faces de dés de la base
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> GetNbSide();
+
+        /// <summary>
+        /// Retourne le nombre de parties de la base
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> GetNbGame();
+        
     }
 }

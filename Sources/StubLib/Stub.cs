@@ -4,8 +4,23 @@ using ModelAppLib;
 
 namespace StubLib
 {
-    public class Stub : ILoader
+    public class Stub : IDataManager
     {
+        public Task<bool> AddDice(Dice dice)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> AddGame(Game game)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> AddSide(DiceSide side)
+        {
+            return Task.FromResult(true);
+        }
+
         public Task<List<Dice>> GetAllDices()
         {
             List<Dice> ret = new();
@@ -78,6 +93,21 @@ namespace StubLib
 
             return Task.FromResult(ret);
 
+        }
+
+        public Task<int> GetNbDice()
+        {
+            return Task.FromResult(GetAllDices().Result.Count);
+        }
+
+        public Task<int> GetNbGame()
+        {
+            return Task.FromResult(GetAllGames().Result.Count);
+        }
+
+        public Task<int> GetNbSide()
+        {
+            return Task.FromResult(GetAllSides().Result.Count);
         }
 
         public Task<List<Dice>> GetSomeDices(int nb, int page)
