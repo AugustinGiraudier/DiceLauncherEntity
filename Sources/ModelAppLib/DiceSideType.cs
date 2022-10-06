@@ -19,7 +19,7 @@ namespace ModelAppLib
         public DiceSideType(int nbSide, DiceSide prototype)
         {
             if (nbSide <= 0)
-                throw new ArgumentOutOfRangeException("nbSide","le nombre de face doit être suppérieur à 0");
+                throw new ArgumentOutOfRangeException(nameof(nbSide),"le nombre de face doit être suppérieur à 0");
             if (prototype == null)
                 throw new ArgumentNullException(nameof(prototype));
             NbSide = nbSide;
@@ -33,7 +33,7 @@ namespace ModelAppLib
         public void AddSides(int nbToAdd)
         {
             if (nbToAdd <= 0)
-                throw new ArgumentOutOfRangeException("nbToAdd", "le nombre de face à ajouter doit être suppérieur à 0");
+                throw new ArgumentOutOfRangeException(nameof(nbToAdd), "le nombre de face à ajouter doit être suppérieur à 0");
             NbSide += nbToAdd;
         }
 

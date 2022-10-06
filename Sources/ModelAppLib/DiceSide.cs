@@ -14,7 +14,7 @@ namespace ModelAppLib
         public DiceSide(string image)
         {
             if(image == null)
-                throw new ArgumentNullException("image");
+                throw new ArgumentNullException(nameof(image), "l'image ne peut pas etre null");
             this.Image = image;
         }
 

@@ -96,7 +96,7 @@ namespace ModelAppLib_UnitTests;
             bool result = game.AddDiceType(diceType);
             Assert.Equal(expectResult, result);
             var diceTypeTest = expectedDiceType.ToList();
-            Assert.Equal(diceTypeTest.Count(), game.Dices.Count());
+            Assert.Equal(diceTypeTest.Count, game.Dices.Count);
             Assert.All(diceTypeTest, e => game.Dices.Contains(e));
         }
     }

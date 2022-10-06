@@ -19,7 +19,7 @@ namespace ModelAppLib
             foreach (var dice in dices)
             {
                 if (dice == null)
-                    throw new ArgumentNullException(nameof(dice), "un des dés est null");
+                    throw new ArgumentNullException(nameof(dices), "un des dés est null");
                 AddDiceType(dice);
             }
         }
@@ -28,7 +28,7 @@ namespace ModelAppLib
             foreach(var dice in dices)
             {
                 if (dice == null)
-                    throw new ArgumentNullException(nameof(dice), "un des dés est null");
+                    throw new ArgumentNullException(nameof(dices), "un des dés est null");
                 AddDiceType(dice);
             }
         }
