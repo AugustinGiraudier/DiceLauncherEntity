@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ModelAppLib;
@@ -14,12 +15,13 @@ namespace ModelAppLib_UnitTests;
             Assert.NotNull(gm);
         }
 
-        [Fact]
+        /*[Fact]
         void CreateObjectNull()
         {
-            Game gm = null;
-            Assert.Null(gm);
-        }
+            List<DiceType> list = null;
+            Game gm = new Game(list);
+            Assert.Throws<ArgumentNullException>(() => gm);
+        }*/
 
         [Fact]
         void GetList()
