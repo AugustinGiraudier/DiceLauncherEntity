@@ -71,9 +71,7 @@ namespace StubLib
                 new DiceType(1, dices[0]),
                 new DiceType(1, dices[1]),
                 new DiceType(1, dices[2]),
-                new DiceType(1, dices[3]),
-                new DiceType(1, dices[4]),
-                new DiceType(1, dices[5])
+                new DiceType(1, dices[3])
             }));
 
             return Task.FromResult(ret);
