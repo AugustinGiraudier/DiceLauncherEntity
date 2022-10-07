@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using EntitiesLib;
 using ModelAppLib;
 using NLog;
 
@@ -12,8 +14,17 @@ namespace ModelApp
                 builder.ForLogger().FilterMinLevel(LogLevel.Trace).WriteToConsole();
             });
 
-            Dice d = new(new DiceSideType(3, new DiceSide("img1")));
-            d.GetTotalSides();
+
+            ModelManager manager = new ModelManager(new DataBaseLinker());
+            
+
+            List<DiceSide> sides = manager.dataManager.GetAllSides().Result;
+
+            foreach (var side in sides)
+            {
+                Console.WriteLine(side.Image);
+            }
+
 
         }
     }
