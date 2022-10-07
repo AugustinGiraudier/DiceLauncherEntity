@@ -1,6 +1,9 @@
 # ---> intelliji
 .idea/
 
+# ---> migrations Entity Framework
+Migrations/
+
 
 # ---> macOS
 # General
