@@ -5,5 +5,7 @@ namespace EntitiesLib
     {
         public long Id { get; set; }
         public int NbDice { get; set; }
+
+        public Dice_entity Prototype { get; set; }
     }
 }

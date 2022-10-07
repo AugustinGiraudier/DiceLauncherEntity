@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ModelAppLib;
 
@@ -7,79 +8,118 @@ namespace EntitiesLib
 {
     public class DataBaseLinker : IDataManager
     {
-        
-        public Task<bool> AddDice(Dice dice)
-        {
-            throw new NotImplementedException();
-        }
+        private DiceLauncher_DbContext context = new DiceLauncher_DbContext();
 
-        public Task<bool> AddGame(Game game)
+        public async Task<bool> AddDice(Dice dice)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> AddSide(DiceSide side)
-        {
-            using (var context = new DiceLauncher_DbContext())
+            //using (var context = new DiceLauncher_DbContext())
             {
-                var r = await context.DiceSides.AddAsync(side.ToEntity());
-
-                if (r.State != Microsoft.EntityFrameworkCore.EntityState.Added)
-                    return false;
-
+                var res = context.Dices.AddAsync(dice.ToEntity());
                 context.SaveChanges();
             }
             return true;
         }
 
-        public Task<List<Dice>> GetAllDices()
+        public async Task<bool> AddGame(Game game)
         {
-            throw new NotImplementedException();
+            //using (var context = new DiceLauncher_DbContext())
+            {
+
+                var res = context.Games.AddAsync(game.ToEntity());
+                context.SaveChanges();
+            }
+            return true;
         }
 
-        public Task<List<Game>> GetAllGames()
+        public async Task<bool> AddSide(DiceSide side)
         {
-            throw new NotImplementedException();
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                var res = await context.Sides.AddAsync(side.ToEntity());
+                context.SaveChanges();
+            }
+            return true;
+        }
+
+        public async Task<List<Dice>> GetAllDices()
+        {
+            List<Dice> ret;
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                var res = context.Dices;
+                ret = res.ToModel();
+            }
+            return ret;
+        }
+
+        public async Task<List<Game>> GetAllGames()
+        {
+            List<Game> ret;
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                ret = context.Games.ToModel();
+            }
+            return ret;
         }
 
         public async Task<List<DiceSide>> GetAllSides()
         {
             List<DiceSide> ret;
-            using(var context = new DiceLauncher_DbContext())
+            //using (var context = new DiceLauncher_DbContext())
             {
-                ret = context.DiceSides.ToModel();
+                ret = context.Sides.ToModel();
             }
             return ret;
         }
 
-        public Task<int> GetNbDice()
+        public async Task<int> GetNbDice()
+        {
+            int ret;
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                ret = context.Dices.Count();
+            }
+            return ret;
+        }
+
+        public async Task<int> GetNbGame()
+        {
+            int ret;
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                ret = context.Games.Count();
+            }
+            return ret;
+        }
+
+        public async Task<int> GetNbSide()
+        {
+            int ret;
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                ret = context.Sides.Count();
+            }
+            return ret;
+        }
+
+        public async Task<List<Dice>> GetSomeDices(int nb, int page)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> GetNbGame()
+        public async Task<List<Game>> GetSomeGames(int nb, int page)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> GetNbSide()
+        public async Task<List<DiceSide>> GetSomeSides(int nb, int page)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Dice>> GetSomeDices(int nb, int page)
+        ~DataBaseLinker()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Game>> GetSomeGames(int nb, int page)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<DiceSide>> GetSomeSides(int nb, int page)
-        {
-            throw new NotImplementedException();
+            this.context.Dispose();
         }
     }
 }

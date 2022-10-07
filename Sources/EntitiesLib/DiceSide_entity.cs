@@ -6,6 +6,6 @@ namespace EntitiesLib
     {
         public long Id { get; set; }
 
-        public String Image { get; set; }
+        public string Image { get; set; }
     }
 }
