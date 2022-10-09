@@ -10,7 +10,9 @@ namespace EntitiesLib
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=DiceLauncher.db");
+            if(!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlite("Data Source=DiceLauncher.db");
         }
+
     }
 }

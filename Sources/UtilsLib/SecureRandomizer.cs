@@ -12,10 +12,11 @@ namespace ModelAppLib
     {
         public int GetRandomInt(int min, int max)
         {
-            byte[] four_bytes = new byte[4];
-            RandomNumberGenerator.Create().GetBytes(four_bytes);
-            UInt32 scale = BitConverter.ToUInt32(four_bytes, 0);
-            return (int)(min + (max - min) * (scale / (uint.MaxValue + 1.0)));
+            byte[] bytes = new byte[sizeof(int)];
+            RandomNumberGenerator.Create().GetBytes(bytes);
+            UInt32 scale = BitConverter.ToUInt32(bytes, 0);
+            int val = (int)(min + (max - min) * (scale / (uint.MaxValue + 1.0)));
+            return val;
         }
     }
 }

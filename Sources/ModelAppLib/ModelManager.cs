@@ -5,8 +5,7 @@ namespace ModelAppLib
 {
     public class ModelManager
     {
-        //private readonly IDataManager dataManager;
-        public IDataManager dataManager;
+        private readonly IDataManager dataManager;
 
         public ModelManager(IDataManager dManager)
         {

@@ -30,12 +30,12 @@ namespace EntitiesLib
 
         public static DiceSideType ToModel(this DiceSideType_entity entity)
                 => new DiceSideType(entity.NbSide, entity.Prototype.ToModel());
-        public static DiceSideType_entity ToEntity(this DiceSideType model)
-                => new DiceSideType_entity { NbSide = model.NbSide, Prototype = model.Prototype.ToEntity() };
+        public static DiceSideType_entity ToEntity(this DiceSideType model, long DiceId)
+                => new DiceSideType_entity { NbSide = model.NbSide, Prototype = model.Prototype.ToEntity(), Side_FK=model.Prototype.Id, Dice_FK=DiceId };
         public static List<DiceSideType> ToModel(this IEnumerable<DiceSideType_entity> entities)
                 => entities.Select(e => e.ToModel()).ToList();
-        public static List<DiceSideType_entity> ToEntity(this IEnumerable<DiceSideType> models)
-                => models.Select(m => m.ToEntity()).ToList();
+        public static List<DiceSideType_entity> ToEntity(this IEnumerable<DiceSideType> models, long DiceId)
+                => models.Select(m => m.ToEntity(DiceId)).ToList();
 
 
         // --- Dice --- //
@@ -45,23 +45,28 @@ namespace EntitiesLib
             d.Id = entity.Id;
             return d;
         }
-        public static Dice_entity ToEntity(this Dice model)
-                => new Dice_entity { Sides = model.SideTypes.ToEntity(), Id = model.Id };
+        public static Dice_entity ToEntity(this Dice model, DiceLauncher_DbContext context)
+        {
+            var d = new Dice_entity { Sides = model.SideTypes.ToEntity(model.Id), Id = model.Id };
+            foreach (var side in d.Sides)
+                side.Prototype = context.Sides.Where(s => s.Id == side.Side_FK).First();
+            return d;
+        }
         public static List<Dice> ToModel(this IEnumerable<Dice_entity> entities)
             => entities.Select(e => e.ToModel()).ToList();
-        public static List<Dice_entity> ToEntity(this IEnumerable<Dice> models)
-            => models.Select(m => m.ToEntity()).ToList();
+        public static List<Dice_entity> ToEntity(this IEnumerable<Dice> models, DiceLauncher_DbContext context)
+            => models.Select(m => m.ToEntity(context)).ToList();
 
 
         // --- Dice Type --- //
         public static DiceType ToModel(this DiceType_entity entity)
                 => new DiceType(entity.NbDice, entity.Prototype.ToModel());
-        public static DiceType_entity ToEntity(this DiceType model)
-            => new DiceType_entity { NbDice = model.NbDices, Prototype = model.Prototype.ToEntity() };
+        public static DiceType_entity ToEntity(this DiceType model, long GameId, DiceLauncher_DbContext context)
+            => new DiceType_entity { NbDice = model.NbDices, Prototype = model.Prototype.ToEntity(context), Dice_FK = model.Prototype.Id, Game_FK= GameId };
         public static List<DiceType> ToModel(this IEnumerable<DiceType_entity> entities)
             => entities.Select(e => e.ToModel()).ToList();
-        public static List<DiceType_entity> ToEntity(this IEnumerable<DiceType> models)
-            => models.Select(m => m.ToEntity()).ToList();
+        public static List<DiceType_entity> ToEntity(this IEnumerable<DiceType> models, long GameId, DiceLauncher_DbContext context)
+            => models.Select(m => m.ToEntity(GameId, context)).ToList();
 
         // --- Game --- //
         public static Game ToModel(this Game_entity entity)
@@ -70,12 +75,17 @@ namespace EntitiesLib
             g.Id = entity.Id;
             return g;
         }
-        public static Game_entity ToEntity(this Game model)
-                => new Game_entity { DiceTypes = model.Dices.ToEntity(), Id = model.Id };
+        public static Game_entity ToEntity(this Game model, DiceLauncher_DbContext context)
+        {
+            var g = new Game_entity { DiceTypes = model.Dices.ToEntity(model.Id, context), Id = model.Id };
+            foreach (var dice in g.DiceTypes)
+                dice.Prototype = context.Dices.Where(d => d.Id == dice.Dice_FK).First();
+            return g;
+        }
         public static List<Game> ToModel(this IEnumerable<Game_entity> entities)
             => entities.Select(e => e.ToModel()).ToList();
-        public static List<Game_entity> ToEntity(this IEnumerable<Game> models)
-            => models.Select(m => m.ToEntity()).ToList();
+        public static List<Game_entity> ToEntity(this IEnumerable<Game> models, DiceLauncher_DbContext context)
+            => models.Select(m => m.ToEntity(context)).ToList();
 
     }
 }
