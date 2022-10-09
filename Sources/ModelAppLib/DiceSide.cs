@@ -5,6 +5,8 @@ namespace ModelAppLib
 {
     public class DiceSide
     {
+
+        public long Id { get; set; }
         public String Image { get;}
 
         /// <summary>

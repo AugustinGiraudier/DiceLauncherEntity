@@ -9,6 +9,7 @@ namespace ModelAppLib
 {
     public class Dice
     {
+        public long Id { get; set; }
 
         private static ILogger<Dice> logger = LoggerFactory.Create(builder => builder.AddNLog()).CreateLogger<Dice>();
         

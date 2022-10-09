@@ -1,0 +1,1 @@
+copy .\DiceLauncher_DEFAULT.db .\DiceLauncher.db
