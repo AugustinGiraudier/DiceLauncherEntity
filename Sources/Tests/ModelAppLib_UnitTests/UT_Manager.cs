@@ -8,6 +8,7 @@ namespace ModelAppLib_UnitTests;
 
 public class UT_Manager
 {
+    private static StubForUT stubUT = new StubForUT();
     
     /**
      * Faire un stub de test pour stocker toute les données à tester
@@ -63,5 +64,30 @@ public class UT_Manager
         manager.AddGame(gm);
         Assert.NotNull(manager.GetAllGames().Contains(gm));
         //Assert.Equal(gm, manager.GetAllGames().Contains(gm));
+    }
+
+    public static IEnumerable<object[]> DataAddDiceModele()
+    {
+        
+        yield return new object[]
+        {
+            stubUT.getDiceNull(),
+            stubUT.getGameNull(),
+            stubUT.getDiceWithValue(),
+            stubUT.getGameWithValue()
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(DataAddDiceModele))]
+    public void Test_AddDiceNull(Dice diceNull, Game gmNull, Dice diceValue, Game gmValue)
+    {
+        ModelManager modele = new ModelManager(new Stub());
+        Assert.Throws<ArgumentNullException>(() => modele.AddDice(diceNull));
+        //Assert.True(modele.AddDice(diceValue));
+        //Assert.Contains(diceValue, modele.GetAllDices()); A faire quand la méthode ajoutera vraiment
+        Assert.Throws<ArgumentNullException>(() => modele.AddGame(gmNull));
+        //Assert.True(modele.AddGame(gmValue));
+        //Assert.Contains(gmValue, modele.GetAllGames()); A faire quand la méthode ajoutera vraiment
     }
 }
