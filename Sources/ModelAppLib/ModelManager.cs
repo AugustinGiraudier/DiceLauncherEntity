@@ -73,6 +73,30 @@ namespace ModelAppLib
         public List<Game> GetAllGames() { return dataManager.GetAllGames().Result; }
 
         /// <summary>
+        /// Récupère un nombre de face avec un offset
+        /// </summary>
+        /// <param name="nb">nombre de face</param>
+        /// <param name="page">offset (commence à 0)</param>
+        /// <returns></returns>
+        public List<DiceSide> GetSomeSides(int nb, int page) { return dataManager.GetSomeSides(nb, page).Result; }
+
+        /// <summary>
+        /// Récupère un nombre de dé avec un offset
+        /// </summary>
+        /// <param name="nb">nombre de dé</param>
+        /// <param name="page">offset (commence à 0)</param>
+        /// <returns></returns>
+        public List<Dice> GetSomeDices(int nb, int page) { return dataManager.GetSomeDices(nb, page).Result; }
+
+        /// <summary>
+        /// Récupère un nombre de partie avec un offset
+        /// </summary>
+        /// <param name="nb">nombre de partie</param>
+        /// <param name="page">offset (commence à 0)</param>
+        /// <returns></returns>
+        public List<Game> GetSomeGames(int nb, int page) { return dataManager.GetSomeGames(nb, page).Result; }
+
+        /// <summary>
         /// Supprime un dé
         /// </summary>
         /// <param name="d">le dé</param>

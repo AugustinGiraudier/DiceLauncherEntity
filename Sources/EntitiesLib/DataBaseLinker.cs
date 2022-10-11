@@ -124,21 +124,36 @@ namespace EntitiesLib
         {
             //using (var context = new DiceLauncher_DbContext())
             {
-                throw new NotImplementedException();
+                return Task.FromResult(
+                          context.Dices.Include(d => d.Sides)
+                                       .ThenInclude(s => s.Prototype)
+                                       .Skip(nb * page)
+                                       .Take(nb)
+                                       .ToModel()
+                                       );
             }
         }
         public Task<List<Game>> GetSomeGames(int nb, int page)
         {
             //using (var context = new DiceLauncher_DbContext())
             {
-                throw new NotImplementedException();
+                return Task.FromResult(
+                          context.Games.Include(g => g.DiceTypes)
+                                       .ThenInclude(d => d.Prototype)
+                                       .Skip(nb * page)
+                                       .Take(nb)
+                                       .ToModel()
+                                       );
             }
         }
         public Task<List<DiceSide>> GetSomeSides(int nb, int page)
         {
             //using (var context = new DiceLauncher_DbContext())
             {
-                throw new NotImplementedException();
+                return Task.FromResult(
+                    context.Sides.Skip(nb * page).Take(nb)
+                                 .ToModel()
+                    ) ;
             }
         }
 
