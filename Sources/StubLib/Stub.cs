@@ -21,6 +21,21 @@ namespace StubLib
             return Task.FromResult(true);
         }
 
+        public Task<bool> DeleteDice(Dice d)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> DeleteGame(Game g)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> DeleteSide(DiceSide ds)
+        {
+            return Task.FromResult(true);
+        }
+
         public Task<List<Dice>> GetAllDices()
         {
             List<Dice> ret = new();

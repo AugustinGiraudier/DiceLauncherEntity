@@ -1,5 +1,6 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntitiesLib
@@ -14,6 +15,7 @@ namespace EntitiesLib
         [ForeignKey("Side_FK")]
         public DiceSide_entity Prototype { get; set; }
 
+        [Required]
         public long? Dice_FK { get; set; }
         [ForeignKey("Dice_FK")]
         public Dice_entity Dice { get; set; }

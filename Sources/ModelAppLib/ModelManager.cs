@@ -72,5 +72,26 @@ namespace ModelAppLib
         /// <returns>liste des parties</returns>
         public List<Game> GetAllGames() { return dataManager.GetAllGames().Result; }
 
+        /// <summary>
+        /// Supprime un dé
+        /// </summary>
+        /// <param name="d">le dé</param>
+        /// <returns></returns>
+        public bool RemoveDice(Dice d) { return dataManager.DeleteDice(d).Result; }
+
+        /// <summary>
+        /// Supprime une face
+        /// </summary>
+        /// <param name="ds">la face</param>
+        /// <returns></returns>
+        public bool RemoveSide(DiceSide ds) { return dataManager.DeleteSide(ds).Result; }
+
+        /// <summary>
+        /// Supprime une partie
+        /// </summary>
+        /// <param name="g">la partie</param>
+        /// <returns></returns>
+        public bool RemoveGame(Game g) { return dataManager.DeleteGame(g).Result; }
+
     }
 }

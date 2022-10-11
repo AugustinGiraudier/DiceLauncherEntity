@@ -5,6 +5,12 @@ namespace ModelAppLib
 {
     public interface IDataManager
     {
+
+        // ===================================================== //
+        //      = SELECT =
+        // ===================================================== //
+
+
         /// <summary>
         /// Permet de récupérer tous les dés
         /// </summary>
@@ -47,6 +53,12 @@ namespace ModelAppLib
         /// <returns></returns>
         public Task<List<Game>> GetSomeGames(int nb, int page);
 
+
+        // ===================================================== //
+        //      = CREATE =
+        // ===================================================== //
+
+
         /// <summary>
         /// Ajoute une partie à la base de données
         /// </summary>
@@ -68,6 +80,12 @@ namespace ModelAppLib
         /// <returns></returns>
         public Task<bool> AddSide(DiceSide side);
 
+
+        // ===================================================== //
+        //      = COUNT =
+        // ===================================================== //
+
+
         /// <summary>
         /// Retourne le nombre de dés de la base
         /// </summary>
@@ -85,6 +103,33 @@ namespace ModelAppLib
         /// </summary>
         /// <returns></returns>
         public Task<int> GetNbGame();
+
+
+        // ===================================================== //
+        //      = REMOVE =
+        // ===================================================== //
+
+
+        /// <summary>
+        /// Supprime le dé passé en paramètre de la base
+        /// </summary>
+        /// <param name="d">dé à supprimer</param>
+        /// <returns></returns>
+        public Task<bool> DeleteDice(Dice d);
+
+        /// <summary>
+        /// Supprime la face de la base
+        /// </summary>
+        /// <param name="ds">face à supprimer</param>
+        /// <returns></returns>
+        public Task<bool> DeleteSide(DiceSide ds);
+
+        /// <summary>
+        /// Supprime une partie de la base
+        /// </summary>
+        /// <param name="g">partie à supprimer</param>
+        /// <returns></returns>
+        public Task<bool> DeleteGame(Game g);
         
     }
 }
