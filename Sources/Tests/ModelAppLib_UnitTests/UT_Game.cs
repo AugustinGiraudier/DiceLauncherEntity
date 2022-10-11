@@ -15,13 +15,26 @@ namespace ModelAppLib_UnitTests;
             Assert.NotNull(gm);
         }
 
-        /*[Fact]
+        [Fact]
         void CreateObjectNull()
         {
             List<DiceType> list = null;
-            Game gm = new Game(list);
-            Assert.Throws<ArgumentNullException>(() => gm);
-        }*/
+            List<DiceType> goodList = new List<DiceType>();
+            goodList.Add(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
+            goodList.Add(null);
+            Game gm;
+            Assert.Throws<ArgumentNullException>(() => gm = new Game(list));
+            Assert.Throws<ArgumentNullException>( () => gm = new Game(goodList));
+        }
+
+        [Fact]
+        void CreateObjectAddDicesTypeNull()
+        {
+            Game gm = new Game(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
+            DiceType test = new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1"))));
+            Assert.Throws<ArgumentNullException>(() => gm.AddDiceType(null));
+            Assert.False(gm.AddDiceType(test));
+        }
 
         [Fact]
         void GetList()
