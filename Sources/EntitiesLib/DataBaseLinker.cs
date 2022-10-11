@@ -9,77 +9,205 @@ namespace EntitiesLib
 {
     public class DataBaseLinker : IDataManager
     {
-        private DiceLauncher_DbContext context = new DiceLauncher_DbContext();
+        private readonly DiceLauncher_DbContext context = new();
+
+
+        // ===================================================== //
+        //      = CREATE =
+        // ===================================================== //
+
 
         public async Task<bool> AddDice(Dice dice)
         {
-            await context.Dices.AddAsync(dice.ToEntity(context));
-            context.SaveChanges();
-            return true;
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                var entity = dice.ToEntity(context);
+                await context.Dices.AddAsync(entity);
+                await context.SaveChangesAsync();
+                dice.Id = entity.Id;
+                return true;
+            }
         }
-
         public async Task<bool> AddGame(Game game)
         {
-            await context.Games.AddAsync(game.ToEntity(context));
-            context.SaveChanges();
-            return true;
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                var entity = game.ToEntity(context);
+                await context.Games.AddAsync(entity);
+                await context.SaveChangesAsync();
+                game.Id = entity.Id;
+                return true;
+            }
         }
-
         public async Task<bool> AddSide(DiceSide side)
         {
-            await context.Sides.AddAsync(side.ToEntity());
-            context.SaveChanges();
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                var entity = side.ToEntity();
+                await context.Sides.AddAsync(entity);
+                await context.SaveChangesAsync();
+                side.Id = entity.Id;
+                return true; 
+            }
+        }
+
+
+        // ===================================================== //
+        //      = REMOVE =
+        // ===================================================== //
+        
+
+        public async Task<bool> DeleteDice(Dice d)
+        {
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                context.Dices.Remove(GetDiceEntity(d));
+                await context.SaveChangesAsync();
+            }
             return true;
         }
-
-        public async Task<List<Dice>> GetAllDices()
+        public async Task<bool> DeleteGame(Game g)
         {
-            return context.Dices.Include(d => d.Sides).ThenInclude(s => s.Prototype).ToModel();
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                context.Games.Remove(GetGameEntity(g));
+                await context.SaveChangesAsync();
+            }
+            return true;
+        }
+        public async Task<bool> DeleteSide(DiceSide ds)
+        {
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                context.Sides.Remove(GetSideEntity(ds));
+                await context.SaveChangesAsync();
+                return true;
+            }
         }
 
-        public async Task<List<Game>> GetAllGames()
+
+        // ===================================================== //
+        //      = SELECT =
+        // ===================================================== //
+
+
+        public Task<List<Dice>> GetAllDices()
         {
-            return context.Games.Include(g => g.DiceTypes).ThenInclude(d => d.Prototype).ToModel();
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                return Task.FromResult(
+                       context.Dices.Include(d => d.Sides)
+                                    .ThenInclude(s => s.Prototype)
+                                    .ToModel()
+                                    );
+            }
+        }
+        public Task<List<Game>> GetAllGames()
+        {
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                return Task.FromResult( 
+                    context.Games.Include(g => g.DiceTypes)
+                                 .ThenInclude(d => d.Prototype)
+                                 .ToModel()
+                                 );
+            }
+        }
+        public Task<List<DiceSide>> GetAllSides()
+        {
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                return Task.FromResult(context.Sides.ToModel());
+            }
+        }
+        public Task<List<Dice>> GetSomeDices(int nb, int page)
+        {
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                throw new NotImplementedException();
+            }
+        }
+        public Task<List<Game>> GetSomeGames(int nb, int page)
+        {
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                throw new NotImplementedException();
+            }
+        }
+        public Task<List<DiceSide>> GetSomeSides(int nb, int page)
+        {
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public async Task<List<DiceSide>> GetAllSides()
+
+        // ===================================================== //
+        //      = COUNT =
+        // ===================================================== //
+
+
+        public Task<int> GetNbDice()
         {
-            return context.Sides.ToModel();
+
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                return Task.FromResult(context.Dices.Count());
+            }
         }
 
-        public async Task<int> GetNbDice()
+        public Task<int> GetNbGame()
         {
-            return context.Dices.Count();
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                return Task.FromResult(context.Games.Count());
+            }
         }
 
-        public async Task<int> GetNbGame()
+        public Task<int> GetNbSide()
         {
-            return context.Games.Count();
+            //using (var context = new DiceLauncher_DbContext())
+            {
+                return Task.FromResult(context.Sides.Count());
+            }
         }
 
-        public async Task<int> GetNbSide()
+
+        // ===================================================== //
+        //      = PRIVATE =
+        // ===================================================== //
+
+
+        /// <summary>
+        /// Retourne l'entité de dé correspondant au dé
+        /// </summary>
+        /// <param name="d">dé</param>
+        /// <returns></returns>
+        private Dice_entity GetDiceEntity(Dice d)
         {
-            return context.Sides.Count();
+            return context.Dices.First(d2 => d2.Id == d.Id);
         }
 
-        public async Task<List<Dice>> GetSomeDices(int nb, int page)
+        /// <summary>
+        /// Retourne l'entité de face correspondant à la face
+        /// </summary>
+        /// <param name="ds">face</param>
+        /// <returns></returns>
+        private DiceSide_entity GetSideEntity(DiceSide ds)
         {
-            throw new NotImplementedException();
+            return context.Sides.First(d2 => d2.Id == ds.Id);
         }
 
-        public async Task<List<Game>> GetSomeGames(int nb, int page)
+        /// <summary>
+        /// Retourne l'entité de partie correspondant à la partie
+        /// </summary>
+        /// <param name="g">partie</param>
+        /// <returns></returns>
+        private Game_entity GetGameEntity(Game g)
         {
-            throw new NotImplementedException();
+            return context.Games.First(g2 => g2.Id == g.Id);
         }
 
-        public async Task<List<DiceSide>> GetSomeSides(int nb, int page)
-        {
-            throw new NotImplementedException();
-        }
-
-        ~DataBaseLinker()
-        {
-            this.context.Dispose();
-        }
     }
 }

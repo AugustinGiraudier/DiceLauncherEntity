@@ -63,9 +63,10 @@ namespace ModelAppLib
             foreach (var dice in dices) // chaque type de dé
             {
                 Dice d = dice.Prototype;
+                var totalNbSide = d.GetTotalSides();
                 for (int i=0; i<dice.NbDices; i++) // chaque dé
                 {
-                    ret.Add(d.GetSideWithItsIndex(rd.GetRandomInt(0,d.GetTotalSides())));
+                    ret.Add(d.GetSideWithItsIndex(rd.GetRandomInt(0, totalNbSide)));
                 }
             }
 

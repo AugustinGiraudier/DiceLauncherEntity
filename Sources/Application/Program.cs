@@ -32,24 +32,21 @@ namespace ModelApp
                     new DiceSideType(2, sides[6])
                 };
 
-
                 var d = new Dice(sideTypes);
                 manager.AddDice(d);
 
-                var dices = manager.GetAllDices();
-                var dt = new DiceType(2, dices[0]);
+                var dt = new DiceType(2, d);
 
                 var g = new Game(dt);
                 manager.AddGame(g);
 
-
-                var games = manager.GetAllGames();
-
-                foreach(var side in games[0].LaunchDices())
+                foreach(var side in g.LaunchDices())
                 {
                     Console.WriteLine(side.Image);
                 }
 
+                manager.RemoveGame(g);
+                manager.RemoveDice(d);
 
             }
         }
