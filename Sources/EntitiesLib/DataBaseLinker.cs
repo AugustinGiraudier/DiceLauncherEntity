@@ -9,7 +9,22 @@ namespace EntitiesLib
 {
     public class DataBaseLinker : IDataManager
     {
-        private readonly DiceLauncher_DbContext context = new();
+        protected readonly DiceLauncher_DbContext context;
+
+        /// <summary>
+        /// Create a db linker with existing context. It will be disposed at the end
+        /// </summary>
+        /// <param name="context"></param>
+        public DataBaseLinker(DiceLauncher_DbContext context)
+        {
+            this.context = context;
+        }
+        public DataBaseLinker()
+        {
+            this.context = new DiceLauncher_DbContext();
+        }
+
+
 
 
         // ===================================================== //
