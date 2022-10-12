@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+		<ProjectReference Include="..\ModelAppLib\ModelAppLib.csproj" />
+		<ProjectReference Include="..\EntitiesLib\EntitiesLib.csproj" />
+		<ProjectReference Include="..\StubLib\StubLib.csproj" />
+  </ItemGroup>
+
+</Project>
