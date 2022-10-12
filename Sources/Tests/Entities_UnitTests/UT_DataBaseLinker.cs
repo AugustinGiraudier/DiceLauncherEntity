@@ -13,7 +13,6 @@ namespace Entities_UnitTests
         [Fact]
         async void TestAddingDice()
         {
-            //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
 
