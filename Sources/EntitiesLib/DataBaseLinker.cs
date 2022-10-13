@@ -36,13 +36,7 @@ namespace EntitiesLib
         {
             var entity = dice.ToEntity(context);
             await context.Dices.AddAsync(entity);
-            try
-            {
-                await context.SaveChangesAsync();
-            }catch(Exception e)
-            {
-                Console.WriteLine("tst");
-            }
+            await context.SaveChangesAsync();
             dice.Id = entity.Id;
             return true;
         }

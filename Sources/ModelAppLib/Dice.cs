@@ -30,7 +30,7 @@ namespace ModelAppLib
                 throw new ArgumentException("La liste des types de faces ne peut être vide", nameof(sidesTypes));
             
             logger.LogTrace("Dice created");
-            this.sidesTypes = new List<DiceSideType>();
+            
             foreach (var sideType in sidesTypes)
             {
                 if (sideType == null)
@@ -44,21 +44,8 @@ namespace ModelAppLib
         /// </summary>
         /// <param name="dstypes">types de face du dé</param>
         public Dice(params DiceSideType[] dstypes)
+            :this(dstypes.AsEnumerable())
         {
-            if (dstypes == null)
-                throw new ArgumentNullException(nameof(dstypes));
-            if (dstypes.Length == 0)
-                throw new ArgumentException("La liste des types de faces ne peut être vide", nameof(dstypes));
-
-            logger.LogTrace("Dice created");
-            this.sidesTypes = new List<DiceSideType>();
-            
-            foreach (var sideType in dstypes)
-            {
-                if (sideType == null)
-                    throw new ArgumentNullException(nameof(dstypes));
-                this.sidesTypes.Add(sideType);
-            }
         }
 
         /// <summary>
