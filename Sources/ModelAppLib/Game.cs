@@ -62,7 +62,7 @@ namespace ModelAppLib
                 var totalNbSide = d.GetTotalSides();
                 for (int i=0; i<dice.NbDices; i++) // chaque dé
                 {
-                    ret.Add(d.GetSideWithItsIndex(rd.GetRandomInt(0, totalNbSide)));
+                    ret.Add(d[rd.GetRandomInt(0, totalNbSide)]);
                 }
             }
 

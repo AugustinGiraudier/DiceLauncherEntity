@@ -68,28 +68,31 @@ namespace ModelAppLib
         /// </summary>
         /// <param name="index">index de la face dans ce dé</param>
         /// <returns>la face pointée par l'index</returns>
-        public DiceSide GetSideWithItsIndex(int index)
+        public DiceSide this[int index]
         {
-            if(index < 0)
+            get
             {
-                throw new ArgumentOutOfRangeException(nameof(index), "L'index doit être positif");
+                if (index < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index), "L'index doit être positif");
+                }
+                if (sidesTypes.Count == 0 || index >= GetTotalSides())
+                    return null;
+
+                int idCpt = 0;
+                DiceSideType dst;
+                int DiceCpt = 0;
+
+                do
+                {
+                    dst = sidesTypes[idCpt];
+                    DiceCpt += dst.NbSide;
+                    idCpt++;
+                }
+                while (DiceCpt <= index);
+
+                return dst.Prototype;
             }
-            if (sidesTypes.Count == 0 || index >= GetTotalSides())
-                return null;
-
-            int idCpt = 0;
-            DiceSideType dst;
-            int DiceCpt = 0;
-
-            do
-            {
-                dst = sidesTypes[idCpt];
-                DiceCpt += dst.NbSide;
-                idCpt++;
-            }
-            while (DiceCpt <= index);
-
-            return dst.Prototype;
         }
 
         /// <summary>

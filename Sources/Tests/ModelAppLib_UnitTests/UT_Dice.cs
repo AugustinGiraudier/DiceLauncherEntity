@@ -110,7 +110,7 @@ namespace ModelAppLib_UnitTests
         [MemberData(nameof(GetDatasForIndexesOfSides))]
         void CheckIndexOfSide(Dice d, int index, DiceSide ds)
         {
-            Assert.True(d.GetSideWithItsIndex(index) == ds);
+            Assert.True(d[index] == ds);
         }
 
         public static IEnumerable<object[]> GetDatasForIndexesOfSides()
