@@ -6,7 +6,7 @@ namespace StubEntitiesLib
     public class StubedDatabaseLinker : DataBaseLinker
     {
 
-        public StubedDatabaseLinker(DiceLauncher_DbContext context)
+        public StubedDatabaseLinker(DiceLauncherDbContext context)
             :base(context)
         {
             var stub = new Stub();

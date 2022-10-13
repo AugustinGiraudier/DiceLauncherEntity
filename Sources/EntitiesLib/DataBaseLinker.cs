@@ -9,19 +9,19 @@ namespace EntitiesLib
 {
     public class DataBaseLinker : IDataManager
     {
-        protected readonly DiceLauncher_DbContext context;
+        protected readonly DiceLauncherDbContext context;
 
         /// <summary>
         /// Create a db linker with existing context. It will be disposed at the end
         /// </summary>
         /// <param name="context"></param>
-        public DataBaseLinker(DiceLauncher_DbContext context)
+        public DataBaseLinker(DiceLauncherDbContext context)
         {
             this.context = context;
         }
         public DataBaseLinker()
         {
-            this.context = new DiceLauncher_DbContext();
+            this.context = new DiceLauncherDbContext();
         }
 
 
@@ -214,7 +214,7 @@ namespace EntitiesLib
         /// </summary>
         /// <param name="d">dé</param>
         /// <returns></returns>
-        private Dice_entity GetDiceEntity(Dice d)
+        private DiceEntity GetDiceEntity(Dice d)
         {
             return context.Dices.First(d2 => d2.Id == d.Id);
         }
@@ -224,7 +224,7 @@ namespace EntitiesLib
         /// </summary>
         /// <param name="ds">face</param>
         /// <returns></returns>
-        private DiceSide_entity GetSideEntity(DiceSide ds)
+        private DiceSideEntity GetSideEntity(DiceSide ds)
         {
             return context.Sides.First(d2 => d2.Id == ds.Id);
         }
@@ -234,7 +234,7 @@ namespace EntitiesLib
         /// </summary>
         /// <param name="g">partie</param>
         /// <returns></returns>
-        private Game_entity GetGameEntity(Game g)
+        private GameEntity GetGameEntity(Game g)
         {
             return context.Games.First(g2 => g2.Id == g.Id);
         }
