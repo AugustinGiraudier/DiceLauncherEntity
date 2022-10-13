@@ -2,7 +2,7 @@
 
 namespace EntitiesLib
 {
-    public class DiceSide_entity
+    public class DiceSideEntity
     {
         public long Id { get; set; }
 

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntitiesLib
 {
-    public class DiceSideType_entity
+    public class DiceSideTypeEntity
     {
         public long Id { get; set; }
 
@@ -13,11 +13,11 @@ namespace EntitiesLib
 
         public long? Side_FK { get; set; }
         [ForeignKey("Side_FK")]
-        public DiceSide_entity Prototype { get; set; }
+        public DiceSideEntity Prototype { get; set; }
 
         [Required]
         public long? Dice_FK { get; set; }
         [ForeignKey("Dice_FK")]
-        public Dice_entity Dice { get; set; }
+        public DiceEntity Dice { get; set; }
     }
 }

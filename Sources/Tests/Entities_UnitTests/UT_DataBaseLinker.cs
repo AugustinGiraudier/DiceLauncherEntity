@@ -17,11 +17,11 @@ namespace Entities_UnitTests
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
 
-            var options = new DbContextOptionsBuilder<DiceLauncher_DbContext>()
+            var options = new DbContextOptionsBuilder<DiceLauncherDbContext>()
                 .UseSqlite(connection)
                 .Options;
 
-            var context = new DiceLauncher_DbContext(options);
+            var context = new DiceLauncherDbContext(options);
             context.Database.EnsureCreated();
             StubedDatabaseLinker linker = new StubedDatabaseLinker(context);
 
