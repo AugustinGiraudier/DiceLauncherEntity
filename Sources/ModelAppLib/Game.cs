@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ModelAppLib
 {
@@ -15,7 +16,7 @@ namespace ModelAppLib
         {
             if(dices == null)
                 throw new ArgumentNullException(nameof(dices), "la liste de dés ne peut etre null");
-            this.dices = new List<DiceType>();
+            
             foreach (var dice in dices)
             {
                 if (dice == null)
@@ -24,13 +25,8 @@ namespace ModelAppLib
             }
         }
         public Game(params DiceType[] dices)
+            :this(dices.AsEnumerable())
         {
-            foreach(var dice in dices)
-            {
-                if (dice == null)
-                    throw new ArgumentNullException(nameof(dices), "un des dés est null");
-                AddDiceType(dice);
-            }
         }
 
         /// <summary>
@@ -55,7 +51,7 @@ namespace ModelAppLib
         /// Génère un lancé des dés de la partie
         /// </summary>
         /// <returns>la liste des faces résultat</returns>
-        public List<DiceSide> LaunchDices()
+        public IEnumerable<DiceSide> LaunchDices()
         {
             var ret = new List<DiceSide>();
             IRandomizer rd = new SecureRandomizer();

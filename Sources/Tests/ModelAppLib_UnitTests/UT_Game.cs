@@ -63,9 +63,9 @@ namespace ModelAppLib_UnitTests;
             Game game = new Game(
                 new DiceType(3, new Dice(new DiceSideType(1, new DiceSide("img1"))))
             );
-            List<DiceSide> list = game.LaunchDices();
+            IEnumerable<DiceSide> list = game.LaunchDices();
             Assert.NotNull(list);
-            Assert.Equal(3, list.Count);
+            Assert.Equal(3, list.Count());
         }
 
         public static IEnumerable<object[]> Data_AddDiceTypeToGame()
