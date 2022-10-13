@@ -12,12 +12,22 @@ namespace StubLib
             return Task.FromResult(true);
         }
 
+        public Task<bool> AddDiceToGame(Game g, Dice d, int nb = 1)
+        {
+            return Task.FromResult(true);
+        }
+
         public Task<bool> AddGame(Game game)
         {
             return Task.FromResult(true);
         }
 
         public Task<bool> AddSide(DiceSide side)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> AddSideToDice(Dice d, DiceSide ds, int nb = 1)
         {
             return Task.FromResult(true);
         }
@@ -163,6 +173,16 @@ namespace StubLib
             }
 
             return Task.FromResult(ret.AsEnumerable());
+        }
+
+        public Task<bool> RemoveDiceFromGame(Game g, Dice d, int nb = 1)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> RemoveSideFromDice(Dice d, DiceSide ds, int nb = 1)
+        {
+            return Task.FromResult(true);
         }
     }
 }

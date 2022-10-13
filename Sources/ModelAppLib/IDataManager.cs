@@ -130,6 +130,38 @@ namespace ModelAppLib
         /// <param name="g">partie à supprimer</param>
         /// <returns></returns>
         public Task<bool> DeleteGame(Game g);
-        
+
+        // ===================================================== //
+        //      = UPDATE =
+        // ===================================================== //
+
+        /// <summary>
+        /// Ajoute des dés à une partie
+        /// </summary>
+        /// <param name="g">Partie</param>
+        /// <param name="d">dé</param>
+        /// <param name="nb">nombre de dé de ce type à ajouter</param>
+        /// <returns></returns>
+        public Task<bool> AddDiceToGame(Game g, Dice d, int nb = 1);
+
+        /// <summary>
+        /// Ajoute des faces à un dé
+        /// </summary>
+        /// <param name="d">dé</param>
+        /// <param name="ds">face</param>
+        /// <param name="nb">nombre de face de ce type à ajouter</param>
+        /// <returns></returns>
+        public Task<bool> AddSideToDice(Dice d, DiceSide ds, int nb = 1);
+
+        /// <summary>
+        /// Supprime des dés d'une partie
+        /// </summary>
+        /// <param name="g">Partie</param>
+        /// <param name="d">Dé</param>
+        /// <param name="nb">nombre de dé de ce type à supprimer</param>
+        /// <returns></returns>
+        public Task<bool> RemoveDiceFromGame(Game g, Dice d, int nb = 1);
+        public Task<bool> RemoveSideFromDice(Dice d, DiceSide ds, int nb = 1);
+
     }
 }

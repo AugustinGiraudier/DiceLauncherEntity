@@ -18,5 +18,13 @@ namespace EntitiesLib
                 optionsBuilder.UseSqlite("Data Source=DiceLauncher.db");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DiceTypeEntity>()
+                .HasKey(d => new { d.Dice_FK, d.Game_FK });
+            modelBuilder.Entity<DiceSideTypeEntity>()
+                .HasKey(d => new { d.Side_FK, d.Dice_FK });
+        }
+
     }
 }
