@@ -15,6 +15,8 @@ namespace ModelAppLib
         
         private readonly List<DiceSideType> sidesTypes = new List<DiceSideType>();
 
+        private readonly IRandomizer randomizer;
+
         public ReadOnlyCollection<DiceSideType> SideTypes => sidesTypes.AsReadOnly();
         
 
@@ -22,14 +24,18 @@ namespace ModelAppLib
         /// Construit un dé avec la liste de ses types de faces
         /// </summary>
         /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
-        public Dice(IEnumerable<DiceSideType> sidesTypes)
+        public Dice(IRandomizer random, IEnumerable<DiceSideType> sidesTypes)
         {
             if(sidesTypes == null)
                 throw new ArgumentNullException(nameof(sidesTypes));
+            if (random == null)
+                throw new ArgumentNullException(nameof(random));
             if (!sidesTypes.Any())
                 throw new ArgumentException("La liste des types de faces ne peut être vide", nameof(sidesTypes));
             
             logger.LogTrace("Dice created");
+
+            randomizer = random;
             
             foreach (var sideType in sidesTypes)
             {
@@ -38,13 +44,31 @@ namespace ModelAppLib
                 this.AddSide(sideType);
             }
         }
-        
+
+        /// <summary>
+        /// Construit un dé avec la liste de ses types de faces
+        /// </summary>
+        /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
+        public Dice(IEnumerable<DiceSideType> sidesTypes)
+            : this(new SecureRandomizer(), (sidesTypes))
+        {
+        }
+
         /// <summary>
         /// Construit un dé avec ses types de faces en parametre
         /// </summary>
         /// <param name="dstypes">types de face du dé</param>
         public Dice(params DiceSideType[] dstypes)
-            :this(dstypes.AsEnumerable())
+            : this(new SecureRandomizer(), dstypes.AsEnumerable())
+        {
+        }
+        
+        /// <summary>
+        /// Construit un dé avec ses types de faces en parametre
+        /// </summary>
+        /// <param name="dstypes">types de face du dé</param>
+        public Dice(IRandomizer random, params DiceSideType[] dstypes)
+            : this(random, dstypes.AsEnumerable())
         {
         }
 
@@ -61,6 +85,16 @@ namespace ModelAppLib
                 ret += dst.NbSide;
             }
             return ret;
+        }
+
+        /// <summary>
+        /// Permet de tirer une face aléatoire du dé
+        /// </summary>
+        /// <returns></returns>
+        public DiceSide GetRandomSide()
+        {
+            int index = randomizer.GetRandomInt(0, GetTotalSides());
+            return this[index];
         }
 
         /// <summary>

@@ -54,15 +54,13 @@ namespace ModelAppLib
         public IEnumerable<DiceSide> LaunchDices()
         {
             var ret = new List<DiceSide>();
-            IRandomizer rd = new SecureRandomizer();
 
             foreach (var dice in dices) // chaque type de dé
             {
                 Dice d = dice.Prototype;
-                var totalNbSide = d.GetTotalSides();
                 for (int i=0; i<dice.NbDices; i++) // chaque dé
                 {
-                    ret.Add(d[rd.GetRandomInt(0, totalNbSide)]);
+                    ret.Add(d.GetRandomSide());
                 }
             }
 
