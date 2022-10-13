@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ModelAppLib
 {
-    public class Dice
+    public class Dice : IEquatable<Dice>
     {
         public long Id { get; set; }
 
@@ -26,7 +26,7 @@ namespace ModelAppLib
         {
             if(sidesTypes == null)
                 throw new ArgumentNullException(nameof(sidesTypes));
-            if (sidesTypes.Count() == 0)
+            if (!sidesTypes.Any())
                 throw new ArgumentException("La liste des types de faces ne peut être vide", nameof(sidesTypes));
             
             logger.LogTrace("Dice created");
@@ -126,12 +126,10 @@ namespace ModelAppLib
         /// <returns>true si égaux false sinon</returns>
         public override bool Equals(Object obj)
         {
-            if (obj == null)
-                return false;
-            Dice d = obj as Dice;
-            if (d != null)
-                return this.SideTypes.SequenceEqual(d.SideTypes);
-            return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(obj, null)) return false;
+            if (!this.GetType().Equals(obj.GetType())) return false;
+            return this.Equals(obj as Dice);
         }
 
         public override int GetHashCode()
@@ -140,6 +138,11 @@ namespace ModelAppLib
             foreach(DiceSideType dt in SideTypes)
                 code ^= dt.GetHashCode();
             return code;
+        }
+
+        public bool Equals(Dice other)
+        {
+            return this.SideTypes.SequenceEqual(other.SideTypes);
         }
     }
 }

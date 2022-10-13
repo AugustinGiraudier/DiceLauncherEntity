@@ -5,24 +5,14 @@ namespace ModelAppLib_UnitTests;
 
 public class StubForUT
 {
-    public Dice getDiceNull()
-    {
-        return null; 
-    }
-
-    public Dice getDiceWithValue()
+    public static Dice getDiceWithValue()
     {
         return new Dice(new DiceSideType(1, new DiceSide("1.png")),
             new DiceSideType(2, new DiceSide("1.png")),
             new DiceSideType(3, new DiceSide("1.png")));
     }
 
-    public Game getGameNull()
-    {
-        return null;
-    }
-
-    public Game getGameWithValue()
+    public static Game getGameWithValue()
     {
         return new Game(new DiceType[]
         {
