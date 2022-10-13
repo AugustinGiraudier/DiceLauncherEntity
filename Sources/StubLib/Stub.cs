@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ModelAppLib;
 
@@ -36,11 +37,11 @@ namespace StubLib
             return Task.FromResult(true);
         }
 
-        public Task<List<Dice>> GetAllDices()
+        public Task<IEnumerable<Dice>> GetAllDices()
         {
             List<Dice> ret = new();
 
-            var sides = GetAllSides().Result;
+            var sides = GetAllSides().Result.ToList();
 
             ret.Add(new Dice(
                 new DiceSideType(1, sides[0]),
@@ -63,14 +64,14 @@ namespace StubLib
                 new DiceSideType(5, sides[5]),
                 new DiceSideType(1, sides[6])));
 
-            return Task.FromResult(ret);
+            return Task.FromResult(ret.AsEnumerable());
         }
 
-        public Task<List<Game>> GetAllGames()
+        public Task<IEnumerable<Game>> GetAllGames()
         {
             List<Game> ret = new();
 
-            var dices = GetAllDices().Result;
+            var dices = GetAllDices().Result.ToList();
 
             ret.Add(new Game(new List<DiceType> {
                 new DiceType(1, dices[0]),
@@ -89,10 +90,10 @@ namespace StubLib
                 new DiceType(1, dices[3])
             }));
 
-            return Task.FromResult(ret);
+            return Task.FromResult(ret.AsEnumerable());
         }
 
-        public Task<List<DiceSide>> GetAllSides()
+        public Task<IEnumerable<DiceSide>> GetAllSides()
         {
             List<DiceSide> ret = new();
 
@@ -104,28 +105,28 @@ namespace StubLib
             ret.Add(new DiceSide("6.png"));
             ret.Add(new DiceSide("star.png"));
 
-            return Task.FromResult(ret);
+            return Task.FromResult(ret.AsEnumerable());
 
         }
 
         public Task<int> GetNbDice()
         {
-            return Task.FromResult(GetAllDices().Result.Count);
+            return Task.FromResult(GetAllDices().Result.Count());
         }
 
         public Task<int> GetNbGame()
         {
-            return Task.FromResult(GetAllGames().Result.Count);
+            return Task.FromResult(GetAllGames().Result.Count());
         }
 
         public Task<int> GetNbSide()
         {
-            return Task.FromResult(GetAllSides().Result.Count);
+            return Task.FromResult(GetAllSides().Result.Count());
         }
 
-        public Task<List<Dice>> GetSomeDices(int nb, int page)
+        public Task<IEnumerable<Dice>> GetSomeDices(int nb, int page)
         {
-            var sides = GetAllSides().Result;
+            var sides = GetAllSides().Result.ToList();
             int cpt = 0;
             List<Dice> ret = new();
             for (int i = 0; i < nb; i++)
@@ -139,21 +140,21 @@ namespace StubLib
                 ret.Add(new Dice(lDst));
             }
 
-            return Task.FromResult(ret);
+            return Task.FromResult(ret.AsEnumerable());
         }
 
-        public Task<List<Game>> GetSomeGames(int nb, int page)
+        public Task<IEnumerable<Game>> GetSomeGames(int nb, int page)
         {
-            List<Game> games = GetAllGames().Result;
+            List<Game> games = GetAllGames().Result.ToList();
             List<Game> ret = new();
             for (int i = nb * page; i < (nb * page) + nb; i++)
             {
                 ret.Add(games[i%games.Count]);
             }
-            return Task.FromResult(ret);
+            return Task.FromResult(ret.AsEnumerable());
         }
 
-        public Task<List<DiceSide>> GetSomeSides(int nb, int page)
+        public Task<IEnumerable<DiceSide>> GetSomeSides(int nb, int page)
         {
             List<DiceSide> ret = new();
             for (int i = nb * page; i < (nb * page) +nb; i++)
@@ -161,7 +162,7 @@ namespace StubLib
                 ret.Add(new DiceSide("img" + i));
             }
 
-            return Task.FromResult(ret);
+            return Task.FromResult(ret.AsEnumerable());
         }
     }
 }

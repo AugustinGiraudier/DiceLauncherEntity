@@ -11,7 +11,7 @@ namespace ModelAppLib
         public ReadOnlyCollection<DiceType> Dices => dices.AsReadOnly(); 
 
 
-        public Game(List<DiceType> dices)
+        public Game(IEnumerable<DiceType> dices)
         {
             if(dices == null)
                 throw new ArgumentNullException(nameof(dices), "la liste de dés ne peut etre null");
