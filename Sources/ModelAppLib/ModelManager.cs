@@ -55,22 +55,22 @@ namespace ModelAppLib
         public int GetGameCount() { return dataManager.GetNbGame().Result; }
 
         /// <summary>
-        /// Retourne la liste de toutes les faces de dés
+        /// Retourne la IEnumerablee de toutes les faces de dés
         /// </summary>
-        /// <returns>liste des faces</returns>
-        public List<DiceSide> GetAllSides() { return dataManager.GetAllSides().Result; }
+        /// <returns>IEnumerablee des faces</returns>
+        public IEnumerable<DiceSide> GetAllSides() { return dataManager.GetAllSides().Result; }
         
         /// <summary>
-        /// Retourne la liste de tous les dés
+        /// Retourne la IEnumerablee de tous les dés
         /// </summary>
-        /// <returns>liste des dés</returns>
-        public List<Dice> GetAllDices() { return dataManager.GetAllDices().Result; }
+        /// <returns>IEnumerablee des dés</returns>
+        public IEnumerable<Dice> GetAllDices() { return dataManager.GetAllDices().Result; }
 
         /// <summary>
-        /// Retourne la liste de toutes les parties
+        /// Retourne la IEnumerablee de toutes les parties
         /// </summary>
-        /// <returns>liste des parties</returns>
-        public List<Game> GetAllGames() { return dataManager.GetAllGames().Result; }
+        /// <returns>IEnumerablee des parties</returns>
+        public IEnumerable<Game> GetAllGames() { return dataManager.GetAllGames().Result; }
 
         /// <summary>
         /// Récupère un nombre de face avec un offset
@@ -78,7 +78,7 @@ namespace ModelAppLib
         /// <param name="nb">nombre de face</param>
         /// <param name="page">offset (commence à 0)</param>
         /// <returns></returns>
-        public List<DiceSide> GetSomeSides(int nb, int page) { return dataManager.GetSomeSides(nb, page).Result; }
+        public IEnumerable<DiceSide> GetSomeSides(int nb, int page) { return dataManager.GetSomeSides(nb, page).Result; }
 
         /// <summary>
         /// Récupère un nombre de dé avec un offset
@@ -86,7 +86,7 @@ namespace ModelAppLib
         /// <param name="nb">nombre de dé</param>
         /// <param name="page">offset (commence à 0)</param>
         /// <returns></returns>
-        public List<Dice> GetSomeDices(int nb, int page) { return dataManager.GetSomeDices(nb, page).Result; }
+        public IEnumerable<Dice> GetSomeDices(int nb, int page) { return dataManager.GetSomeDices(nb, page).Result; }
 
         /// <summary>
         /// Récupère un nombre de partie avec un offset
@@ -94,7 +94,7 @@ namespace ModelAppLib
         /// <param name="nb">nombre de partie</param>
         /// <param name="page">offset (commence à 0)</param>
         /// <returns></returns>
-        public List<Game> GetSomeGames(int nb, int page) { return dataManager.GetSomeGames(nb, page).Result; }
+        public IEnumerable<Game> GetSomeGames(int nb, int page) { return dataManager.GetSomeGames(nb, page).Result; }
 
         /// <summary>
         /// Supprime un dé

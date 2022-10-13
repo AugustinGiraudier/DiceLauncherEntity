@@ -13,7 +13,7 @@ namespace ModelAppLib
 
         private static ILogger<Dice> logger = LoggerFactory.Create(builder => builder.AddNLog()).CreateLogger<Dice>();
         
-        private readonly List<DiceSideType> sidesTypes;
+        private readonly List<DiceSideType> sidesTypes = new List<DiceSideType>();
 
         public ReadOnlyCollection<DiceSideType> SideTypes => sidesTypes.AsReadOnly();
         
@@ -22,11 +22,11 @@ namespace ModelAppLib
         /// Construit un dé avec la liste de ses types de faces
         /// </summary>
         /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
-        public Dice(List<DiceSideType> sidesTypes)
+        public Dice(IEnumerable<DiceSideType> sidesTypes)
         {
             if(sidesTypes == null)
                 throw new ArgumentNullException(nameof(sidesTypes));
-            if (sidesTypes.Count == 0)
+            if (sidesTypes.Count() == 0)
                 throw new ArgumentException("La liste des types de faces ne peut être vide", nameof(sidesTypes));
             
             logger.LogTrace("Dice created");

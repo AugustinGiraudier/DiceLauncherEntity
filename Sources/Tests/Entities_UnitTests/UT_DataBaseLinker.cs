@@ -3,6 +3,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using ModelAppLib;
 using StubEntitiesLib;
+using System.Linq;
 using Xunit;
 
 namespace Entities_UnitTests
@@ -24,7 +25,7 @@ namespace Entities_UnitTests
             context.Database.EnsureCreated();
             StubedDatabaseLinker linker = new StubedDatabaseLinker(context);
 
-            var sides = linker.GetAllSides().Result;
+            var sides = linker.GetAllSides().Result.ToList();
 
             await linker.AddDice(new Dice(new DiceSideType(2, sides[0])));
 

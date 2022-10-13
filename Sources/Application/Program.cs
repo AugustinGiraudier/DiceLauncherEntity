@@ -3,6 +3,7 @@ using ModelAppLib;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ModelApp
 {
@@ -19,7 +20,7 @@ namespace ModelApp
 
             {
 
-                var sides = manager.GetAllSides();
+                var sides = manager.GetAllSides().ToList();
 
                 var sideTypes = new List<DiceSideType>
                 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ModelAppLib;
 using StubLib;
 using Xunit;
@@ -39,7 +40,8 @@ public class UT_Manager
             new DiceSideType(2, new DiceSide("img2")),
             new DiceSideType(3, new DiceSide("img2")));
         modele.AddDice(newDe);
-        Assert.NotNull(modele.GetAllDices().Contains(newDe));
+        var dices = modele.GetAllDices().ToList();
+        Assert.NotNull(dices.Contains(newDe));
     }
 
     [Fact]

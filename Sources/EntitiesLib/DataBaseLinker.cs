@@ -106,7 +106,7 @@ namespace EntitiesLib
         // ===================================================== //
 
 
-        public Task<List<Dice>> GetAllDices()
+        public Task<IEnumerable<Dice>> GetAllDices()
         {
             //using (var context = new DiceLauncher_DbContext())
             {
@@ -117,7 +117,7 @@ namespace EntitiesLib
                                     );
             }
         }
-        public Task<List<Game>> GetAllGames()
+        public Task<IEnumerable<Game>> GetAllGames()
         {
             //using (var context = new DiceLauncher_DbContext())
             {
@@ -128,14 +128,14 @@ namespace EntitiesLib
                                  );
             }
         }
-        public Task<List<DiceSide>> GetAllSides()
+        public Task<IEnumerable<DiceSide>> GetAllSides()
         {
             //using (var context = new DiceLauncher_DbContext())
             {
                 return Task.FromResult(context.Sides.ToModel());
             }
         }
-        public Task<List<Dice>> GetSomeDices(int nb, int page)
+        public Task<IEnumerable<Dice>> GetSomeDices(int nb, int page)
         {
             //using (var context = new DiceLauncher_DbContext())
             {
@@ -148,7 +148,7 @@ namespace EntitiesLib
                                        );
             }
         }
-        public Task<List<Game>> GetSomeGames(int nb, int page)
+        public Task<IEnumerable<Game>> GetSomeGames(int nb, int page)
         {
             //using (var context = new DiceLauncher_DbContext())
             {
@@ -161,7 +161,7 @@ namespace EntitiesLib
                                        );
             }
         }
-        public Task<List<DiceSide>> GetSomeSides(int nb, int page)
+        public Task<IEnumerable<DiceSide>> GetSomeSides(int nb, int page)
         {
             //using (var context = new DiceLauncher_DbContext())
             {

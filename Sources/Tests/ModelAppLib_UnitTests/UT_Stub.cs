@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ModelAppLib;
 using StubLib;
 using Xunit;
@@ -44,7 +45,7 @@ namespace ModelAppLib_UnitTests
         void CheckGettingSomeSides(int nbSides, int pageNum)
         {
             var stub = new Stub();
-            var result = stub.GetSomeSides(nbSides, pageNum).Result;
+            var result = stub.GetSomeSides(nbSides, pageNum).Result.ToList();
 
             Assert.Equal(nbSides, result.Count);
             Assert.Equal("img" + (int)(nbSides * pageNum), result[0].Image);
@@ -63,7 +64,7 @@ namespace ModelAppLib_UnitTests
             var stub = new Stub();
             var result = stub.GetSomeGames(nbGames, 1).Result;
 
-            Assert.Equal(nbGames, result.Count);
+            Assert.Equal(nbGames, result.Count());
         }
 
         [Theory]
@@ -78,7 +79,7 @@ namespace ModelAppLib_UnitTests
             var stub = new Stub();
             var result = stub.GetSomeDices(nbDices, 1).Result;
 
-            Assert.Equal(nbDices, result.Count);
+            Assert.Equal(nbDices, result.Count());
         }
 
         [Fact]
@@ -106,21 +107,21 @@ namespace ModelAppLib_UnitTests
         void CheckGettingNbDices()
         {
             var stub = new Stub();
-            Assert.Equal(stub.GetAllDices().Result.Count, stub.GetNbDice().Result);
+            Assert.Equal(stub.GetAllDices().Result.Count(), stub.GetNbDice().Result);
         }
         
         [Fact]
         void CheckGettingNbSides()
         {
             var stub = new Stub();
-            Assert.Equal(stub.GetAllSides().Result.Count, stub.GetNbSide().Result);
+            Assert.Equal(stub.GetAllSides().Result.Count(), stub.GetNbSide().Result);
         }
         
         [Fact]
         void CheckGettingNbGames()
         {
             var stub = new Stub();
-            Assert.Equal(stub.GetAllGames().Result.Count, stub.GetNbGame().Result);
+            Assert.Equal(stub.GetAllGames().Result.Count(), stub.GetNbGame().Result);
         }
     }
 }
