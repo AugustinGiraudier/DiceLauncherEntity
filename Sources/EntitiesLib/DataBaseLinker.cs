@@ -184,10 +184,12 @@ namespace EntitiesLib
                     break;
                 }
             }
+
+            var newDe = new DiceTypeEntity { Prototype = de, Dice_FK = de.Id, Game = ge, Game_FK = ge.Id, NbDice = nb };
+            ge.DiceTypes.Add(newDe);
+
             if (!flagGameHasDice)
-            {
-                ge.DiceTypes.Add(new DiceTypeEntity { Prototype=de, Dice_FK=de.Id, Game=ge, Game_FK=ge.Id, NbDice=nb });
-            }
+                g.AddDiceType(newDe.ToModel());
 
             await context.SaveChangesAsync();
 
@@ -211,10 +213,12 @@ namespace EntitiesLib
                     break;
                 }
             }
+
+            var newDste = new DiceSideTypeEntity { Prototype = dse, Dice_FK = dse.Id, Dice = de, Side_FK = dse.Id, NbSide = nb };
+            d.AddSide(newDste.ToModel());
+
             if (!flagDiceHasSide)
-            {
-                de.Sides.Add(new DiceSideTypeEntity { Prototype = dse, Dice_FK = dse.Id, Dice = de, Side_FK = dse.Id, NbSide=nb });
-            }
+                de.Sides.Add(newDste);
 
             await context.SaveChangesAsync();
 
@@ -228,26 +232,22 @@ namespace EntitiesLib
             GameEntity ge = GetGameEntity(g);
             DiceEntity de = GetDiceEntity(d);
 
-            bool flagGameHasDice = false;
             DiceTypeEntity dteToRemove = null;
             foreach (var diceT in ge.DiceTypes)
             {
                 if (diceT.Prototype == de)
                 {
-                    flagGameHasDice = true;
                     if(diceT.NbDice > nb)
                         diceT.NbDice -= nb;
                     else
-                    {
                         dteToRemove = diceT;
-                    }
                     break;
                 }
             }
-            if (flagGameHasDice && !ReferenceEquals(dteToRemove,null))
-            {
+            if (!ReferenceEquals(dteToRemove,null))
                 ge.DiceTypes.Remove(dteToRemove);
-            }
+
+            g.RemoveDiceType(new DiceType(nb, d));
 
             await context.SaveChangesAsync();
 
@@ -261,26 +261,22 @@ namespace EntitiesLib
             DiceEntity de = GetDiceEntity(d);
             DiceSideEntity dse = GetSideEntity(ds);
 
-            bool flagDiceHasSide = false;
             DiceSideTypeEntity dsteToRemove = null;
             foreach (var SideT in de.Sides)
             {
                 if (SideT.Prototype == dse)
                 {
-                    flagDiceHasSide = true;
                     if (SideT.NbSide > nb)
                         SideT.NbSide -= nb;
                     else
-                    {
                         dsteToRemove = SideT;
-                    }
                     break;
                 }
             }
-            if (flagDiceHasSide && !ReferenceEquals(dsteToRemove, null))
-            {
+            if (!ReferenceEquals(dsteToRemove, null))
                 de.Sides.Remove(dsteToRemove);
-            }
+
+            d.RemoveSideType(new DiceSideType(nb, ds));
 
             await context.SaveChangesAsync();
 

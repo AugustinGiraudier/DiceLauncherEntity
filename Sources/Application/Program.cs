@@ -78,14 +78,64 @@ namespace ModelApp
                 foreach (var res in results)
                     ITEM($"Image résultat : '{res.Image}'");
 
+                STEP("Création de la liste des types de faces pour le second dé");
+                var sideTypes2 = new List<DiceSideType>
+                {
+                    new DiceSideType(3, sides[0]),
+                    new DiceSideType(3, sides[5]),
+                };
+                TEST(true);
 
-                STEP("Suppression du dé de la base");
+                STEP("Création du second dé");
+                var d2 = new Dice(new SecureRandomizer(), sideTypes2);
+                TEST(!ReferenceEquals(d2, null));
+
+                STEP("Ajout du second dé à la base");
+                await manager.AddDice(d2);
+                TEST((await manager.GetAllDices()).Contains(d2));
+
+                STEP("Ajout du second dé à la partie déja créée");
+                await manager.AddDiceToGame(g, d2);
+                TEST(g.Dices.Count() == 2);
+
+                STEP("Lancement des dés de la partie");
+                var results2 = g.LaunchDices();
+                TEST(results2.Count() == NB_DICES + 1);
+                foreach (var res in results2)
+                    ITEM($"Image résultat : '{res.Image}'");
+
+                STEP("Suppression du premier dé de la partie");
+                await manager.RemoveDiceFromGame(g, d, NB_DICES);
+                TEST(g.Dices.FirstOrDefault(di => di.Equals(d)) == null);
+
+                STEP("Lancement des dés de la partie");
+                var results3 = g.LaunchDices();
+                TEST(results3.Count() == 1);
+                foreach (var res in results3)
+                    ITEM($"Image résultat : '{res.Image}'");
+
+                STEP("Suppression d'un des 2 types de face du dé restant dans la partie");
+                await manager.RemoveSideFromDice(d2, sides[5], 3);
+                TEST(d2.SideTypes.Count() == 1);
+
+                STEP("Lancement des dés de la partie");
+                g = (await manager.GetAllGames()).First();
+                var results4 = g.LaunchDices();
+                TEST(results4.Count() == 1);
+                foreach (var res in results4)
+                    ITEM($"Image résultat : '{res.Image}'");
+
+                STEP("Suppression de la partie de la base");
                 await manager.RemoveGame(g);
                 TEST(!((await manager.GetAllGames()).Contains(g)));
 
-                STEP("Suppression de la partie de la base");
+                STEP("Suppression du dé de la base");
                 await manager.RemoveDice(d);
                 TEST(!((await manager.GetAllDices()).Contains(d)));
+                
+                STEP("Suppression du second dé de la base");
+                await manager.RemoveDice(d2);
+                TEST(!((await manager.GetAllDices()).Contains(d2)));
 
 
                 INFO("Fin du programme");

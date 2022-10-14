@@ -128,6 +128,22 @@ namespace ModelAppLib
                 sidesTypes.Add(sideT);
         }
 
+        public void RemoveSideType(DiceSideType dst)
+        {
+            if (dst == null)
+                throw new ArgumentNullException(nameof(dst), "le type de face ne peut etre null");
+
+
+            var theDst = sidesTypes.Find(x => x.Prototype.Equals(dst.Prototype));
+            if (theDst == null)
+                throw new ArgumentException("le dé ne contient pas ce type de face...", nameof(theDst));
+
+            if (theDst.NbSide - dst.NbSide > 0)
+                theDst.RemoveSides(dst.NbSide);
+            else
+                sidesTypes.Remove(theDst);
+        }
+
         /// <summary>
         /// Egaux si mêmes types de faces
         /// </summary>

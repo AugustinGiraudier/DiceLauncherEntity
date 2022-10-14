@@ -42,6 +42,76 @@ namespace ModelAppLib
         }
 
         /// <summary>
+        /// Ajoute des dés à une partie
+        /// </summary>
+        /// <param name="g">partie</param>
+        /// <param name="d">dé</param>
+        /// <param name="nbToAdd">nombre à ajouter</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<bool> AddDiceToGame(Game g, Dice d, int nbToAdd=1)
+        {
+            if (g == null)
+                throw new ArgumentNullException(nameof(g), "la partie ne peut etre null");
+            if (d == null)
+                throw new ArgumentNullException(nameof(d), "le dé ne peut etre null");
+
+            return await dataManager.AddDiceToGame(g, d, nbToAdd);
+        }
+
+        /// <summary>
+        /// Ajoute des faces à un dé
+        /// </summary>
+        /// <param name="d">dé</param>
+        /// <param name="ds">face</param>
+        /// <param name="nbToAdd">nombre à ajouter</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<bool> AddSideToDice(Dice d, DiceSide ds, int nbToAdd = 1)
+        {
+            if (ds == null)
+                throw new ArgumentNullException(nameof(ds), "la face ne peut etre null");
+            if (d == null)
+                throw new ArgumentNullException(nameof(d), "le dé ne peut etre null");
+
+            return await dataManager.AddSideToDice(d, ds, nbToAdd);
+        }
+
+        /// <summary>
+        /// Retire des dés à une partie
+        /// </summary>
+        /// <param name="g">partie</param>
+        /// <param name="d">dé</param>
+        /// <param name="nbToRm">nombre à retirer</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<bool> RemoveDiceFromGame(Game g, Dice d, int nbToRm = 1)
+        {
+            if (g == null)
+                throw new ArgumentNullException(nameof(g), "la partie ne peut etre null");
+            if (d == null)
+                throw new ArgumentNullException(nameof(d), "le dé ne peut etre null");
+            return await dataManager.RemoveDiceFromGame(g, d, nbToRm);
+        }
+
+        /// <summary>
+        /// Retire des faces à un dé
+        /// </summary>
+        /// <param name="d">dé</param>
+        /// <param name="ds">face</param>
+        /// <param name="nbToRm">nombre à retirer</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<bool> RemoveSideFromDice(Dice d, DiceSide ds, int nbToRm = 1)
+        {
+            if (ds == null)
+                throw new ArgumentNullException(nameof(ds), "la face ne peut etre null");
+            if (d == null)
+                throw new ArgumentNullException(nameof(d), "le dé ne peut etre null");
+            return await dataManager.RemoveSideFromDice(d, ds, nbToRm);
+        }
+
+        /// <summary>
         /// Retourne le nombre de dés du stockage
         /// </summary>
         /// <returns>le nombre de dés</returns>
