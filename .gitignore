@@ -3,6 +3,7 @@
 
 # ---> migrations Entity Framework
 Migrations/
+DiceLauncher.db
 
 
 # ---> macOS

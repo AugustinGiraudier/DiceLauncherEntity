@@ -16,6 +16,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ModelAppLib\ModelAppLib.csproj" />
 		<ProjectReference Include="..\EntitiesLib\EntitiesLib.csproj" />
+		<ProjectReference Include="..\StubEntitiesLib\StubEntitiesLib.csproj" />
 	</ItemGroup>
 
 </Project>

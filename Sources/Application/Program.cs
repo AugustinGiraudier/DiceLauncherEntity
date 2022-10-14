@@ -1,6 +1,7 @@
 ﻿using EntitiesLib;
 using ModelAppLib;
 using NLog;
+using StubEntitiesLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace ModelApp
             });
 
 
-            ModelManager manager = new ModelManager(new DataBaseLinker());
+            ModelManager manager = new ModelManager(new StubedDatabaseLinker());
 
             var sides = (await manager.GetAllSides()).ToList();
 
