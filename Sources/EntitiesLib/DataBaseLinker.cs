@@ -164,7 +164,7 @@ namespace EntitiesLib
         // ===================================================== //
 
 
-        public async Task<bool> AddDiceToGame(Game g, Dice d, int nb)
+        public async Task<bool> AddDiceToGame(Game g, Dice d, int nb = 1)
         {
             CheckNumberIsPositive(nb);
 
@@ -191,7 +191,7 @@ namespace EntitiesLib
             return true;
         }
 
-        public async Task<bool> AddSideToDice(Dice d, DiceSide ds, int nb)
+        public async Task<bool> AddSideToDice(Dice d, DiceSide ds, int nb=1)
         {
             CheckNumberIsPositive(nb);
 
@@ -218,7 +218,7 @@ namespace EntitiesLib
             return true;
         }
 
-        public async Task<bool> RemoveDiceFromGame(Game g, Dice d, int nb)
+        public async Task<bool> RemoveDiceFromGame(Game g, Dice d, int nb=1)
         {
             CheckNumberIsPositive(nb);
 
@@ -251,7 +251,7 @@ namespace EntitiesLib
             return true;
         }
 
-        public async Task<bool> RemoveSideFromDice(Dice d, DiceSide ds, int nb)
+        public async Task<bool> RemoveSideFromDice(Dice d, DiceSide ds, int nb = 1)
         {
             CheckNumberIsPositive(nb);
 
@@ -289,10 +289,10 @@ namespace EntitiesLib
         //      = PRIVATE =
         // ===================================================== //
 
-        private void CheckNumberIsPositive(int nb)
+        private static void CheckNumberIsPositive(int nb)
         {
             if (nb <= 0)
-                throw new ArgumentOutOfRangeException("Le nombre à ajouter ne peut etre null ou négatif...", nameof(nb));
+                throw new ArgumentOutOfRangeException(nameof(nb), "Le nombre à ajouter ne peut etre null ou négatif...");
         }
 
         /// <summary>
@@ -306,9 +306,9 @@ namespace EntitiesLib
             {
                 return context.Dices.First(d2 => d2.Id == d.Id);
             }
-            catch(InvalidOperationException e)
+            catch(InvalidOperationException)
             {
-                throw new ArgumentException("le dé n'existe pas dans la base...", nameof(d));
+                throw new ArgumentException(nameof(d), "le dé n'existe pas dans la base...");
             }
         }
 
@@ -323,9 +323,9 @@ namespace EntitiesLib
             {
                 return context.Sides.First(d2 => d2.Id == ds.Id);
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
-                throw new ArgumentException("la face n'existe pas dans la base...", nameof(ds));
+                throw new ArgumentException(nameof(ds), "la face n'existe pas dans la base...");
             }
         }
 
@@ -340,9 +340,9 @@ namespace EntitiesLib
             {
                 return context.Games.First(g2 => g2.Id == g.Id);
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
-                throw new ArgumentException("la partie n'existe pas dans la base...", nameof(g));
+                throw new ArgumentException(nameof(g), "la partie n'existe pas dans la base...");
             }
         }
     }

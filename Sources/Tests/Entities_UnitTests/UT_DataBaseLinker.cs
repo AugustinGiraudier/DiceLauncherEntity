@@ -670,7 +670,7 @@ namespace Entities_UnitTests
         //      PRIVATE
         // =============================================== //
 
-        private DataBaseLinker GetLinkerInMemory()
+        private static DataBaseLinker GetLinkerInMemory()
         {
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
