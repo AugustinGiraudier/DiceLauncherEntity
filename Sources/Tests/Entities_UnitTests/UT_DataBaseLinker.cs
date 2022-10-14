@@ -45,7 +45,7 @@ namespace Entities_UnitTests
 
             await linker.AddDice(new Dice(new DiceSideType(2, sides.First())));
 
-            var dices = linker.GetAllDices().Result;
+            var dices = linker.GetSomeDices(1,0).Result;
 
             Assert.Single(dices);
             Assert.Equal(1, linker.GetNbDice().Result);
@@ -68,19 +68,19 @@ namespace Entities_UnitTests
             Assert.Single(linker.GetAllDices().Result);
             Assert.Equal(1, linker.GetNbDice().Result);
 
-            var games = linker.GetAllGames().Result.ToList();
+            var games = linker.GetSomeGames(1,0).Result;
 
             Assert.Single(games);
             Assert.Equal(1, linker.GetNbGame().Result);
 
-            Assert.Equal(dice, games[0].Dices[0].Prototype);
+            Assert.Equal(dice, games.First().Dices[0].Prototype);
         }
 
         [Fact]
         async void TestAddingGameWithUnknownDice()
         {
             var linker = GetLinkerInMemory();
-            var sides = linker.GetAllSides().Result;
+            var sides = linker.GetSomeSides(1,0).Result;
 
             var dice = new Dice(new DiceSideType(2, sides.First()));
 
