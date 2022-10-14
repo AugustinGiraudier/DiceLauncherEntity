@@ -185,13 +185,12 @@ namespace EntitiesLib
                 }
             }
 
-            var newDe = new DiceTypeEntity { Prototype = de, Dice_FK = de.Id, Game = ge, Game_FK = ge.Id, NbDice = nb };
-            ge.DiceTypes.Add(newDe);
-
             if (!flagGameHasDice)
-                g.AddDiceType(newDe.ToModel());
+                ge.DiceTypes.Add(new DiceTypeEntity { Prototype = de, Dice_FK = de.Id, Game = ge, Game_FK = ge.Id, NbDice = nb });
 
             await context.SaveChangesAsync();
+
+            g.AddDiceType(new DiceType(nb, d));
 
             return true;
         }
@@ -214,13 +213,12 @@ namespace EntitiesLib
                 }
             }
 
-            var newDste = new DiceSideTypeEntity { Prototype = dse, Dice_FK = dse.Id, Dice = de, Side_FK = dse.Id, NbSide = nb };
-            d.AddSide(newDste.ToModel());
-
             if (!flagDiceHasSide)
-                de.Sides.Add(newDste);
+                de.Sides.Add(new DiceSideTypeEntity { Prototype = dse, Dice_FK = dse.Id, Dice = de, Side_FK = dse.Id, NbSide = nb });
 
             await context.SaveChangesAsync();
+
+            d.AddSide(new DiceSideType(nb, ds));
 
             return true;
         }
@@ -247,9 +245,9 @@ namespace EntitiesLib
             if (!ReferenceEquals(dteToRemove,null))
                 ge.DiceTypes.Remove(dteToRemove);
 
-            g.RemoveDiceType(new DiceType(nb, d));
-
             await context.SaveChangesAsync();
+
+            g.RemoveDiceType(new DiceType(nb, d));
 
             return true;
         }
@@ -276,9 +274,9 @@ namespace EntitiesLib
             if (!ReferenceEquals(dsteToRemove, null))
                 de.Sides.Remove(dsteToRemove);
 
-            d.RemoveSideType(new DiceSideType(nb, ds));
-
             await context.SaveChangesAsync();
+
+            d.RemoveSideType(new DiceSideType(nb, ds));
 
             return true;
         }
