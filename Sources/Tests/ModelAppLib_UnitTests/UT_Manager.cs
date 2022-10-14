@@ -33,11 +33,11 @@ public class UT_Manager
     }
 
     [Fact]
-    void AddDiceNull()
+    async void AddDiceNull()
     {
         ModelManager manager = new ModelManager(new Stub());
         Dice newDe = null;
-        Assert.Throws<ArgumentNullException>(() => manager.AddDice(newDe));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await manager.AddDice(newDe));
     }
 
     public static IEnumerable<object[]> DataAddDiceModele()
@@ -54,10 +54,10 @@ public class UT_Manager
 
     [Theory]
     [MemberData(nameof(DataAddDiceModele))]
-    public void TestAddDiceNull(Dice diceNull, Game gmNull, Dice __, Game ___)
+    public async void TestAddDiceNull(Dice diceNull, Game gmNull, Dice __, Game ___)
     {
         ModelManager modele = new ModelManager(new Stub());
-        Assert.Throws<ArgumentNullException>(() => modele.AddDice(diceNull));
-        Assert.Throws<ArgumentNullException>(() => modele.AddGame(gmNull));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await modele.AddDice(diceNull));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await modele.AddGame(gmNull));
     }
 }
