@@ -6,9 +6,7 @@ namespace EntitiesLib
 {
     public class DiceTypeEntity
     {
-        public long Id { get; set; }
         public int NbDice { get; set; }
-
 
         public long? Dice_FK { get; set; }
         [ForeignKey("Dice_FK")]

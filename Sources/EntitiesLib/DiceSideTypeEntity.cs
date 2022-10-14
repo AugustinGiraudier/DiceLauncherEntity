@@ -7,7 +7,6 @@ namespace EntitiesLib
 {
     public class DiceSideTypeEntity
     {
-        public long Id { get; set; }
 
         public int NbSide { get; set; }
 
