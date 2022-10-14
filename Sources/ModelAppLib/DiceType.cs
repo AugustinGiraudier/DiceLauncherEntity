@@ -34,7 +34,7 @@ namespace ModelAppLib
         /// Ajoute un certain nombre de dé de ce type
         /// </summary>
         /// <param name="nbDicesToAdd">nombre de dés à ajouter</param>
-        public void AddDice(int nbDicesToAdd)
+        public void AddDices(int nbDicesToAdd)
         {
             if(nbDicesToAdd <=0)
                 throw new ArgumentOutOfRangeException(nameof(nbDicesToAdd), "Le nombre de dés à ajouter doit être suppérieur à 0");
@@ -45,6 +45,19 @@ namespace ModelAppLib
         {
             return this.NbDices == other.NbDices && this.Prototype.Equals(other.Prototype);
         }
+
+        /// <summary>
+        /// Retire un certain nombre de dé de ce type
+        /// </summary>
+        /// <param name="nbDicesToRm">nombre de dé à retirer</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public void RemoveDices(int nbDicesToRm)
+        {
+            if (nbDicesToRm <= 0)
+                throw new ArgumentOutOfRangeException(nameof(nbDicesToRm), "Le nombre de dés à retirer doit être suppérieur à 0");
+            this.NbDices -= nbDicesToRm;
+        }
+
 
         /// <summary>
         /// Egaux si même nombre de dé et même prototype

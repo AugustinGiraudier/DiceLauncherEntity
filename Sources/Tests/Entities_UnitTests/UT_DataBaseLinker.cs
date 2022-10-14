@@ -211,16 +211,18 @@ namespace Entities_UnitTests
                 await linker.AddSide(ToAdd);
 
             await linker.AddDice(d);
+            var oldCount = d.SideTypes.Count;
+            var oldTotalSides = d.GetTotalSides();
             await linker.AddSideToDice(d, ToAdd, nbToAdd);
 
             var dice = linker.GetAllDices().Result.First();
 
             if (sides.Contains(ToAdd))
-                Assert.Equal(d.SideTypes.Count, dice.SideTypes.Count);
+                Assert.Equal(oldCount, dice.SideTypes.Count);
             else
-                Assert.Equal(d.SideTypes.Count+1, dice.SideTypes.Count);
+                Assert.Equal(oldCount + 1, dice.SideTypes.Count);
 
-            Assert.Equal(d.GetTotalSides()+nbToAdd, dice.GetTotalSides());
+            Assert.Equal(oldTotalSides+nbToAdd, dice.GetTotalSides());
         }
 
         [Theory]
@@ -236,14 +238,15 @@ namespace Entities_UnitTests
                 await linker.AddDice(ToAdd);
 
             await linker.AddGame(g);
+            var oldCount = g.Dices.Count;
             await linker.AddDiceToGame(g, ToAdd, nbToAdd);
 
             var game = linker.GetAllGames().Result.First();
 
             if (dices.Contains(ToAdd))
-                Assert.Equal(g.Dices.Count, game.Dices.Count);
+                Assert.Equal(oldCount, game.Dices.Count);
             else
-                Assert.Equal(g.Dices.Count + 1, game.Dices.Count);
+                Assert.Equal(oldCount + 1, game.Dices.Count);
         }
 
         [Fact]
@@ -302,19 +305,19 @@ namespace Entities_UnitTests
             foreach (var side in sides)
                 await linker.AddSide(side);
             await linker.AddDice(d);
-
+            var oldCount = d.SideTypes.Count;
+            var oldNum = d.SideTypes.First(st => st.Prototype.Equals(ToRemove)).NbSide;
             await linker.RemoveSideFromDice(d, ToRemove, nbToRemove);
             var dice = linker.GetAllDices().Result.First();
             if(nbOfRemoved > nbToRemove)
             { // il reste des faces de ce type
-                Assert.Equal(sides.Count(), dice.SideTypes.Count);
-                var oldNum = d.SideTypes.First(st => st.Prototype.Equals(ToRemove)).NbSide;
+                Assert.Equal(oldCount, dice.SideTypes.Count);
                 var newNum = dice.SideTypes.First(st => st.Prototype.Equals(ToRemove)).NbSide;
                 Assert.Equal(oldNum - nbToRemove, newNum);
             }
             else
             { // il ne reste plus de face de ce type
-                Assert.Equal(d.SideTypes.Count - 1, dice.SideTypes.Count);
+                Assert.Equal(oldCount - 1, dice.SideTypes.Count);
                 Assert.Throws<InvalidOperationException>(() =>
                 {
                     dice.SideTypes.First(st => st.Prototype.Equals(ToRemove));
@@ -333,19 +336,19 @@ namespace Entities_UnitTests
             foreach (var dice in dices)
                 await linker.AddDice(dice);
             await linker.AddGame(g);
-
+            var oldCount = g.Dices.Count;
+            var oldNum = g.Dices.First(st => st.Prototype.Equals(ToRemove)).NbDices;
             await linker.RemoveDiceFromGame(g, ToRemove, nbToRemove);
             var game = linker.GetAllGames().Result.First();
             if (nbOfRemoved > nbToRemove)
             { // il reste des dés de ce type
-                Assert.Equal(g.Dices.Count, game.Dices.Count);
-                var oldNum = g.Dices.First(st => st.Prototype.Equals(ToRemove)).NbDices;
+                Assert.Equal(oldCount, game.Dices.Count);
                 var newNum = game.Dices.First(st => st.Prototype.Equals(ToRemove)).NbDices;
                 Assert.Equal(oldNum - nbToRemove, newNum);
             }
             else
             { // il ne reste plus de dé de ce type
-                Assert.Equal(g.Dices.Count - 1, game.Dices.Count);
+                Assert.Equal(oldCount - 1, game.Dices.Count);
                 Assert.Throws<InvalidOperationException>(() =>
                 {
                     game.Dices.First(st => st.Prototype.Equals(ToRemove));
@@ -371,7 +374,17 @@ namespace Entities_UnitTests
             });
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
             {
-                await linker.RemoveSideFromDice(d, sides.Last(), -1);
+                await linker.RemoveSideFromDice(d, sides.Last(),-1);
+
+            });
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveSideFromDice(null, sides.Last());
+
+            });
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveSideFromDice(d, null);
 
             });
         }
@@ -396,6 +409,16 @@ namespace Entities_UnitTests
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
             {
                 await linker.RemoveDiceFromGame(g, d, -1);
+
+            });            
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveDiceFromGame(null, d);
+
+            });            
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveDiceFromGame(g, null);
 
             });
         }

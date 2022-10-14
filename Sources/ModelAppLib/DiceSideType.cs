@@ -46,6 +46,18 @@ namespace ModelAppLib
         }
 
         /// <summary>
+        /// Retire des faces à ce type de face
+        /// </summary>
+        /// <param name="nbToRm">Nombre de faces à retirer</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public void RemoveSides(int nbToRm)
+        {
+            if (nbToRm <= 0)
+                throw new ArgumentOutOfRangeException(nameof(nbToRm), "le nombre de face à retirer doit être suppérieur à 0");
+            NbSide -= nbToRm;
+        }
+
+        /// <summary>
         /// Egaux si même prototype
         /// </summary>
         /// <param name="obj">objet à comparer</param>

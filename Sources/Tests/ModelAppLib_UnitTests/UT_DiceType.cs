@@ -36,7 +36,7 @@ namespace ModelAppLib_UnitTests
         {
             Dice d = new(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")));
             DiceType dt = new(3, d);
-            dt.AddDice(3);
+            dt.AddDices(3);
             Assert.Equal(6, dt.NbDices);
         }
 

@@ -44,11 +44,32 @@ namespace ModelAppLib
                 throw new ArgumentNullException(nameof(dt), "le type de dé ne peut etre null");
             if (dices.Contains(dt))
             {
-                dices.Find(x => x.Equals(dt))?.AddDice(dt.NbDices);
+                dices.Find(x => x.Equals(dt))?.AddDices(dt.NbDices);
                 return false;
             }
             dices.Add(dt);
             return true;
+        }
+
+        /// <summary>
+        /// Retire un type de dé du jeu
+        /// </summary>
+        /// <param name="dt">type de dé à retirer</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void RemoveDiceType(DiceType dt)
+        {
+            if (dt == null)
+                throw new ArgumentNullException(nameof(dt), "le type de dé ne peut etre null");
+
+
+            var theDt = dices.Find(x => x.Prototype.Equals(dt.Prototype));
+            if (theDt == null)
+                throw new ArgumentException("la partie ne contient pas ce type de dé...", nameof(theDt));
+
+            if (theDt.NbDices - dt.NbDices > 0)
+                theDt.RemoveDices(dt.NbDices);
+            else
+                dices.Remove(theDt);
         }
 
         /// <summary>
@@ -77,6 +98,7 @@ namespace ModelAppLib
             if (!obj.GetType().Equals(GetType())) return false;
             return Equals(obj as Game);
         }
+        
         public bool Equals(Game other)
         {
             return dices.SequenceEqual(other.dices) && Id == other.Id;
