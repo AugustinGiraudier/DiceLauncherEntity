@@ -9,7 +9,7 @@ namespace ModelApp
 {
     static class Program
     {
-        static void Main(string[] args)
+        static async void Main(string[] args)
         {
             LogManager.Setup().LoadConfiguration(builder => {
                 builder.ForLogger().FilterMinLevel(LogLevel.Trace).WriteToConsole();
@@ -18,7 +18,7 @@ namespace ModelApp
 
             ModelManager manager = new ModelManager(new DataBaseLinker());
 
-            var sides = manager.GetAllSides().ToList();
+            var sides = (await manager.GetAllSides()).ToList();
 
             var sideTypes = new List<DiceSideType>
             {
