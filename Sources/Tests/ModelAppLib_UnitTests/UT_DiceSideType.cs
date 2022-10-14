@@ -42,12 +42,12 @@ namespace ModelAppLib_UnitTests
 
         [Theory]
         [MemberData(nameof(GetDatasForEquality))]
-        void CheckEqual(Object obj1, Object obj2, bool shouldBeEqual)
+        void CheckEqual(DiceSideType obj1, DiceSideType obj2, bool shouldBeEqual)
         {
             if (obj1 != null)
-                Assert.Equal(shouldBeEqual, obj1.Equals(obj2));
+                Assert.Equal(shouldBeEqual, obj1.Equals(obj2 as Object));
             if (obj2 != null)
-                Assert.Equal(shouldBeEqual, obj2.Equals(obj1));
+                Assert.Equal(shouldBeEqual, obj2.Equals(obj1 as Object));
         }
 
         [Theory]

@@ -49,10 +49,9 @@ namespace ModelAppLib
         /// <returns>true si égaux false sinon</returns>
         public override bool Equals(object obj)
         {
-            DiceSideType dst = obj as DiceSideType;
             if (ReferenceEquals(this, obj)) return true;
             if (ReferenceEquals(obj, null)) return false;
-            if (this.GetType().Equals(obj.GetType())) return false;
+            if (!this.GetType().Equals(obj.GetType())) return false;
             return this.Equals(obj as DiceSideType);
         }
 
