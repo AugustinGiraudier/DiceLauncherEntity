@@ -21,7 +21,7 @@ namespace StubEntitiesLib
 
         private void StubThisLinker()
         {
-            if(context.Sides.Count() == 0)
+            if(!context.Sides.Any())
             {
                 var stub = new Stub();
                 var sides = stub.GetAllSides().Result;
