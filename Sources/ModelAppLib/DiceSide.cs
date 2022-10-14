@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace ModelAppLib
 {
-    /// <summary>
+     /// <summary>
     /// Classe modélisant une face de dé
     /// </summary>
-    public class DiceSide
+    public class DiceSide : IEquatable<DiceSide>
     {
 
         public long Id { get; set; }
@@ -23,6 +24,11 @@ namespace ModelAppLib
             this.Image = image;
         }
 
+        public bool Equals(DiceSide other)
+        {
+            return this.Image.Equals(other.Image);
+        }
+
         /// <summary>
         /// Egaux si même image
         /// </summary>
@@ -30,10 +36,10 @@ namespace ModelAppLib
         /// <returns>true si égaux false sinon</returns>
         public override bool Equals(object obj)
         {
-            DiceSide ds = obj as DiceSide;
-            if (ds != null)
-                return this.Image.Equals(ds.Image);
-            return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(obj, null)) return false;
+            if (!this.GetType().Equals(obj.GetType())) return false;
+            return this.Equals(obj as DiceSide);
         }
 
         public override int GetHashCode()

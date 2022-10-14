@@ -8,7 +8,7 @@ namespace ModelAppLib
     /// <summary>
     /// Classe modélisant une partie avec ses dés et la possibilité de simuler leur lancer
     /// </summary>
-    public class Game
+    public class Game  : IEquatable<Game>
     {
         public long Id { get; set; }
         private readonly List<DiceType> dices = new List<DiceType>();
@@ -69,6 +69,16 @@ namespace ModelAppLib
 
             return ret;
         }
-
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (!obj.GetType().Equals(GetType())) return false;
+            return Equals(obj as Game);
+        }
+        public bool Equals(Game other)
+        {
+            return dices.SequenceEqual(other.dices) && Id == other.Id;
+        }
     }
 }

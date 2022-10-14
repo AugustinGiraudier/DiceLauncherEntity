@@ -5,7 +5,7 @@ namespace ModelAppLib
     /// <summary>
     /// Classe modélisant un type de face avec son prototype de référence ainsi que sa quantité
     /// </summary>
-    public class DiceSideType
+    public class DiceSideType : IEquatable<DiceSideType>
     {
         /// <summary>
         /// Nombre de face de ce type
@@ -40,6 +40,11 @@ namespace ModelAppLib
             NbSide += nbToAdd;
         }
 
+        public bool Equals(DiceSideType other)
+        {
+            return this.NbSide == other.NbSide && this.Prototype.Equals(other.Prototype);
+        }
+
         /// <summary>
         /// Egaux si même prototype
         /// </summary>
@@ -47,10 +52,10 @@ namespace ModelAppLib
         /// <returns>true si égaux false sinon</returns>
         public override bool Equals(object obj)
         {
-            DiceSideType dst = obj as DiceSideType;
-            if (dst != null)
-                return (this.NbSide == dst.NbSide && this.Prototype.Equals(dst.Prototype));
-            return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(obj, null)) return false;
+            if (!this.GetType().Equals(obj.GetType())) return false;
+            return this.Equals(obj as DiceSideType);
         }
 
         public override int GetHashCode()

@@ -6,7 +6,7 @@ namespace ModelAppLib
     /// <summary>
     /// Classe modélisant un type de dé avec son prototype de référence ainsi que sa quantité
     /// </summary>
-    public class DiceType
+    public class DiceType : IEquatable<DiceType>
     {
         /// <summary>
         /// Nombre de dé de ce type
@@ -41,6 +41,11 @@ namespace ModelAppLib
             this.NbDices += nbDicesToAdd;
         }
 
+        public bool Equals(DiceType other)
+        {
+            return this.NbDices == other.NbDices && this.Prototype.Equals(other.Prototype);
+        }
+
         /// <summary>
         /// Egaux si même nombre de dé et même prototype
         /// </summary>
@@ -48,10 +53,10 @@ namespace ModelAppLib
         /// <returns>true si égaux false sinon</returns>
         public override bool Equals(object obj)
         {
-            DiceType ds = obj as DiceType;
-            if (ds != null)
-                return (this.NbDices == ds.NbDices && this.Prototype.Equals(ds.Prototype));
-            return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(obj, null)) return false;
+            if (!this.GetType().Equals(obj.GetType())) return false;
+            return this.Equals(obj as DiceType);
         }
 
         public override int GetHashCode()
