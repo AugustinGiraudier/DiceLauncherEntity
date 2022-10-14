@@ -70,5 +70,14 @@ namespace ModelAppLib
             return ret;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            Game other = obj as Game;
+            return Id == other.Id && dices.SequenceEqual(other.dices);
+        }
+
     }
 }

@@ -371,7 +371,17 @@ namespace Entities_UnitTests
             });
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
             {
-                await linker.RemoveSideFromDice(d, sides.Last(), -1);
+                await linker.RemoveSideFromDice(d, sides.Last(),-1);
+
+            });
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveSideFromDice(null, sides.Last());
+
+            });
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveSideFromDice(d, null);
 
             });
         }
@@ -396,6 +406,16 @@ namespace Entities_UnitTests
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
             {
                 await linker.RemoveDiceFromGame(g, d, -1);
+
+            });            
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveDiceFromGame(null, d);
+
+            });            
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await linker.RemoveDiceFromGame(g, null);
 
             });
         }
