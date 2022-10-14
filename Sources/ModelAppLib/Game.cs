@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace ModelAppLib
@@ -79,6 +80,11 @@ namespace ModelAppLib
         public bool Equals(Game other)
         {
             return dices.SequenceEqual(other.dices) && Id == other.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode() ^ Dices.GetHashCode();
         }
     }
 }
