@@ -11,21 +11,21 @@ namespace ModelAppLib_UnitTests
         [Fact]
         void CreateObjectNotNull()
         {
-            DiceType dt = new(3, new Dice(new DiceSideType(3, new DiceSide("img1"))));
+            DiceType dt = new(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1"))));
             Assert.NotNull(dt);
         }
 
         [Fact]
         void GetNbDices()
         {
-            DiceType dt = new(3, new Dice(new DiceSideType(3, new DiceSide("img1"))));
+            DiceType dt = new(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1"))));
             Assert.Equal(3, dt.NbDices);
         }
 
         [Fact]
         void GetPrototypeWorks()
         {
-            Dice d = new(new DiceSideType(3, new DiceSide("img1")));
+            Dice d = new(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")));
             DiceType dt = new(3, d);
             Assert.NotNull(dt.Prototype);
             Assert.True(d == dt.Prototype);
@@ -34,7 +34,7 @@ namespace ModelAppLib_UnitTests
         [Fact]
         void TestAddDice()
         {
-            Dice d = new(new DiceSideType(3, new DiceSide("img1")));
+            Dice d = new(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")));
             DiceType dt = new(3, d);
             dt.AddDice(3);
             Assert.Equal(6, dt.NbDices);
@@ -64,35 +64,35 @@ namespace ModelAppLib_UnitTests
         {
             yield return new object[]
             {
-                new DiceType(3, new Dice(new DiceSideType(3, new DiceSide("img1")))),
-                new DiceType(3, new Dice(new DiceSideType(3, new DiceSide("img1")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))),
                 true
             };
             
             yield return new object[]
             {
-                new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))),
-                new DiceType(3, new Dice(new DiceSideType(3, new DiceSide("img1")))),
+                new DiceType(2, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))),
                 false
             };
             
             yield return new object[]
             {
-                new DiceType(3, new Dice(new DiceSideType(2, new DiceSide("img1")))),
-                new DiceType(3, new Dice(new DiceSideType(3, new DiceSide("img1")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(2, new DiceSide("img1")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))),
                 false
             };
             
             yield return new object[]
             {
-                new DiceType(3, new Dice(new DiceSideType(3, new DiceSide("img2")))),
-                new DiceType(3, new Dice(new DiceSideType(3, new DiceSide("img1")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img2")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))),
                 false
             };
             
             yield return new object[]
             {
-                new DiceType(3, new Dice(new DiceSideType(3, new DiceSide("img2")))),
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img2")))),
                 null,
                 false
             };

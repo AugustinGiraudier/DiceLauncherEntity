@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace ModelAppLib
 {
+    /// <summary>
+    /// Classe modélisant une partie avec ses dés et la possibilité de simuler leur lancer
+    /// </summary>
     public class Game
     {
         public long Id { get; set; }

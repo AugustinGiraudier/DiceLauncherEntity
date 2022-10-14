@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace ModelAppLib
 {
+    /// <summary>
+    /// Classe modélisant un dé
+    /// </summary>
     public class Dice : IEquatable<Dice>
     {
         public long Id { get; set; }
@@ -43,24 +46,6 @@ namespace ModelAppLib
                     throw new ArgumentNullException(nameof(sidesTypes));
                 this.AddSide(sideType);
             }
-        }
-
-        /// <summary>
-        /// Construit un dé avec la liste de ses types de faces
-        /// </summary>
-        /// <param name="sidesTypes">Liste des types de faces qui sera clonnée</param>
-        public Dice(IEnumerable<DiceSideType> sidesTypes)
-            : this(new SecureRandomizer(), (sidesTypes))
-        {
-        }
-
-        /// <summary>
-        /// Construit un dé avec ses types de faces en parametre
-        /// </summary>
-        /// <param name="dstypes">types de face du dé</param>
-        public Dice(params DiceSideType[] dstypes)
-            : this(new SecureRandomizer(), dstypes.AsEnumerable())
-        {
         }
         
         /// <summary>

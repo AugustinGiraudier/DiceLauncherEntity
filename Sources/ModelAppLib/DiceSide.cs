@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace ModelAppLib
 {
+    /// <summary>
+    /// Classe modélisant une face de dé
+    /// </summary>
     public class DiceSide
     {
 

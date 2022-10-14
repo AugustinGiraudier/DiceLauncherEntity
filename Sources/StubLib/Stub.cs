@@ -5,6 +5,9 @@ using ModelAppLib;
 
 namespace StubLib
 {
+    /// <summary>
+    /// Classe permettant de générer des données de test pour le model de DiceLauncher
+    /// </summary>
     public class Stub : IDataManager
     {
         public Task<bool> AddDice(Dice dice)
@@ -54,6 +57,7 @@ namespace StubLib
             var sides = GetAllSides().Result.ToList();
 
             ret.Add(new Dice(
+                new SecureRandomizer(),
                 new DiceSideType(1, sides[0]),
                 new DiceSideType(1, sides[1]),
                 new DiceSideType(1, sides[2]),
@@ -62,15 +66,18 @@ namespace StubLib
                 new DiceSideType(1, sides[5])));
 
             ret.Add(new Dice(
+                new SecureRandomizer(),
                 new DiceSideType(2, sides[2]), 
                 new DiceSideType(3, sides[0])));
 
             ret.Add(new Dice(
+                new SecureRandomizer(),
                 new DiceSideType(1, sides[0]),
                 new DiceSideType(2, sides[1]),
                 new DiceSideType(3, sides[2])));
 
             ret.Add(new Dice(
+                new SecureRandomizer(),
                 new DiceSideType(5, sides[5]),
                 new DiceSideType(1, sides[6])));
 
@@ -147,7 +154,7 @@ namespace StubLib
                     lDst.Add(new DiceSideType(1, sides[cpt%7]));
                     cpt++;
                 }
-                ret.Add(new Dice(lDst));
+                ret.Add(new Dice(new SecureRandomizer(), lDst));
             }
 
             return Task.FromResult(ret.AsEnumerable());

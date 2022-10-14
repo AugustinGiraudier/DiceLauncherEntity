@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntitiesLib
 {
+    /// <summary>
+    /// Entitté d'un type de Face
+    /// </summary>
     public class DiceSideTypeEntity
     {
 

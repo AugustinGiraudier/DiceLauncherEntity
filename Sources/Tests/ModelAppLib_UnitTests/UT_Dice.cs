@@ -14,7 +14,7 @@ namespace ModelAppLib_UnitTests
             {
                 new DiceSideType(1, new DiceSide("img1"))
             };
-            Dice d = new(lst);
+            Dice d = new(new SecureRandomizer(), lst);
             Assert.NotNull(d);
         }
 
@@ -22,15 +22,15 @@ namespace ModelAppLib_UnitTests
         void CreateObjectWithNullCollection()
         {
             List<DiceSideType> ldt = null;
-            Assert.Throws<ArgumentNullException>(() => new Dice(ldt));
+            Assert.Throws<ArgumentNullException>(() => new Dice(new SecureRandomizer(), ldt));
 
             List<DiceSideType> ldt2 = new List<DiceSideType>{ 
                 new DiceSideType(2, new DiceSide("img")),
                 null
             };
-            Assert.Throws<ArgumentNullException>(() => new Dice(ldt2));
+            Assert.Throws<ArgumentNullException>(() => new Dice(new SecureRandomizer(), ldt2));
             
-            Assert.Throws<ArgumentNullException>(() => new Dice(new DiceSideType(2, new DiceSide("img")),null));
+            Assert.Throws<ArgumentNullException>(() => new Dice(new SecureRandomizer(), new DiceSideType(2, new DiceSide("img")),null));
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace ModelAppLib_UnitTests
             var lst = new List<DiceSideType>()            {
                 new DiceSideType(1, new DiceSide("img1"))
             };
-            Dice d = new(lst);
+            Dice d = new(new SecureRandomizer(), lst);
             Assert.NotNull(d.SideTypes);
         }
 
@@ -50,7 +50,7 @@ namespace ModelAppLib_UnitTests
             DiceSideType dst = new DiceSideType(1, ds);
             var lst = new List<DiceSideType>();
             lst.Add(dst);
-            Dice d = new(lst);
+            Dice d = new(new SecureRandomizer(), lst);
             Assert.Single(d.SideTypes);
         }
 
@@ -60,7 +60,7 @@ namespace ModelAppLib_UnitTests
             DiceSideType dst = new DiceSideType(1, new DiceSide("imgPath"));
             var lst = new List<DiceSideType>();
             lst.Add(dst);
-            Dice d = new(lst);
+            Dice d = new(new SecureRandomizer(), lst);
             d.AddSide(dst);
             Assert.Single(d.SideTypes);
             Assert.Equal(2, d.SideTypes[0].NbSide);
@@ -72,7 +72,7 @@ namespace ModelAppLib_UnitTests
             var lst = new List<DiceSideType>()            {
                 new DiceSideType(1, new DiceSide("img1"))
             };
-            Dice d = new(lst);
+            Dice d = new(new SecureRandomizer(), lst);
             d.AddSide(new DiceSideType(2, new DiceSide("img")));
             d.AddSide(new DiceSideType(3, new DiceSide("img2")));
             Assert.Equal(3, d.SideTypes.Count);
@@ -118,7 +118,7 @@ namespace ModelAppLib_UnitTests
             DiceSide ds = new DiceSide("img");
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(3, ds),
                     new DiceSideType(3, new DiceSide("img"))
                 ),
@@ -129,7 +129,7 @@ namespace ModelAppLib_UnitTests
             DiceSide ds2 = new DiceSide("img2");
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(3, ds2),
                     new DiceSideType(3, new DiceSide("img"))
                 ),
@@ -140,7 +140,7 @@ namespace ModelAppLib_UnitTests
             DiceSide ds3 = new DiceSide("img1");
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(3, new DiceSide("img2")),
                     new DiceSideType(3, ds3)
                 ),
@@ -150,7 +150,7 @@ namespace ModelAppLib_UnitTests
 
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(3, new DiceSide("img2")),
                     new DiceSideType(3, new DiceSide("img2"))
                 ),
@@ -160,7 +160,7 @@ namespace ModelAppLib_UnitTests
 
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(3, new DiceSide("img2")),
                     new DiceSideType(3, new DiceSide("img2"))
                 ),
@@ -173,7 +173,7 @@ namespace ModelAppLib_UnitTests
         {
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(3, new DiceSide("img")),
                     new DiceSideType(3, new DiceSide("img2"))
                 ),
@@ -182,7 +182,7 @@ namespace ModelAppLib_UnitTests
             
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(2, new DiceSide("img2")),
                     new DiceSideType(3, new DiceSide("img2"))
                 ),
@@ -191,7 +191,7 @@ namespace ModelAppLib_UnitTests
 
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new DiceSideType(2, new DiceSide("img2")),
                     new DiceSideType(2, new DiceSide("img")),
                     new DiceSideType(3, new DiceSide("img2"))
@@ -204,13 +204,13 @@ namespace ModelAppLib_UnitTests
         {
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new List<DiceSideType>{
                         new DiceSideType(1,new DiceSide("img1")),
                         new DiceSideType(1,new DiceSide("img1"))
                     } 
                 ),
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new List<DiceSideType>{
                         new DiceSideType(2,new DiceSide("img1"))
                     }
@@ -220,13 +220,13 @@ namespace ModelAppLib_UnitTests
 
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new List<DiceSideType>{
                         new DiceSideType(1,new DiceSide("img1")),
                         new DiceSideType(1,new DiceSide("img2"))
                     }
                 ),
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new List<DiceSideType>{
                         new DiceSideType(2,new DiceSide("img1"))
                     }
@@ -236,7 +236,7 @@ namespace ModelAppLib_UnitTests
             
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new List<DiceSideType>{
                         new DiceSideType(1,new DiceSide("img1")),
                         new DiceSideType(1,new DiceSide("img2"))
@@ -248,7 +248,7 @@ namespace ModelAppLib_UnitTests
             
             yield return new object[]
             {
-                new Dice(
+                new Dice(new SecureRandomizer(), 
                     new List<DiceSideType>{
                         new DiceSideType(1,new DiceSide("img1")),
                         new DiceSideType(1,new DiceSide("img2"))

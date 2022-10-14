@@ -2,6 +2,9 @@
 
 namespace EntitiesLib
 {
+    /// <summary>
+    /// Contexte de l'application DiceLauncher utilisant une connection à une base de données SQLite
+    /// </summary>
     public class DiceLauncherDbContext : DbContext
     {
         public DbSet<GameEntity> Games { get; set; }

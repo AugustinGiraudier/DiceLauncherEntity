@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 
 namespace ModelAppLib
 {
+    /// <summary>
+    /// Une version sécurisée de gestion de nombres aléatoires
+    /// </summary>
     public class SecureRandomizer : IRandomizer
     {
         public int GetRandomInt(int min, int max)

@@ -86,7 +86,7 @@ namespace ModelAppLib_UnitTests
         void CheckAddingDice()
         {
             var stub = new Stub();
-            Assert.True(stub.AddDice(new Dice(new DiceSideType(1, new DiceSide("img1")))).Result);
+            Assert.True(stub.AddDice(new Dice(new SecureRandomizer(), new DiceSideType(1, new DiceSide("img1")))).Result);
         }
 
         [Fact]

@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntitiesLib
 {
+    /// <summary>
+    /// Entité d'un type de Dé
+    /// </summary>
     public class DiceTypeEntity
     {
         public int NbDice { get; set; }

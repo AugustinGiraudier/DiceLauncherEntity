@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
+    /// <summary>
+    /// Facade du model du projet DiceLauncher
+    /// Il rend accessible les actiions utilisateurs à effectuer sur le modèle
+    /// </summary>
     public class ModelManager
     {
         private readonly IDataManager dataManager;

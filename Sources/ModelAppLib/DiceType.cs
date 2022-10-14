@@ -3,6 +3,9 @@ using System;
 
 namespace ModelAppLib
 {
+    /// <summary>
+    /// Classe modélisant un type de dé avec son prototype de référence ainsi que sa quantité
+    /// </summary>
     public class DiceType
     {
         /// <summary>

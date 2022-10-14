@@ -43,7 +43,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            await linker.AddDice(new Dice(new DiceSideType(2, sides.First())));
+            await linker.AddDice(new Dice(new SecureRandomizer(), new DiceSideType(2, sides.First())));
 
             var dices = linker.GetSomeDices(1,0).Result;
 
@@ -59,7 +59,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            var dice = new Dice(new DiceSideType(2, sides.First()));
+            var dice = new Dice(new SecureRandomizer(), new DiceSideType(2, sides.First()));
 
             await linker.AddDice(dice);
 
@@ -82,7 +82,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetSomeSides(1,0).Result;
 
-            var dice = new Dice(new DiceSideType(2, sides.First()));
+            var dice = new Dice(new SecureRandomizer(), new DiceSideType(2, sides.First()));
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
@@ -96,7 +96,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
 
             var side = new DiceSide("TEST.png");
-            var dice = new Dice(new DiceSideType(2, side));
+            var dice = new Dice(new SecureRandomizer(), new DiceSideType(2, side));
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
@@ -126,7 +126,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            var dice = new Dice(new DiceSideType(1, sides.First()));
+            var dice = new Dice(new SecureRandomizer(), new DiceSideType(1, sides.First()));
             await linker.AddDice(dice);
             await linker.DeleteDice(dice);
 
@@ -144,7 +144,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            var dice = new Dice(new DiceSideType(1, sides.First()));
+            var dice = new Dice(new SecureRandomizer(), new DiceSideType(1, sides.First()));
             await linker.AddDice(dice);
 
             var game = new Game(new DiceType(1, dice));
@@ -177,7 +177,7 @@ namespace Entities_UnitTests
         {
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
-            var dice = new Dice(new DiceSideType(1, sides.First()));
+            var dice = new Dice(new SecureRandomizer(), new DiceSideType(1, sides.First()));
             await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
                 await linker.DeleteDice(dice);
@@ -189,7 +189,7 @@ namespace Entities_UnitTests
         {
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
-            var dice = new Dice(new DiceSideType(1, sides.First()));
+            var dice = new Dice(new SecureRandomizer(), new DiceSideType(1, sides.First()));
             var game = new Game(new DiceType(1, dice));
             await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
@@ -252,7 +252,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            Dice d = new Dice(new DiceSideType(2, sides.First()));
+            Dice d = new Dice(new SecureRandomizer(), new DiceSideType(2, sides.First()));
 
             await linker.AddDice(d);
 
@@ -274,7 +274,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            Dice d = new Dice(new DiceSideType(2, sides.First()));
+            Dice d = new Dice(new SecureRandomizer(), new DiceSideType(2, sides.First()));
             Game g = new Game(new DiceType(2, d));
 
             await linker.AddDice(d);
@@ -360,7 +360,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            Dice d = new Dice(new DiceSideType(2, sides.First()));
+            Dice d = new Dice(new SecureRandomizer(), new DiceSideType(2, sides.First()));
 
             await linker.AddDice(d);
 
@@ -382,7 +382,7 @@ namespace Entities_UnitTests
             var linker = GetLinkerInMemory();
             var sides = linker.GetAllSides().Result;
 
-            Dice d = new Dice(new DiceSideType(2, sides.First()));
+            Dice d = new Dice(new SecureRandomizer(), new DiceSideType(2, sides.First()));
             Game g = new Game(new DiceType(2, d));
 
             await linker.AddDice(d);
@@ -413,7 +413,7 @@ namespace Entities_UnitTests
                     new DiceSide("TEST1"),
                     new DiceSide("TEST2")
                 };
-                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
+                Dice d = new Dice(new SecureRandomizer(), new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
 
                 yield return new object[]
                 {
@@ -429,7 +429,7 @@ namespace Entities_UnitTests
                     new DiceSide("TEST1"),
                     new DiceSide("TEST2")
                 };
-                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
+                Dice d = new Dice(new SecureRandomizer(), new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
                 yield return new object[]
                 {
                     d,
@@ -444,7 +444,7 @@ namespace Entities_UnitTests
                     new DiceSide("TEST1"),
                     new DiceSide("TEST2")
                 };
-                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
+                Dice d = new Dice(new SecureRandomizer(), new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
                 yield return new object[]
                 {
                     d,
@@ -458,7 +458,7 @@ namespace Entities_UnitTests
                 {
                     new DiceSide("TEST1")
                 };
-                Dice d = new Dice(new DiceSideType(1, sides[0]));
+                Dice d = new Dice(new SecureRandomizer(), new DiceSideType(1, sides[0]));
                 yield return new object[]
                 {
                     d,
@@ -477,7 +477,7 @@ namespace Entities_UnitTests
                     new DiceSide("TEST1"),
                     new DiceSide("TEST2")
                 };
-                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(6, sides[1]));
+                Dice d = new Dice(new SecureRandomizer(), new DiceSideType(1, sides[0]), new DiceSideType(6, sides[1]));
 
                 yield return new object[]
                 {
@@ -494,7 +494,7 @@ namespace Entities_UnitTests
                     new DiceSide("TEST1"),
                     new DiceSide("TEST2")
                 };
-                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
+                Dice d = new Dice(new SecureRandomizer(), new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
                 yield return new object[]
                 {
                     d,
@@ -510,7 +510,7 @@ namespace Entities_UnitTests
                     new DiceSide("TEST1"),
                     new DiceSide("TEST2")
                 };
-                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
+                Dice d = new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
                 yield return new object[]
                 {
                     d,
@@ -532,7 +532,7 @@ namespace Entities_UnitTests
                 };
                 List<Dice> dices = new List<Dice>
                 {
-                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]))
+                    new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]))
                 };
                 Game g = new Game(new DiceType(1, dices[0]));
 
@@ -553,8 +553,8 @@ namespace Entities_UnitTests
                 };
                 List<Dice> dices = new List<Dice>
                 {
-                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
-                    new Dice(new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
+                    new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
+                    new Dice(new SecureRandomizer(),new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
                 };
                 Game g = new Game(new DiceType(1, dices[0]), new DiceType(2, dices[1]));
 
@@ -575,8 +575,8 @@ namespace Entities_UnitTests
                 };
                 List<Dice> dices = new List<Dice>
                 {
-                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
-                    new Dice(new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
+                    new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
+                    new Dice(new SecureRandomizer(),new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
                 };
                 Game g = new Game(new DiceType(1, dices[0]));
 
@@ -585,7 +585,7 @@ namespace Entities_UnitTests
                     g,
                     sides,
                     dices,
-                    new Dice(new DiceSideType(1, sides[0])),
+                    new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0])),
                     5
                 };
             }
@@ -602,7 +602,7 @@ namespace Entities_UnitTests
                 };
                 List<Dice> dices = new List<Dice>
                 {
-                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]))
+                    new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]))
                 };
                 Game g = new Game(new DiceType(5, dices[0]));
 
@@ -624,8 +624,8 @@ namespace Entities_UnitTests
                 };
                 List<Dice> dices = new List<Dice>
                 {
-                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
-                    new Dice(new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
+                    new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
+                    new Dice(new SecureRandomizer(),new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
                 };
                 Game g = new Game(new DiceType(1, dices[0]), new DiceType(2, dices[1]));
 
@@ -647,8 +647,8 @@ namespace Entities_UnitTests
                 };
                 List<Dice> dices = new List<Dice>
                 {
-                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
-                    new Dice(new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
+                    new Dice(new SecureRandomizer(),new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
+                    new Dice(new SecureRandomizer(),new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
                 };
                 Game g = new Game(new DiceType(1, dices[0]), new DiceType(2, dices[1]));
 

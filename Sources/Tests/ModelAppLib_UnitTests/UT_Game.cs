@@ -20,7 +20,7 @@ namespace ModelAppLib_UnitTests;
         {
             List<DiceType> list = null;
             List<DiceType> goodList = new List<DiceType>();
-            goodList.Add(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
+            goodList.Add(new DiceType(2, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))));
             goodList.Add(null);
             Game gm;
             Assert.Throws<ArgumentNullException>(() => gm = new Game(list));
@@ -30,8 +30,8 @@ namespace ModelAppLib_UnitTests;
         [Fact]
         void CreateObjectAddDicesTypeNull()
         {
-            Game gm = new Game(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
-            DiceType test = new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1"))));
+            Game gm = new Game(new DiceType(2, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))));
+            DiceType test = new DiceType(2, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1"))));
             Assert.Throws<ArgumentNullException>(() => gm.AddDiceType(null));
             Assert.False(gm.AddDiceType(test));
         }
@@ -49,10 +49,10 @@ namespace ModelAppLib_UnitTests;
         {
             List<DiceType> list = new List<DiceType>();
             Game gm = new Game(list);
-            gm.AddDiceType(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
-            gm.AddDiceType(new DiceType(5, new Dice(new DiceSideType(1, new DiceSide("img3")))));
-            list.Add(new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img1")))));
-            list.Add(new DiceType(5, new Dice(new DiceSideType(1, new DiceSide("img3")))));
+            gm.AddDiceType(new DiceType(2, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))));
+            gm.AddDiceType(new DiceType(5, new Dice(new SecureRandomizer(), new DiceSideType(1, new DiceSide("img3")))));
+            list.Add(new DiceType(2, new Dice(new SecureRandomizer(), new DiceSideType(3, new DiceSide("img1")))));
+            list.Add(new DiceType(5, new Dice(new SecureRandomizer(), new DiceSideType(1, new DiceSide("img3")))));
             Assert.NotNull(gm.Dices);
             Assert.All(list, a => gm.Dices.Contains(a));
         }
@@ -61,7 +61,7 @@ namespace ModelAppLib_UnitTests;
         void TestLauncheDices()
         {
             Game game = new Game(
-                new DiceType(3, new Dice(new DiceSideType(1, new DiceSide("img1"))))
+                new DiceType(3, new Dice(new SecureRandomizer(), new DiceSideType(1, new DiceSide("img1"))))
             );
             IEnumerable<DiceSide> list = game.LaunchDices();
             Assert.NotNull(list);
@@ -75,39 +75,39 @@ namespace ModelAppLib_UnitTests;
                 true,
                 new DiceType[]
                 {
-                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
-                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
-                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
-                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
-                    new DiceType(4, new Dice(new DiceSideType(2, new DiceSide("img7")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new SecureRandomizer(),new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new SecureRandomizer(),new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(6, new DiceSide("img6")))),
+                    new DiceType(4, new Dice(new SecureRandomizer(),new DiceSideType(2, new DiceSide("img7")))),
                 },
                 new Game(new DiceType[]
                 {
-                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
-                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
-                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
-                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new SecureRandomizer(),new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new SecureRandomizer(),new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(6, new DiceSide("img6")))),
                 }),
-                new DiceType(4, new Dice(new DiceSideType(2, new DiceSide("img7"))))
+                new DiceType(4, new Dice(new SecureRandomizer(),new DiceSideType(2, new DiceSide("img7"))))
             };
             yield return new object[]
             {
                 false,
                 new DiceType[]
                 {
-                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
-                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
-                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
-                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new SecureRandomizer(),new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new SecureRandomizer(),new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(6, new DiceSide("img6")))),
                 },
                 new Game(new DiceType[]
                 {
-                    new DiceType(1, new Dice(new DiceSideType(1, new DiceSide("img1")))),
-                    new DiceType(2, new Dice(new DiceSideType(3, new DiceSide("img5")))),
-                    new DiceType(3, new Dice(new DiceSideType(5, new DiceSide("img4")))),
-                    new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(1, new DiceSide("img1")))),
+                    new DiceType(2, new Dice(new SecureRandomizer(),new DiceSideType(3, new DiceSide("img5")))),
+                    new DiceType(3, new Dice(new SecureRandomizer(),new DiceSideType(5, new DiceSide("img4")))),
+                    new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(6, new DiceSide("img6")))),
                 }),
-                new DiceType(1, new Dice(new DiceSideType(6, new DiceSide("img6")))),
+                new DiceType(1, new Dice(new SecureRandomizer(),new DiceSideType(6, new DiceSide("img6")))),
             };
         }
 

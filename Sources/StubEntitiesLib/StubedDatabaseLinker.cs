@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace StubEntitiesLib
 {
+    /// <summary>
+    /// Permet de renseigner des faces dans la base de donnée grace à l'utilisation du stub.
+    /// </summary>
     public class StubedDatabaseLinker : DataBaseLinker
     {
 

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security;
 
 [assembly: InternalsVisibleTo("StubEntitiesLib")]
 
 namespace EntitiesLib
 {
+    /// <summary>
+    /// Classe contenant les extentions ToModel et ToEntity pour chaque entité du projet
+    /// </summary>
     internal static class Extentions
     {
 
@@ -44,7 +48,7 @@ namespace EntitiesLib
         // --- Dice --- //
         public static Dice ToModel(this DiceEntity entity)
         {
-            var d = new Dice(entity.Sides.ToModel());
+            var d = new Dice(new SecureRandomizer(), entity.Sides.ToModel());
             d.Id = entity.Id;
             return d;
         }

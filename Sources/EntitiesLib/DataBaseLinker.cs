@@ -8,6 +8,9 @@ using ModelAppLib;
 
 namespace EntitiesLib
 {
+    /// <summary>
+    /// Manager de données utilisant une base de donnée Entity Framework comme support
+    /// </summary>
     public class DataBaseLinker : IDataManager
     {
         protected readonly DiceLauncherDbContext context;

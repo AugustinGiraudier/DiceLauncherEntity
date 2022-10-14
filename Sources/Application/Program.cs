@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ModelApp
 {
+    /// <summary>
+    /// Classe Constituant le test fonctionnel principal de l'application
+    /// </summary>
     static class Program
     {
         static async Task Main(string[] args)
@@ -32,7 +35,7 @@ namespace ModelApp
                 new DiceSideType(2, sides[6])
             };
 
-            var d = new Dice(sideTypes);
+            var d = new Dice(new SecureRandomizer(), sideTypes);
             await manager.AddDice(d);
 
             var dt = new DiceType(2, d);

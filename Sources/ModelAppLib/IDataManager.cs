@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 
 namespace ModelAppLib
 {
+    /// <summary>
+    /// Interface concernant la gestion des données du projet
+    /// Elle implémente les méthodes CRUD pour le projet DiceLauncher
+    /// </summary>
     public interface IDataManager
     {
 
