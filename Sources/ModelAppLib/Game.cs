@@ -64,7 +64,7 @@ namespace ModelAppLib
 
             var theDt = dices.Find(x => x.Prototype.Equals(dt.Prototype));
             if (theDt == null)
-                throw new ArgumentException("la partie ne contient pas ce type de dé...", nameof(theDt));
+                throw new ArgumentException("la partie ne contient pas ce type de dé...", nameof(dt));
 
             if (theDt.NbDices - dt.NbDices > 0)
                 theDt.RemoveDices(dt.NbDices);

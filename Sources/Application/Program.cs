@@ -96,7 +96,7 @@ namespace ModelApp
 
                 STEP("Ajout du second dé à la partie déja créée");
                 await manager.AddDiceToGame(g, d2);
-                TEST(g.Dices.Count() == 2);
+                TEST(g.Dices.Count == 2);
 
                 STEP("Lancement des dés de la partie");
                 var results2 = g.LaunchDices();
@@ -116,7 +116,7 @@ namespace ModelApp
 
                 STEP("Suppression d'un des 2 types de face du dé restant dans la partie");
                 await manager.RemoveSideFromDice(d2, sides[5], 3);
-                TEST(d2.SideTypes.Count() == 1);
+                TEST(d2.SideTypes.Count == 1);
 
                 STEP("Lancement des dés de la partie");
                 g = (await manager.GetAllGames()).First();

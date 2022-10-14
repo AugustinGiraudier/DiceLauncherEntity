@@ -51,10 +51,18 @@ public class UT_Manager
             StubForUT.getGameWithValue()
         };
     }
+    public static IEnumerable<object[]> DataAddDiceModele2()
+    {
+        yield return new object[]
+        {
+            null,
+            null
+        };
+    }
 
     [Theory]
-    [MemberData(nameof(DataAddDiceModele))]
-    public async void TestAddDiceNull(Dice diceNull, Game gmNull, Dice __, Game ___)
+    [MemberData(nameof(DataAddDiceModele2))]
+    public async void TestAddDiceNull(Dice diceNull, Game gmNull)
     {
         ModelManager modele = new ModelManager(new Stub());
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await modele.AddDice(diceNull));

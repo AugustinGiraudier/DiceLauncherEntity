@@ -40,10 +40,6 @@ namespace ModelAppLib
             NbSide += nbToAdd;
         }
 
-        public bool Equals(DiceSideType other)
-        {
-            return this.NbSide == other.NbSide && this.Prototype.Equals(other.Prototype);
-        }
 
         /// <summary>
         /// Retire des faces à ce type de face
@@ -69,7 +65,10 @@ namespace ModelAppLib
             if (!this.GetType().Equals(obj.GetType())) return false;
             return this.Equals(obj as DiceSideType);
         }
-
+        public bool Equals(DiceSideType other)
+        {
+            return this.NbSide == other.NbSide && this.Prototype.Equals(other.Prototype);
+        }
         public override int GetHashCode()
         {
             return this.Prototype.GetHashCode() ^ NbSide;

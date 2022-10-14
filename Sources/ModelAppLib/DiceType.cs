@@ -41,11 +41,6 @@ namespace ModelAppLib
             this.NbDices += nbDicesToAdd;
         }
 
-        public bool Equals(DiceType other)
-        {
-            return this.NbDices == other.NbDices && this.Prototype.Equals(other.Prototype);
-        }
-
         /// <summary>
         /// Retire un certain nombre de dé de ce type
         /// </summary>
@@ -71,7 +66,10 @@ namespace ModelAppLib
             if (!this.GetType().Equals(obj.GetType())) return false;
             return this.Equals(obj as DiceType);
         }
-
+        public bool Equals(DiceType other)
+        {
+            return this.NbDices == other.NbDices && this.Prototype.Equals(other.Prototype);
+        }
         public override int GetHashCode()
         {
             return Prototype.GetHashCode() ^ NbDices;

@@ -136,7 +136,7 @@ namespace ModelAppLib
 
             var theDst = sidesTypes.Find(x => x.Prototype.Equals(dst.Prototype));
             if (theDst == null)
-                throw new ArgumentException("le dé ne contient pas ce type de face...", nameof(theDst));
+                throw new ArgumentException("le dé ne contient pas ce type de face...", nameof(dst));
 
             if (theDst.NbSide - dst.NbSide > 0)
                 theDst.RemoveSides(dst.NbSide);
@@ -157,17 +157,16 @@ namespace ModelAppLib
             return this.Equals(obj as Dice);
         }
 
-        public override int GetHashCode()
-        {
-            int code = 1;
-            foreach(DiceSideType dt in SideTypes)
-                code ^= dt.GetHashCode();
-            return code;
-        }
-
         public bool Equals(Dice other)
         {
             return this.SideTypes.SequenceEqual(other.SideTypes);
+        }
+        public override int GetHashCode()
+        {
+            int code = 1;
+            foreach (DiceSideType dt in SideTypes)
+                code ^= dt.GetHashCode();
+            return code;
         }
     }
 }
