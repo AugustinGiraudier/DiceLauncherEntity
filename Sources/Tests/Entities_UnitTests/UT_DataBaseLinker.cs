@@ -292,6 +292,114 @@ namespace Entities_UnitTests
             });
         }
 
+        // ---------- REMOVE FROM ---------- //
+
+        [Theory]
+        [MemberData(nameof(DataRemovingSidesFromDice))]
+        async void TestRemovingSidesFromDice(Dice d, IEnumerable<DiceSide> sides, DiceSide ToRemove, int nbOfRemoved, int nbToRemove)
+        {
+            var linker = GetLinkerInMemory();
+            foreach (var side in sides)
+                await linker.AddSide(side);
+            await linker.AddDice(d);
+
+            await linker.RemoveSideFromDice(d, ToRemove, nbToRemove);
+            var dice = linker.GetAllDices().Result.First();
+            if(nbOfRemoved > nbToRemove)
+            { // il reste des faces de ce type
+                Assert.Equal(sides.Count(), dice.SideTypes.Count);
+                var oldNum = d.SideTypes.First(st => st.Prototype.Equals(ToRemove)).NbSide;
+                var newNum = dice.SideTypes.First(st => st.Prototype.Equals(ToRemove)).NbSide;
+                Assert.Equal(oldNum - nbToRemove, newNum);
+            }
+            else
+            { // il ne reste plus de face de ce type
+                Assert.Equal(d.SideTypes.Count - 1, dice.SideTypes.Count);
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    dice.SideTypes.First(st => st.Prototype.Equals(ToRemove));
+                });
+            }
+
+        }
+
+        [Theory]
+        [MemberData(nameof(DataRemovingDicesFromGame))]
+        async void TestRemovingDicesFromGame(Game g, IEnumerable<DiceSide> sides, IEnumerable<Dice> dices, Dice ToRemove, int nbOfRemoved, int nbToRemove)
+        {
+            var linker = GetLinkerInMemory();
+            foreach (var side in sides)
+                await linker.AddSide(side);
+            foreach (var dice in dices)
+                await linker.AddDice(dice);
+            await linker.AddGame(g);
+
+            await linker.RemoveDiceFromGame(g, ToRemove, nbToRemove);
+            var game = linker.GetAllGames().Result.First();
+            if (nbOfRemoved > nbToRemove)
+            { // il reste des dés de ce type
+                Assert.Equal(g.Dices.Count, game.Dices.Count);
+                var oldNum = g.Dices.First(st => st.Prototype.Equals(ToRemove)).NbDices;
+                var newNum = game.Dices.First(st => st.Prototype.Equals(ToRemove)).NbDices;
+                Assert.Equal(oldNum - nbToRemove, newNum);
+            }
+            else
+            { // il ne reste plus de dé de ce type
+                Assert.Equal(g.Dices.Count - 1, game.Dices.Count);
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    game.Dices.First(st => st.Prototype.Equals(ToRemove));
+                });
+            }
+
+        }
+
+        [Fact]
+        async void TestRemovingNullAndNegativeNbOfSidesFromDice()
+        {
+            var linker = GetLinkerInMemory();
+            var sides = linker.GetAllSides().Result;
+
+            Dice d = new Dice(new DiceSideType(2, sides.First()));
+
+            await linker.AddDice(d);
+
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            {
+                await linker.RemoveSideFromDice(d, sides.Last(), 0);
+
+            });
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            {
+                await linker.RemoveSideFromDice(d, sides.Last(), -1);
+
+            });
+        }
+
+        [Fact]
+        async void TestRemovingNullAndNegativeNbOfDicesFromGame()
+        {
+            var linker = GetLinkerInMemory();
+            var sides = linker.GetAllSides().Result;
+
+            Dice d = new Dice(new DiceSideType(2, sides.First()));
+            Game g = new Game(new DiceType(2, d));
+
+            await linker.AddDice(d);
+            await linker.AddGame(g);
+
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            {
+                await linker.RemoveDiceFromGame(g, d, 0);
+
+            });
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            {
+                await linker.RemoveDiceFromGame(g, d, -1);
+
+            });
+        }
+
 
         // =============================================== //
         //      MEMBER DATAS
@@ -356,6 +464,59 @@ namespace Entities_UnitTests
                     d,
                     sides,
                     new DiceSide("TEST3"),
+                    5
+                };
+            }
+        }
+
+        public static IEnumerable<object[]> DataRemovingSidesFromDice()
+        {
+            {
+                List<DiceSide> sides = new List<DiceSide>
+                {
+                    new DiceSide("TEST1"),
+                    new DiceSide("TEST2")
+                };
+                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(6, sides[1]));
+
+                yield return new object[]
+                {
+                    d,
+                    sides,
+                    sides[1],
+                    6,
+                    5
+                };
+            }
+            {
+                List<DiceSide> sides = new List<DiceSide>
+                {
+                    new DiceSide("TEST1"),
+                    new DiceSide("TEST2")
+                };
+                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
+                yield return new object[]
+                {
+                    d,
+                    sides,
+                    sides[1],
+                    2,
+                    2
+                };
+            }
+            {
+                List<DiceSide> sides = new List<DiceSide>
+                {
+                    new DiceSide("TEST1"),
+                    new DiceSide("TEST2")
+                };
+                Dice d = new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]));
+                yield return new object[]
+                {
+                    d,
+                    sides,
+                    sides[0],
+                    1,
                     5
                 };
             }
@@ -426,6 +587,79 @@ namespace Entities_UnitTests
                     dices,
                     new Dice(new DiceSideType(1, sides[0])),
                     5
+                };
+            }
+
+        }
+
+        public static IEnumerable<object[]> DataRemovingDicesFromGame()
+        {
+            {
+                List<DiceSide> sides = new List<DiceSide>
+                {
+                    new DiceSide("TEST1"),
+                    new DiceSide("TEST2")
+                };
+                List<Dice> dices = new List<Dice>
+                {
+                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1]))
+                };
+                Game g = new Game(new DiceType(5, dices[0]));
+
+                yield return new object[]
+                {
+                    g,
+                    sides,
+                    dices,
+                    dices[0],
+                    5,
+                    3
+                };
+            }
+            {
+                List<DiceSide> sides = new List<DiceSide>
+                {
+                    new DiceSide("TEST1"),
+                    new DiceSide("TEST2")
+                };
+                List<Dice> dices = new List<Dice>
+                {
+                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
+                    new Dice(new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
+                };
+                Game g = new Game(new DiceType(1, dices[0]), new DiceType(2, dices[1]));
+
+                yield return new object[]
+                {
+                    g,
+                    sides,
+                    dices,
+                    dices[1],
+                    2,
+                    5
+                };
+            }
+            {
+                List<DiceSide> sides = new List<DiceSide>
+                {
+                    new DiceSide("TEST1"),
+                    new DiceSide("TEST2")
+                };
+                List<Dice> dices = new List<Dice>
+                {
+                    new Dice(new DiceSideType(1, sides[0]), new DiceSideType(2, sides[1])),
+                    new Dice(new DiceSideType(2, sides[0]), new DiceSideType(5, sides[1]))
+                };
+                Game g = new Game(new DiceType(1, dices[0]), new DiceType(2, dices[1]));
+
+                yield return new object[]
+                {
+                    g,
+                    sides,
+                    dices,
+                    dices[1],
+                    2,
+                    2
                 };
             }
 
