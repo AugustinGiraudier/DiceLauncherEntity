@@ -308,7 +308,7 @@ namespace EntitiesLib
             }
             catch(InvalidOperationException)
             {
-                throw new ArgumentException(nameof(d), "le dé n'existe pas dans la base...");
+                throw new ArgumentException("le dé n'existe pas dans la base...", nameof(d));
             }
         }
 
@@ -325,7 +325,7 @@ namespace EntitiesLib
             }
             catch (InvalidOperationException)
             {
-                throw new ArgumentException(nameof(ds), "la face n'existe pas dans la base...");
+                throw new ArgumentException("la face n'existe pas dans la base...", nameof(ds));
             }
         }
 
@@ -342,7 +342,7 @@ namespace EntitiesLib
             }
             catch (InvalidOperationException)
             {
-                throw new ArgumentException(nameof(g), "la partie n'existe pas dans la base...");
+                throw new ArgumentException("la partie n'existe pas dans la base...", nameof(g));
             }
         }
     }
