@@ -291,7 +291,7 @@ namespace EntitiesLib
 
         private void CheckNumberIsPositive(int nb)
         {
-            if (nb >= 0)
+            if (nb <= 0)
                 throw new ArgumentOutOfRangeException("Le nombre à ajouter ne peut etre null ou négatif...", nameof(nb));
         }
 
