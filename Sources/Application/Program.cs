@@ -4,12 +4,13 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ModelApp
 {
     static class Program
     {
-        static async void Main(string[] args)
+        static async Task Main(string[] args)
         {
             LogManager.Setup().LoadConfiguration(builder => {
                 builder.ForLogger().FilterMinLevel(LogLevel.Trace).WriteToConsole();
@@ -32,20 +33,20 @@ namespace ModelApp
             };
 
             var d = new Dice(sideTypes);
-            manager.AddDice(d);
+            await manager.AddDice(d);
 
             var dt = new DiceType(2, d);
 
             var g = new Game(dt);
-            manager.AddGame(g);
+            await manager.AddGame(g);
 
             foreach(var side in g.LaunchDices())
             {
                 Console.WriteLine(side.Image);
             }
 
-            manager.RemoveGame(g);
-            manager.RemoveDice(d);
+            await manager.RemoveGame(g);
+            await manager.RemoveDice(d);
 
         }
     }
