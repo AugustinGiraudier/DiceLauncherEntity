@@ -105,13 +105,6 @@ namespace ModelAppLib
         public async Task<bool> RemoveDice(Dice d) { return await dataManager.DeleteDice(d); }
 
         /// <summary>
-        /// Supprime une face
-        /// </summary>
-        /// <param name="ds">la face</param>
-        /// <returns></returns>
-        public async Task<bool> RemoveSide(DiceSide ds) { return await dataManager.DeleteSide(ds); }
-
-        /// <summary>
         /// Supprime une partie
         /// </summary>
         /// <param name="g">la partie</param>
