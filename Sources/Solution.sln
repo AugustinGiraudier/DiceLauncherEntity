@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities_UnitTests", "Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StubEntitiesLib", "StubEntitiesLib\StubEntitiesLib.csproj", "{370580C3-2CC3-47D3-8C81-6FA23E15D99A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuisnessLib", "BuisnessLib\BuisnessLib.csproj", "{01D8040D-1903-4EAC-98FF-4198679531FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{370580C3-2CC3-47D3-8C81-6FA23E15D99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{370580C3-2CC3-47D3-8C81-6FA23E15D99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{370580C3-2CC3-47D3-8C81-6FA23E15D99A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D8040D-1903-4EAC-98FF-4198679531FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D8040D-1903-4EAC-98FF-4198679531FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D8040D-1903-4EAC-98FF-4198679531FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D8040D-1903-4EAC-98FF-4198679531FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

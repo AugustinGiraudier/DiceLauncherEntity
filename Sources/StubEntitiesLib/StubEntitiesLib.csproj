@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+		<ProjectReference Include="..\BuisnessLib\BuisnessLib.csproj" />
 		<ProjectReference Include="..\EntitiesLib\EntitiesLib.csproj" />
 		<ProjectReference Include="..\StubLib\StubLib.csproj" />
   </ItemGroup>
