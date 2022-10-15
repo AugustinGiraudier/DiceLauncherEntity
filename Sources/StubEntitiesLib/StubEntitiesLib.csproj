@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-		<ProjectReference Include="..\EntitiesLib\EntitiesLib.csproj" />
 		<ProjectReference Include="..\EntitiesToModel\EntitiesToModel.csproj" />
 		<ProjectReference Include="..\StubLib\StubLib.csproj" />
   </ItemGroup>
