@@ -10,11 +10,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BuisnessLib\BuisnessLib.csproj" />
 		<ProjectReference Include="..\ModelAppLib\ModelAppLib.csproj" />
 		<ProjectReference Include="..\StubEntitiesLib\StubEntitiesLib.csproj" />
 	</ItemGroup>
