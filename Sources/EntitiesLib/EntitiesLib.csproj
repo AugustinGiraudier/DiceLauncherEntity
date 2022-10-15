@@ -15,7 +15,6 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ModelAppLib\ModelAppLib.csproj" />
 		<ProjectReference Include="..\UtilsLib\UtilsLib.csproj" />
 	</ItemGroup>
 
